@@ -5,158 +5,132 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> 
     <title>Anupam & Aastha | A Ghibli Fairytale</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Great+Vibes&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     
     <style>
-        :root { --gold: #c5a059; --cream: #fdfaf5; }
+        :root { --gold: #c5a059; --cream: #fdfaf5; --glass: rgba(255, 255, 255, 0.15); }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { background-color: var(--cream); font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
 
-        /* 1. SCRATCH CANVAS OVERLAY */
+        /* 1. INTERACTIVE SCRATCH OVERLAY */
         #scratch-container {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: 10000; background: #fff; display: flex; flex-direction: column;
             justify-content: center; align-items: center; text-align: center;
-            transition: opacity 1s ease;
+            transition: opacity 1.2s ease;
         }
         .canvas-wrapper {
             position: relative; width: 320px; height: 320px;
-            background: url('https://images.unsplash.com/photo-1518133910546-b6c2fb7d79e3?auto=format&fit=crop&w=400') no-repeat center/cover;
-            border-radius: 50%; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background: url('https://img.icons8.com/ios-filled/500/BC8887/like.png') no-repeat center/contain;
         }
-        canvas { position: absolute; top: 0; left: 0; cursor: crosshair; border-radius: 50%; }
-        .scratch-instruction { margin-top: 30px; font-weight: bold; letter-spacing: 3px; color: var(--gold); animation: pulse 2s infinite; }
+        canvas { position: absolute; top: 0; left: 0; cursor: crosshair; border-radius: 50%; touch-action: none; }
+        .scratch-hint { margin-top: 30px; letter-spacing: 4px; color: var(--gold); font-weight: 600; text-transform: uppercase; font-size: 0.8rem; }
 
-        /* 2. GHIBLI HERO SECTION */
+        /* 2. GHIBLI HERO SECTION (EXACT MATCH TO SCREENSHOT) */
         .hero { 
             height: 100vh; display: flex; flex-direction: column; justify-content: center; 
             align-items: center; text-align: center; color: white;
-            /* Ghibli Style Background */
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1920'); 
+            background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1920'); 
             background-size: cover; background-position: center; background-attachment: fixed;
         }
-        .hero h1 { font-family: 'Great Vibes', cursive; font-size: 6rem; text-shadow: 0 0 20px rgba(0,0,0,0.5); }
-        .btn-discover {
-            margin-top: 30px; padding: 15px 40px; border: 1px solid white; border-radius: 50px;
-            color: white; text-decoration: none; font-size: 0.9rem; letter-spacing: 2px;
-            background: rgba(255,255,255,0.1); backdrop-filter: blur(5px); transition: 0.3s;
+        .hero .date-line { letter-spacing: 5px; font-size: 0.85rem; margin-bottom: 25px; opacity: 0.9; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 4.5rem; letter-spacing: 12px; color: var(--gold); text-transform: uppercase; }
+        .hero h1 span { display: block; font-family: 'Great Vibes', cursive; font-size: 3rem; text-transform: lowercase; letter-spacing: 2px; margin: -10px 0; }
+        
+        .hero-text { max-width: 550px; margin: 30px auto; font-size: 0.95rem; line-height: 1.8; font-weight: 300; padding: 0 20px; }
+        
+        /* Glass-morphism "Discover" Button */
+        .btn-glass {
+            padding: 18px 50px; border: 1px solid rgba(255,255,255,0.4); border-radius: 50px;
+            color: white; text-decoration: none; font-size: 0.75rem; letter-spacing: 4px;
+            background: var(--glass); backdrop-filter: blur(8px); transition: 0.4s;
+            text-transform: uppercase; font-weight: 600;
         }
-        .btn-discover:hover { background: white; color: #333; }
+        .btn-glass:hover { background: white; color: #1a1a1a; transform: translateY(-3px); }
 
-        /* 3. EVENT CARDS */
-        .section { padding: 100px 20px; }
-        .event-card { 
-            max-width: 900px; margin: 0 auto 40px; background: white; display: flex;
-            border-radius: 15px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.05);
-        }
-        .event-img { width: 45%; background-size: cover; background-position: center; }
-        .event-info { width: 55%; padding: 50px; }
-
-        @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
-        @media (max-width: 768px) { .event-card { flex-direction: column; } .event-img, .event-info { width: 100%; min-height: 250px; } .hero h1 { font-size: 4rem; } }
+        #main-wrapper { visibility: hidden; }
     </style>
 </head>
 <body>
 
     <div id="scratch-container">
-        <h2 style="font-family: 'Great Vibes'; font-size: 3rem; margin-bottom: 20px;">Anupam & Aastha</h2>
+        <h2 style="font-family: 'Great Vibes'; font-size: 3rem; margin-bottom: 20px; color: #333;">Anupam & Aastha</h2>
         <div class="canvas-wrapper">
             <canvas id="scratch-canvas" width="320" height="320"></canvas>
         </div>
-        <p class="scratch-instruction">SCRATCH THE HEART TO OPEN</p>
+        <p class="scratch-hint">SCRATCH THE HEART TO ENTER</p>
     </div>
 
-    <audio id="weddingMusic" loop><source src="music.mp3" type="audio/mpeg"></audio>
+    <audio id="bgMusic" loop preload="auto"><source src="music.mp3" type="audio/mpeg"></audio>
 
-    <div id="main-content" style="visibility: hidden;">
+    <div id="main-wrapper">
         <header class="hero">
-            <p data-aos="fade-down" style="letter-spacing: 5px;">3 MAY 2026 • SHIMLA HILLS</p>
-            <h1 data-aos="zoom-in">Anupam & Aastha</h1>
-            <p data-aos="fade-up" style="max-width: 600px; padding: 20px;">
-                With the blessings of our families, we warmly invite you to a celebration 
-                woven with tradition and music, amidst the enchanting hills of Himachal Pradesh.
+            <p class="date-line" data-aos="fade-down">3 MAY 2026 • SHIMLA HILLS</p>
+            <h1 data-aos="zoom-in">ANUPAM <span>&</span> AASTHA</h1>
+            
+            <p class="hero-text" data-aos="fade-up">
+                With the blessings of our families, we warmly invite you to a 
+                celebration woven with tradition and music, and heartfelt moments 
+                amidst the enchanting hills of Himachal Pradesh.
             </p>
-            <a href="#events" class="btn-discover" data-aos="fade-up">DISCOVER THE DETAILS</a>
+            
+            <a href="#events" class="btn-glass" data-aos="fade-up" data-aos-delay="200">DISCOVER THE DETAILS</a>
+            <p style="margin-top:25px; font-size: 0.75rem; letter-spacing: 2px; opacity: 0.7; text-transform: uppercase;">Join us as we begin our forever</p>
         </header>
-
-        <section class="section" id="events">
-            <div class="event-card" data-aos="fade-right">
-                <div class="event-img" style="background-image: url('https://images.unsplash.com/photo-1595981267035-21a0ca2f5e33?auto=format&fit=crop&w=600')"></div>
-                <div class="event-info">
-                    <p style="color: var(--gold); font-weight: bold; letter-spacing: 2px;">30 APRIL 2026</p>
-                    <h3 style="font-family: 'Playfair Display'; font-size: 2.5rem; margin: 10px 0;">Mehendi & Hi-Tea</h3>
-                    <p>4:00 PM Onwards<br>Hotel Taj Theog, Shimla</p>
-                </div>
-            </div>
-            </section>
-
-        <section class="section" style="text-align: center; background: #1a1a1a; color: white;">
-            <h2 style="font-family: 'Great Vibes'; font-size: 4rem; color: var(--gold);">RSVP</h2>
-            <p>We look forward to seeing you!</p>
-            <div style="margin-top: 30px;">
-                <a href="https://wa.me/919872904973" style="color: #25D366; font-size: 1.5rem; text-decoration: none; font-weight: bold;">WHATSAPP US</a>
-            </div>
-        </section>
     </div>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
         const canvas = document.getElementById('scratch-canvas');
         const ctx = canvas.getContext('2d');
-        let isDrawing = false;
-        let scratchedPercentage = 0;
+        let isScratching = false;
 
-        // Fill canvas with gold color
+        // Cover canvas with Gold Texture
         ctx.fillStyle = '#c5a059';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
-        // Add "SCRATCH" text to the gold surface
-        ctx.fillStyle = "#fff";
-        ctx.font = "bold 20px Montserrat";
+        // Add "SCRATCH" text to surface
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "bold 18px Montserrat";
         ctx.textAlign = "center";
-        ctx.fillText("SCRATCH ME", canvas.width/2, canvas.height/2 + 10);
+        ctx.fillText("SCRATCH HERE", canvas.width/2, canvas.height/2 + 7);
 
-        function scratch(e) {
-            if (!isDrawing) return;
+        function handleScratch(e) {
+            if (!isScratching) return;
             const rect = canvas.getBoundingClientRect();
-            const x = (e.clientX || e.touches[0].clientX) - rect.left;
-            const y = (e.clientY || e.touches[0].clientY) - rect.top;
+            const x = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
+            const y = (e.clientY || (e.touches && e.touches[0].clientY)) - rect.top;
             
             ctx.globalCompositeOperation = 'destination-out';
             ctx.beginPath();
-            ctx.arc(x, y, 30, 0, Math.PI * 2);
+            ctx.arc(x, y, 35, 0, Math.PI * 2);
             ctx.fill();
-            checkScratch();
+            
+            // Auto-reveal after 45% scratched
+            const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+            let clearCount = 0;
+            for (let i = 3; i < pixels.length; i += 4) { if (pixels[i] === 0) clearCount++; }
+            if (clearCount > (pixels.length / 4) * 0.45) revealSite();
         }
 
-        function checkScratch() {
-            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-            let count = 0;
-            for (let i = 0; i < imageData.data.length; i += 4) {
-                if (imageData.data[i + 3] === 0) count++;
-            }
-            if (count > (canvas.width * canvas.height) * 0.4) {
-                revealInvitation();
-            }
-        }
-
-        function revealInvitation() {
+        function revealSite() {
             document.getElementById('scratch-container').style.opacity = '0';
             setTimeout(() => {
                 document.getElementById('scratch-container').style.display = 'none';
-                document.getElementById('main-content').style.visibility = 'visible';
-                document.getElementById('weddingMusic').play();
-                AOS.init({ duration: 1000, once: true });
+                document.getElementById('main-wrapper').style.visibility = 'visible';
+                document.getElementById('bgMusic').play();
+                AOS.init({ duration: 1200, once: true });
             }, 1000);
         }
 
-        canvas.addEventListener('mousedown', () => isDrawing = true);
-        canvas.addEventListener('touchstart', () => isDrawing = true);
-        window.addEventListener('mouseup', () => isDrawing = false);
-        window.addEventListener('touchend', () => isDrawing = false);
-        canvas.addEventListener('mousemove', scratch);
-        canvas.addEventListener('touchmove', scratch);
+        // Event Listeners
+        canvas.addEventListener('mousedown', () => isScratching = true);
+        canvas.addEventListener('touchstart', (e) => { isScratching = true; e.preventDefault(); });
+        window.addEventListener('mouseup', () => isScratching = false);
+        window.addEventListener('touchend', () => isScratching = false);
+        canvas.addEventListener('mousemove', handleScratch);
+        canvas.addEventListener('touchmove', (e) => { handleScratch(e); e.preventDefault(); });
     </script>
 </body>
 </html>
