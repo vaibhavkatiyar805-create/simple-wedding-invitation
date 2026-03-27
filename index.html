@@ -48,3 +48,106 @@
         font-size: 1.3rem !important; font-weight: bold !important;
         text-transform: uppercase; letter-spacing: 2px;
         border-radius: 50px !important; margin: 10px 0;
+        display: inline-flex; align-items: center; justify-content: center;
+        font-family: 'Montserrat', sans-serif;
+      }
+      .btn-maps { background-color: #4a4a4a !important; color: white !important; border: none; }
+      .btn-whatsapp { background-color: #25D366 !important; color: white !important; border: none; }
+
+      .title-font { font-family: 'Great Vibes', cursive; color: var(--gold); font-size: 5.5rem !important; }
+      .event-card { background: white; padding: 40px 20px; border-radius: 10px; height: 100%; border-bottom: 5px solid var(--gold); }
+    </style>
+  </head>
+
+  <body>
+    <audio id="myAudio" loop>
+      <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="reveal-overlay">
+      <h2 class="title-font has-text-white">Anupam & Aastha</h2>
+      <p class="is-size-4 has-text-grey-light">3rd May 2026</p>
+      <button class="reveal-btn" onclick="startInvite()">VIEW INVITATION</button>
+    </div>
+
+    <section class="hero is-medium has-text-centered">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title-font">Anupam & Aastha</h1>
+          <p class="is-size-3">SAVE THE DATE</p>
+          
+          <ul id="hitungmundur">
+            <li><span class="days">00</span><p>Days</p></li>
+            <li><span class="hours">00</span><p>Hrs</p></li>
+            <li><span class="minutes">00</span><p>Min</p></li>
+            <li><span class="seconds">00</span><p>Sec</p></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section has-text-centered" id="Waktu">
+      <div class="container">
+        <h2 class="title-font is-size-1">The Venues</h2>
+        <div class="columns is-multiline is-centered">
+          
+          <div class="column is-4">
+            <div class="event-card">
+              <h3 class="is-size-3 has-text-weight-bold">Hotel Taj Theog</h3>
+              <p class="is-size-5 mb-4">Theog, Shimla Hills</p>
+              <a href="https://maps.app.goo.gl/YourTajTheogLink" class="button btn-big btn-maps" target="_blank">
+                📍 OPEN IN GOOGLE MAPS
+              </a>
+            </div>
+          </div>
+
+          <div class="column is-4">
+            <div class="event-card">
+              <h3 class="is-size-3 has-text-weight-bold">Hyatt Centric</h3>
+              <p class="is-size-5 mb-4">Sector 17, Chandigarh</p>
+              <a href="https://maps.app.goo.gl/YourHyattLink" class="button btn-big btn-maps" target="_blank">
+                📍 OPEN IN GOOGLE MAPS
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section has-text-centered" id="rsvp">
+      <div class="container">
+        <h2 class="title-font">Kindly RSVP</h2>
+        <p class="is-size-4 mb-5">Please confirm your presence via WhatsApp</p>
+        
+        <div class="columns is-centered">
+          <div class="column is-6">
+            <a href="https://api.whatsapp.com/send?phone=919872904973" class="button btn-big btn-whatsapp">
+              💬 CONTACT ASHTHA
+            </a>
+            <a href="https://api.whatsapp.com/send?phone=917837210001" class="button btn-big btn-whatsapp">
+              💬 CONTACT ANUPAM
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/jquery.countdown.js"></script>
+    <script>
+      function startInvite() {
+        document.getElementById('reveal-overlay').classList.add('hidden');
+        const audio = document.getElementById('myAudio');
+        audio.play();
+      }
+
+      $(function() {
+        $('#hitungmundur').countdown({
+          date: '05/03/2026 15:30:00',
+          offset: +5.5
+        });
+      });
+    </script>
+  </body>
+</html>
