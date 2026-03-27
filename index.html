@@ -332,6 +332,106 @@
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
+        // Envelope & AOS Logic
+        let isOpening = false;
+        function openEnvelope() {
+            if (isOpening) return;
+            isOpening = true;
+            document.getElementById('envelope-container').classList.add('open');
+            document.getElementById('tap-hint').style.opacity = '0';
+            
+            setTimeout(() => {
+                const wrapper = document.getElementById('envelope-wrapper');
+                const mainSite = document.getElementById('main-site');
+                wrapper.style.opacity = '0';
+                
+                setTimeout(() => {
+                    wrapper.style.display = 'none';
+                    mainSite.style.display = 'block';
+                    void mainSite.offsetWidth; 
+                    mainSite.style.opacity = '1';
+                    document.getElementById('weddingAudio').play().catch(e => console.log("Audio skipped"));
+                    AOS.init({ duration: 1000, once: true, offset: 50 });
+                }, 800); 
+            }, 1500); 
+        }
+
+        // Timer Logic
+        const target = new Date("May 3, 2026 15:30:00").getTime();
+        setInterval(() => {
+            const now = new Date().getTime();
+            const d = target - now;
+            document.getElementById("days").innerText = Math.max(0, Math.floor(d / (1000 * 60 * 60 * 24))).toString().padStart(2, '0');
+            document.getElementById("hours").innerText = Math.max(0, Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).toString().padStart(2, '0');
+            document.getElementById("mins").innerText = Math.max(0, Math.floor((d % (1000 * 60 * 60)) / (1000 * 60))).toString().padStart(2, '0');
+            document.getElementById("secs").innerText = Math.max(0, Math.floor((d % (1000 * 60)) / 1000)).toString().padStart(2, '0');
+        }, 1000);
+
+        // Form Logic
+        function selectAttending(isAccepting) {
+            document.getElementById('btn-accept').classList.remove('selected');
+            document.getElementById('btn-decline').classList.remove('selected');
+            if(isAccepting) {
+                document.getElementById('btn-accept').classList.add('selected');
+                document.getElementById('attending').value = "Accept";
+            } else {
+                document.getElementById('btn-decline').classList.add('selected');
+                document.getElementById('attending').value = "Decline";
+            }
+        }
+
+        function submitForm(e) {
+            e.preventDefault(); 
+            if(!document.getElementById('attending').value) {
+                alert("Please select if you will attend.");
+                return;
+            }
+            const btn = document.getElementById('submitBtn');
+            btn.innerText = "Sending...";
+            btn.disabled = true;
+
+            // 1. DATA GATHER KARNA
+            const formData = new FormData();
+            formData.append("Attending", document.getElementById('attending').value);
+            formData.append("Name", document.querySelector('input[type="text"]').value);
+            formData.append("Total Guests", document.querySelector('select').value);
+            
+            let dietOptions = [];
+            document.querySelectorAll('input[name="diet"]:checked').forEach(cb => dietOptions.push(cb.value));
+            formData.append("Dietary Requirements", dietOptions.length > 0 ? dietOptions.join(", ") : "None");
+            
+            formData.append("Message", document.querySelector('textarea').value);
+
+            // 2. FORMSPREE KO BHEJNA (YAHAN APNA URL DAALO!)
+            fetch("https://formspree.io/f/mjgpkqne", {
+                method: "POST",
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    btn.innerText = "Send RSVP";
+                    btn.disabled = false;
+                    const toast = document.getElementById('toast');
+                    toast.classList.add('show');
+                    document.getElementById('rsvpForm').reset();
+                    document.getElementById('btn-accept').classList.remove('selected');
+                    document.getElementById('btn-decline').classList.remove('selected');
+                    document.getElementById('attending').value = "";
+                    setTimeout(() => { toast.classList.remove('show'); }, 3000);
+                } else {
+                    alert("Oops! There was a problem submitting your form");
+                    btn.innerText = "Send RSVP";
+                    btn.disabled = false;
+                }
+            }).catch(error => {
+                alert("Oops! There was a problem submitting your form");
+                btn.innerText = "Send RSVP";
+                btn.disabled = false;
+            });
+        }
+    </script>
         // Envelope & AOS Bug Fix Logic
         let isOpening = false;
         function openEnvelope() {
