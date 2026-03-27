@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> 
     <title>Aastha & Anupam | The Royal Wedding</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     
     <style>
@@ -13,54 +13,85 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { background-color: var(--cream); font-family: 'Montserrat', sans-serif; color: var(--text); overflow-x: hidden; scroll-behavior: smooth; }
 
-        /* 1. ROYAL GREEN ENVELOPE REVEAL */
+        /* 1. ROYAL GREEN ENVELOPE REVEAL (Kept Exactly as you wanted) */
         #envelope-wrapper { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 99999; background: #fff; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 1.5s ease; }
-        
         .envelope-container { position: relative; width: 320px; height: 200px; cursor: pointer; margin-top: 20px; }
-        
-        /* Envelope Layers & Shading */
         .envelope-back { position: absolute; width: 100%; height: 100%; background: #163025; border-radius: 5px; z-index: 1; box-shadow: 0 15px 40px rgba(0,0,0,0.15); }
-        
         .letter { position: absolute; top: 10px; left: 10px; width: 300px; height: 180px; background: var(--warm-yellow); border-radius: 5px; z-index: 2; transition: transform 0.6s ease 0.4s, z-index 0s 0.4s; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border: 2px solid var(--gold); }
         .letter img { width: 75px; max-height: 90px; object-fit: contain; margin-bottom: 10px; opacity: 0.9; }
         .letter h3 { font-family: 'Cinzel', serif; font-size: 1.2rem; color: var(--dark-blue); font-weight: 700; margin: 0; letter-spacing: 2px; }
-        
-        /* Envelope Flaps */
         .envelope-front-left { position: absolute; top: 0; left: 0; width: 0; height: 0; border-top: 100px solid transparent; border-bottom: 100px solid transparent; border-left: 160px solid #2a5945; z-index: 3; }
         .envelope-front-right { position: absolute; top: 0; right: 0; width: 0; height: 0; border-top: 100px solid transparent; border-bottom: 100px solid transparent; border-right: 160px solid #254d3c; z-index: 3; }
         .envelope-bottom { position: absolute; bottom: 0; left: 0; width: 0; height: 0; border-left: 160px solid transparent; border-right: 160px solid transparent; border-bottom: 110px solid #1e4031; z-index: 4; }
         .envelope-flap { position: absolute; top: 0; left: 0; width: 0; height: 0; border-left: 160px solid transparent; border-right: 160px solid transparent; border-top: 115px solid #326b52; z-index: 5; transform-origin: top; transition: transform 0.5s ease; }
-        
-        /* Envelope Open Animation */
         .envelope-container.open .envelope-flap { transform: rotateX(180deg); z-index: 1; }
         .envelope-container.open .letter { transform: translateY(-80px); z-index: 6; }
-        
         .tap-hint { margin-top: 60px; font-family: 'Cinzel', serif; font-size: 1.2rem; letter-spacing: 4px; color: #2a5945; animation: pulse 2s infinite; transition: opacity 0.3s; }
-
-        /* 2. HERO SECTION */
-        .hero { position: relative; height: 100vh; width: 100vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; overflow: hidden; background: url('http://googleusercontent.com/image_generation_content/0') no-repeat center bottom; background-size: cover; background-attachment: fixed; }
-        .hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(20,30,50,0.4) 0%, rgba(20,30,50,0.1) 50%, rgba(0,0,0,0.8) 100%); z-index: 1; }
-        
-        .hero-content { position: relative; z-index: 10; padding: 20px; width: 100%; max-width: 800px; transform: translateY(-5%); }
-        .hero-names { font-family: 'Cinzel', serif; font-size: 6rem; color: #fff; line-height: 1.1; text-shadow: 0 10px 30px rgba(0,0,0,0.6); font-weight: 500; letter-spacing: 8px; }
-        .hero-weds { font-family: 'Montserrat', sans-serif; font-size: 1.2rem; color: var(--gold); letter-spacing: 15px; margin: 20px 0; text-transform: uppercase; font-weight: 300; }
-
-        .scroll-down { position: absolute; bottom: 40px; z-index: 10; color: white; display: flex; flex-direction: column; align-items: center; opacity: 0.8; animation: bounce 2s infinite; }
-        .scroll-down span { font-family: 'Montserrat', sans-serif; font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 10px; }
-        .scroll-down i { width: 1px; height: 40px; background: linear-gradient(transparent, var(--gold)); }
-
-        /* Lanterns */
-        .lantern { position: absolute; bottom: -100px; width: 40px; height: 60px; background: radial-gradient(circle at 50% 50%, #ffdaa3, #ff8c00); border-radius: 5px 5px 10px 10px; box-shadow: 0 0 30px rgba(255, 140, 0, 0.8), inset 0 0 10px rgba(255,255,255,0.5); z-index: 5; opacity: 0; animation: floatUp linear infinite; }
-        .lantern::after { content: ''; position: absolute; bottom: -5px; left: 15px; width: 10px; height: 10px; background: rgba(0,0,0,0.4); border-radius: 50%; filter: blur(2px); }
-        
-        @keyframes floatUp { 0% { transform: translateY(0) scale(0.8) rotate(-5deg); opacity: 0; } 20% { opacity: 0.9; } 100% { transform: translateY(-120vh) scale(1.2) rotate(5deg); opacity: 0; } }
         @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
-        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-15px); } 60% { transform: translateY(-7px); } }
+
+        /* 2. MINIMALIST EDITORIAL HERO SECTION (The New Canva Style) */
+        .hero-minimal { 
+            position: relative; height: 100vh; width: 100vw; display: flex; flex-direction: column; 
+            background-color: #ffffff; overflow: hidden;
+        }
+
+        .hero-text-container {
+            flex-shrink: 0; display: flex; flex-direction: column; align-items: center; 
+            padding-top: 12vh; z-index: 10; width: 100%; text-align: center;
+        }
+
+        .names-minimal { 
+            font-family: 'Playfair Display', serif; font-size: 3rem; color: #1a1a1a; 
+            display: flex; align-items: center; justify-content: center; gap: 15px; 
+            letter-spacing: 3px; line-height: 1;
+        }
+        
+        .cursive-and { 
+            font-family: 'Great Vibes', cursive; font-size: 2.5rem; text-transform: lowercase; 
+            color: #333; margin-top: 5px;
+        }
+
+        .minimal-divider { 
+            width: 80px; border: 0; border-top: 1px solid #ccc; margin: 30px auto; 
+        }
+
+        .date-minimal { 
+            display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 15px; 
+        }
+        
+        .month-cursive { 
+            font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: #1a1a1a; 
+            transform: translateY(-10px); /* Adjusts position to look like signature */
+        }
+        
+        .day-number { 
+            font-family: 'Playfair Display', serif; font-size: 7rem; line-height: 0.8; 
+            color: #1a1a1a; font-weight: 400; letter-spacing: -2px;
+        }
+
+        .details-minimal { 
+            font-family: 'Montserrat', sans-serif; font-size: 0.8rem; color: #555; 
+            line-height: 1.8; letter-spacing: 1px; text-transform: uppercase; margin-top: 10px;
+        }
+
+        /* The Image Area */
+        .hero-image-container { 
+            flex-grow: 1; width: 100%; position: relative; margin-top: 20px; 
+        }
+        
+        .hero-couple-img { 
+            width: 100%; height: 100%; object-fit: cover; object-position: center top; 
+        }
+        
+        /* Smooth fade from white text area into the photo */
+        .fade-overlay-top { 
+            position: absolute; top: -2px; left: 0; width: 100%; height: 120px; 
+            background: linear-gradient(to bottom, #ffffff 0%, transparent 100%); 
+        }
 
         /* 3. COUNTDOWN SECTION */
         .countdown-section { padding: 80px 20px; background: var(--dark-blue); text-align: center; position: relative; z-index: 20; color: white; }
         .countdown-title { font-family: 'Cinzel', serif; font-size: 2.2rem; color: var(--gold); margin-bottom: 30px; letter-spacing: 3px; font-weight: 400; text-transform: uppercase; }
-        
         .timer-wrapper { display: flex; gap: 20px; justify-content: center; max-width: 600px; margin: 0 auto; flex-wrap: wrap; }
         .time-box { text-align: center; min-width: 70px; }
         .time-box span { font-family: 'Cinzel', serif; font-size: 3.5rem; display: block; font-weight: 500; color: white; text-shadow: 0 4px 15px rgba(0,0,0,0.3); }
@@ -70,7 +101,6 @@
         .family-section { padding: 100px 20px; background: var(--warm-yellow); text-align: center; position: relative; }
         .welcome-msg { max-width: 800px; margin: 0 auto 60px; font-size: 1.1rem; line-height: 1.8; color: var(--text); font-style: italic; }
         .family-grid { display: flex; justify-content: center; gap: 40px; max-width: 1000px; margin: 0 auto; flex-wrap: wrap; }
-        
         .family-box { background: white; border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 5px; padding: 50px 30px 40px; width: 45%; min-width: 320px; box-shadow: 0 15px 30px rgba(0, 0, 0, 0.04); position: relative; }
         .family-box::before { content: 'ॐ'; position: absolute; top: -25px; left: 50%; transform: translateX(-50%); font-size: 2.5rem; color: var(--gold); background: var(--warm-yellow); padding: 0 20px; }
         .family-title { font-family: 'Cinzel', serif; font-size: 1.8rem; color: var(--dark-blue); border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 15px; margin-bottom: 20px; }
@@ -81,13 +111,10 @@
         /* 5. EVENTS TIMELINE */
         .events-section { padding: 100px 20px; background: var(--cream); text-align: center; }
         .section-title { font-family: 'Great Vibes', cursive; font-size: 4.5rem; color: var(--gold); margin-bottom: 60px; }
-        
         .timeline { max-width: 900px; margin: 0 auto; position: relative; }
         .timeline::before { content: ''; position: absolute; width: 1px; background: var(--gold); top: 0; bottom: 0; left: 50%; transform: translateX(-50%); opacity: 0.4; }
-        
         .event-card { display: flex; background: white; border-radius: 5px; margin-bottom: 50px; width: 100%; box-shadow: 0 15px 40px rgba(0,0,0,0.06); position: relative; overflow: hidden; text-align: left; }
         .event-card::after { content: ''; position: absolute; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; background: var(--gold); border: 4px solid var(--cream); border-radius: 50%; z-index: 2; }
-        
         .event-card:nth-child(odd) { flex-direction: row; }
         .event-card:nth-child(even) { flex-direction: row-reverse; text-align: right; }
         .event-card:nth-child(odd)::after { left: 50%; transform: translate(-50%, -50%); }
@@ -96,7 +123,6 @@
         .event-img { width: 50%; min-height: 350px; background-size: cover; background-position: center; position: relative; }
         .event-img::after { content: ''; position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(45deg, rgba(212,175,55,0.1), transparent); }
         .event-info { width: 50%; padding: 50px 40px; display: flex; flex-direction: column; justify-content: center; }
-
         .e-date { color: var(--gold); font-weight: 600; letter-spacing: 3px; font-size: 0.85rem; text-transform: uppercase; }
         .e-name { font-family: 'Cinzel', serif; font-size: 2.2rem; margin: 15px 0; color: var(--dark-blue); }
         .e-desc { font-size: 0.95rem; line-height: 1.8; margin-bottom: 25px; color: #666; }
@@ -105,11 +131,10 @@
         .btn-map { background: transparent; color: var(--dark-blue); border: 1px solid rgba(30, 41, 59, 0.3); align-self: flex-start; }
         .event-card:nth-child(even) .btn-map { align-self: flex-end; }
         .btn-map:hover { background: var(--dark-blue); color: white; border-color: var(--dark-blue); }
-        
         .btn-wa { background: #25D366; color: white; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2); font-size: 1rem; padding: 15px 45px; border: none; }
         .btn-wa:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(37, 211, 102, 0.4); }
 
-        /* 7. COMPLIMENTS SECTION */
+        /* 6. COMPLIMENTS SECTION */
         .compliments-section { padding: 80px 20px 40px; background: var(--light-gray); text-align: center; }
         .compliments-title { font-family: 'Cinzel', serif; font-size: 2rem; color: var(--gold); letter-spacing: 4px; margin-bottom: 40px; text-transform: uppercase; }
         .compliments-box { background: white; border-radius: 15px; padding: 40px; max-width: 800px; margin: 0 auto 50px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
@@ -117,8 +142,13 @@
         .compliments-text { font-size: 1rem; color: #666; line-height: 1.8; }
         .footer-text { font-size: 0.9rem; color: #888; margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.05); }
 
+        /* Responsive Design for Mobile (Crucial for the new font sizes) */
         @media (max-width: 768px) {
-            .hero-names { font-size: 3.5rem; }
+            .names-minimal { flex-direction: column; gap: 5px; font-size: 2.8rem; }
+            .cursive-and { font-size: 2rem; margin: -10px 0; }
+            .day-number { font-size: 5.5rem; }
+            .month-cursive { font-size: 3rem; transform: translateY(-5px); }
+            
             .countdown-title { font-size: 1.6rem; }
             .time-box span { font-size: 2.5rem; }
             .timeline::before { left: 20px; }
@@ -155,22 +185,31 @@
 
     <div id="main-site" style="visibility: hidden; opacity: 0; transition: opacity 1.5s ease;">
         
-        <section class="hero">
-            <div class="lantern" style="left: 10%; animation-duration: 12s; animation-delay: 0s;"></div>
-            <div class="lantern" style="left: 30%; animation-duration: 15s; animation-delay: 2s; width: 30px; height: 45px;"></div>
-            <div class="lantern" style="left: 50%; animation-duration: 18s; animation-delay: 5s;"></div>
-            <div class="lantern" style="left: 70%; animation-duration: 14s; animation-delay: 1s; width: 50px; height: 75px;"></div>
-            <div class="lantern" style="left: 85%; animation-duration: 16s; animation-delay: 4s;"></div>
-
-            <div class="hero-content" data-aos="zoom-in" data-aos-duration="1500">
-                <div class="hero-names">AASTHA</div>
-                <div class="hero-weds">WEDS</div>
-                <div class="hero-names">ANUPAM</div>
+        <section class="hero-minimal">
+            <div class="hero-text-container" data-aos="fade-down" data-aos-duration="1500">
+                <div class="names-minimal">
+                    <span>AASTHA</span>
+                    <span class="cursive-and">and</span>
+                    <span>ANUPAM</span>
+                </div>
+                
+                <hr class="minimal-divider">
+                
+                <div class="date-minimal">
+                    <span class="month-cursive">May</span>
+                    <span class="day-number">3</span>
+                </div>
+                
+                <div class="details-minimal">
+                    Three thirty in the afternoon<br>
+                    Hotel Taj Theog, Shimla Hills<br>
+                    2026
+                </div>
             </div>
 
-            <div class="scroll-down">
-                <span>Scroll to Discover</span>
-                <i></i>
+            <div class="hero-image-container" data-aos="fade-up" data-aos-duration="2000">
+                <div class="fade-overlay-top"></div>
+                <img src="hero.png" alt="Aastha and Anupam" class="hero-couple-img">
             </div>
         </section>
 
@@ -269,7 +308,6 @@
                         <a href="https://maps.google.com/?q=Hyatt+Centric+Sector+17+Chandigarh" target="_blank" class="btn btn-map">📍 Get Directions</a>
                     </div>
                 </div>
-
             </div>
         </section>
 
@@ -302,11 +340,9 @@
             if (isOpening) return;
             isOpening = true;
             
-            // Trigger CSS animations to open envelope and pull card up
             document.getElementById('envelope-container').classList.add('open');
             document.getElementById('tap-hint').style.opacity = '0';
             
-            // Wait just 1.5 seconds after tapping, then show the website
             setTimeout(() => {
                 const wrapper = document.getElementById('envelope-wrapper');
                 const mainSite = document.getElementById('main-site');
@@ -318,15 +354,14 @@
                     mainSite.style.visibility = 'visible';
                     mainSite.style.opacity = '1';
                     
-                    // Play music
                     document.getElementById('weddingAudio').play().catch(e => console.log("Audio needed user interaction"));
                     
                     AOS.init({ duration: 1000, once: true, offset: 50 });
-                }, 800); // Wait for fade out
-            }, 1500); // 1.5 Seconds fast reveal
+                }, 800); 
+            }, 1500); 
         }
 
-        // --- 2. TIMER LOGIC (WITH SECONDS) ---
+        // --- 2. TIMER LOGIC ---
         const target = new Date("May 3, 2026 15:30:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
@@ -339,4 +374,3 @@
     </script>
 </body>
 </html>
-
