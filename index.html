@@ -3,50 +3,59 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> 
-    <title>Aastha & Anupam | A Mountain Celebration</title>
+    <title>Aastha & Anupam | A Ghibli Tale</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     
     <style>
-        /* COLOR PALETTE - Navy, Emerald, Gold & Cream */
+        /* COLOR PALETTE - Navy, Gold & Emerald Ghibli Vibe */
         :root { 
-            --navy: #0F172A; /* Deep Royal Navy */
+            --navy: #0F172A; 
             --navy-light: #1E293B;
-            --emerald: #1B4332; /* Rich Mountain Emerald */
-            --emerald-light: #2D6A4F;
+            --emerald: #1B4332;
             --gold: #D4AF37;
-            --gold-light: #F3E5AB;
             --cream: #FAFAFA;
-            --text-dark: #111111;
+            --text-dark: #1a1a1a;
             --text-light: #666666;
         }
         
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background-color: #e5e5e5; font-family: 'Montserrat', sans-serif; color: var(--text-dark); overflow-x: hidden; scroll-behavior: smooth; }
+        body { background-color: #111; font-family: 'Montserrat', sans-serif; color: var(--text-dark); overflow-x: hidden; scroll-behavior: smooth; }
 
-        /* Forces Mobile View on Desktop */
-        .mobile-container { max-width: 480px; margin: 0 auto; background: var(--cream); min-height: 100vh; box-shadow: 0 0 40px rgba(0,0,0,0.15); position: relative; }
+        /* Container to keep it looking like an app/invite on desktop too */
+        .mobile-container { max-width: 480px; margin: 0 auto; background: var(--cream); min-height: 100vh; box-shadow: 0 0 40px rgba(0,0,0,0.5); position: relative; overflow: hidden; }
 
         .serif { font-family: 'Playfair Display', serif; }
         .cursive { font-family: 'Great Vibes', cursive; }
         .sans { font-family: 'Montserrat', sans-serif; }
 
         /* =========================================
-           1. NAVY ENVELOPE & WAX SEAL REVEAL
+           1. GHIBLI BACKGROUND & NAVY ENVELOPE
            ========================================= */
-        #envelope-wrapper { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 99999; background: var(--cream); display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 1.5s ease; }
+        #envelope-wrapper { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 99999; 
+            /* THE GHIBLI BACKGROUND - Replace 'ghibli-couple.jpg' with your anime image */
+            background: url('ghibli-couple.jpg') no-repeat center center; 
+            background-size: cover;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 1.5s ease; 
+        }
         
-        .envelope-container { position: relative; width: 340px; height: 220px; cursor: pointer; margin-top: 30px; }
+        /* Dark overlay to make the envelope pop */
+        #envelope-wrapper::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); z-index: 0; }
+
+        .envelope-content-box { position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; width: 100%; }
+
+        .envelope-container { position: relative; width: 340px; height: 220px; cursor: pointer; margin-top: 20px; }
         
-        /* Navy Envelope Body */
-        .envelope-back { position: absolute; width: 100%; height: 100%; background: var(--navy); border-radius: 5px; z-index: 1; box-shadow: 0 20px 50px rgba(15, 23, 42, 0.3); border: 1px solid rgba(212, 175, 55, 0.2); }
+        /* Navy Blue Envelope */
+        .envelope-back { position: absolute; width: 100%; height: 100%; background: var(--navy); border-radius: 5px; z-index: 1; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5); border: 1px solid rgba(212, 175, 55, 0.3); }
         
-        /* The Date Reveal Letter Inside */
+        /* Letter Inside */
         .letter { position: absolute; top: 15px; left: 15px; width: 310px; height: 190px; background: #fffdf9; border-radius: 5px; z-index: 2; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.5s; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border: 2px solid var(--gold); }
-        .letter .save-text { font-size: 1.1rem; color: var(--emerald); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 5px; }
-        .letter .reveal-date { font-size: 3rem; color: var(--gold); line-height: 1; margin-bottom: 5px; }
-        .letter .reveal-year { font-size: 1rem; color: var(--navy); letter-spacing: 5px; }
+        .letter .save-text { font-size: 1rem; color: var(--navy); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 5px; font-weight: 500; }
+        .letter .reveal-date { font-size: 3.5rem; color: var(--gold); line-height: 1; margin-bottom: 5px; }
+        .letter .reveal-year { font-size: 1.2rem; color: var(--emerald); letter-spacing: 5px; }
         
         /* Navy Flaps */
         .envelope-front-left { position: absolute; top: 0; left: 0; width: 0; height: 0; border-top: 110px solid transparent; border-bottom: 110px solid transparent; border-left: 170px solid #141f36; z-index: 3; }
@@ -54,78 +63,88 @@
         .envelope-bottom { position: absolute; bottom: 0; left: 0; width: 0; height: 0; border-left: 170px solid transparent; border-right: 170px solid transparent; border-bottom: 120px solid #0b1120; z-index: 4; }
         .envelope-flap { position: absolute; top: 0; left: 0; width: 0; height: 0; border-left: 170px solid transparent; border-right: 170px solid transparent; border-top: 125px solid var(--navy-light); z-index: 5; transform-origin: top; transition: transform 0.6s ease; }
         
-        /* The Gold Wax Seal */
+        /* Gold Wax Seal */
         .wax-seal { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 65px; height: 65px; background: radial-gradient(circle at 30% 30%, #ffd700, #d4af37, #997a15); border-radius: 50%; z-index: 10; box-shadow: 0 5px 15px rgba(0,0,0,0.5), inset 0 2px 5px rgba(255,255,255,0.4); display: flex; justify-content: center; align-items: center; color: #5a4600; font-size: 1.8rem; transition: opacity 0.4s ease, transform 0.4s ease; border: 2px solid rgba(255,215,0,0.5); }
         .wax-seal::after { content: 'A&A'; font-family: 'Great Vibes', cursive; text-shadow: -1px -1px 1px rgba(255,255,255,0.3), 1px 1px 1px rgba(0,0,0,0.3); }
 
-        /* Animation Classes */
         .envelope-container.open .wax-seal { opacity: 0; transform: translate(-50%, -50%) scale(1.5); }
         .envelope-container.open .envelope-flap { transform: rotateX(180deg); z-index: 1; }
         .envelope-container.open .letter { transform: translateY(-110px); z-index: 6; }
         
-        .tap-hint { margin-top: 70px; font-size: 0.85rem; letter-spacing: 5px; color: var(--navy); animation: pulse 2s infinite; text-transform: uppercase; }
+        .tap-hint { margin-top: 50px; font-size: 0.85rem; letter-spacing: 5px; color: rgba(255,255,255,0.8); animation: pulse 2s infinite; text-transform: uppercase; }
         @keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
 
         /* =========================================
-           2. MOUNTAIN EMERALD HERO SECTION
+           2. HERO SECTION (Continuous Ghibli Theme)
            ========================================= */
-        .hero { position: relative; width: 100%; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding-bottom: 50px; background: url('https://images.unsplash.com/photo-1542224566-6e85f2e6772f?q=80&w=1000&auto=format&fit=crop') no-repeat center center; background-size: cover; text-align: center; }
-        .hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(15,23,42,0.2) 0%, rgba(27,67,50,0.8) 100%); z-index: 1; }
+        .hero { position: relative; width: 100%; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; 
+            /* Same Ghibli background for a seamless transition */
+            background: url('ghibli-couple.jpg') no-repeat center center; background-size: cover; 
+        }
+        .hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(15,23,42,0.4) 0%, rgba(15,23,42,0.8) 100%); z-index: 1; }
         
         .hero-content { position: relative; z-index: 2; color: white; width: 100%; padding: 0 20px; }
-        .hero-top-text { font-size: 0.9rem; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; margin-bottom: 20px; }
-        .hero-names { font-size: 3.5rem; line-height: 1.1; letter-spacing: 3px; color: #fff; margin-bottom: 10px; text-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-        .hero-and { font-size: 2.5rem; color: var(--gold); margin: -10px 0; }
+        .hero-top-text { font-size: 0.85rem; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; margin-bottom: 20px; }
+        .hero-names { font-size: 3.5rem; line-height: 1; letter-spacing: 3px; color: #fff; margin-bottom: 5px; text-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        .hero-and { font-size: 2.5rem; color: var(--gold); margin: -5px 0; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
         
-        .hero-divider { width: 80px; height: 1px; background: var(--gold); margin: 30px auto; opacity: 0.7; }
+        .hero-divider { width: 60px; height: 1px; background: var(--gold); margin: 30px auto; opacity: 0.8; }
         
-        .hero-date { font-size: 1.2rem; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 15px; }
-        .hero-location { font-size: 0.85rem; letter-spacing: 2px; color: rgba(255,255,255,0.8); line-height: 1.6; }
+        .hero-date { font-size: 1.1rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 10px; }
+        .hero-location { font-size: 0.8rem; letter-spacing: 2px; color: rgba(255,255,255,0.7); line-height: 1.6; }
 
         /* =========================================
-           3. COUNTDOWN SECTION
+           3. ELEGANT COUNTDOWN
            ========================================= */
-        .countdown-section { padding: 60px 20px; background-color: var(--emerald); text-align: center; color: white; border-top: 3px solid var(--gold); border-bottom: 3px solid var(--gold); }
-        .cd-title { font-size: 1.2rem; letter-spacing: 4px; margin-bottom: 30px; color: var(--gold-light); text-transform: uppercase; }
+        .countdown-section { padding: 50px 20px; background-color: var(--navy); text-align: center; color: white; border-top: 2px solid var(--gold); border-bottom: 2px solid var(--gold); }
+        .cd-title { font-size: 1rem; letter-spacing: 4px; margin-bottom: 25px; color: var(--gold); text-transform: uppercase; }
         .timer-row { display: flex; justify-content: center; align-items: center; gap: 15px; }
-        .t-box { display: flex; flex-direction: column; align-items: center; min-width: 65px; }
-        .t-num { font-size: 3rem; font-weight: 400; color: #fff; line-height: 1; text-shadow: 0 2px 5px rgba(0,0,0,0.3); }
-        .t-label { font-size: 0.7rem; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; margin-top: 5px; }
+        .t-box { display: flex; flex-direction: column; align-items: center; min-width: 60px; }
+        .t-num { font-size: 2.8rem; font-weight: 400; color: #fff; line-height: 1; }
+        .t-label { font-size: 0.65rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 2px; margin-top: 5px; }
 
         /* =========================================
-           4. CLASSY EVENTS SECTION (Mountain Images)
+           4. CLEAN EVENTS SECTION (Like the previous one)
            ========================================= */
         .events-section { padding: 80px 20px; background-color: var(--cream); text-align: center; }
-        .section-title { font-size: 3.5rem; color: var(--emerald); margin-bottom: 50px; }
+        .section-title { font-size: 3.5rem; color: var(--navy); margin-bottom: 50px; }
         
-        .event-card { background: #fff; border-radius: 12px; overflow: hidden; margin-bottom: 40px; box-shadow: 0 15px 35px rgba(0,0,0,0.06); text-align: center; border: 1px solid rgba(27,67,50,0.1); }
-        .event-img { width: 100%; height: 250px; background-size: cover; background-position: center; position: relative; }
-        /* Smooth gradient fade into the white card */
-        .event-img::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 50%; background: linear-gradient(to top, #ffffff 0%, transparent 100%); }
+        .event-card { background: #fff; border-radius: 12px; overflow: hidden; margin-bottom: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); text-align: center; border: 1px solid rgba(15,23,42,0.1); transition: transform 0.3s; }
+        .event-card:hover { transform: translateY(-5px); }
         
-        .event-content { padding: 0 30px 40px; position: relative; z-index: 2; background: #fff; margin-top: -20px; }
-        .e-date { font-size: 0.8rem; color: var(--emerald); font-weight: 600; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
-        .e-name { font-size: 2rem; color: var(--navy); margin-bottom: 15px; }
-        .e-desc { font-size: 0.9rem; color: var(--text-light); line-height: 1.7; margin-bottom: 25px; }
-        .btn-map { display: inline-block; padding: 12px 25px; border: 1px solid var(--emerald); color: var(--emerald); text-decoration: none; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; border-radius: 30px; transition: 0.3s; }
-        .btn-map:hover { background: var(--emerald); color: #fff; }
+        /* Set these to your individual Ghibli style event images */
+        .event-img { width: 100%; height: 220px; background-color: #e2e8f0; background-size: cover; background-position: center; position: relative; }
+        .event-img::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 40%; background: linear-gradient(to top, #ffffff 0%, transparent 100%); }
+        
+        .event-content { padding: 0 25px 35px; position: relative; z-index: 2; background: #fff; margin-top: -10px; }
+        .e-date { font-size: 0.75rem; color: var(--gold); font-weight: 600; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+        .e-name { font-size: 1.8rem; color: var(--navy); margin-bottom: 15px; }
+        .e-desc { font-size: 0.85rem; color: var(--text-light); line-height: 1.6; margin-bottom: 20px; }
+        
+        .btn-map { display: inline-block; padding: 10px 25px; border: 1px solid var(--navy); color: var(--navy); text-decoration: none; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; border-radius: 30px; transition: 0.3s; }
+        .btn-map:hover { background: var(--navy); color: #fff; border-color: var(--navy); }
 
         /* =========================================
-           5. NEAT RSVP SECTION (Numbers Only)
+           5. NEAT RSVP (Numbers Only)
            ========================================= */
-        .rsvp-section { padding: 80px 20px; text-align: center; background-color: var(--navy); color: white; }
-        .rsvp-title { font-size: 3rem; color: var(--gold); margin-bottom: 15px; line-height: 1; }
-        .rsvp-subtitle { font-size: 0.9rem; color: rgba(255,255,255,0.7); margin-bottom: 40px; line-height: 1.6; letter-spacing: 1px; text-transform: uppercase; }
+        .rsvp-section { padding: 80px 20px; text-align: center; background-color: var(--navy); color: white; position: relative; }
+        /* Optional subtle mountain silhouette at the bottom of RSVP */
+        .rsvp-section::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, rgba(212,175,55,0.1) 0%, transparent 70%); pointer-events: none; }
         
-        .rsvp-numbers { display: flex; flex-direction: column; gap: 20px; align-items: center; }
-        .btn-rsvp { display: flex; align-items: center; justify-content: center; width: 100%; max-width: 300px; background: rgba(255,255,255,0.05); border: 1px solid var(--gold); color: var(--gold); text-decoration: none; padding: 18px 20px; border-radius: 8px; font-size: 1.2rem; letter-spacing: 3px; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-        .btn-rsvp:hover { background: var(--gold); color: var(--navy); transform: translateY(-3px); }
-        .btn-rsvp span { margin-right: 15px; font-size: 1.5rem; }
+        .rsvp-title { font-size: 3.5rem; color: var(--gold); margin-bottom: 10px; line-height: 1; position: relative; z-index: 2; }
+        .rsvp-subtitle { font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 40px; line-height: 1.6; letter-spacing: 1px; text-transform: uppercase; position: relative; z-index: 2; }
+        
+        .rsvp-numbers { display: flex; flex-direction: column; gap: 20px; align-items: center; position: relative; z-index: 2; }
+        .btn-rsvp { display: flex; align-items: center; justify-content: center; width: 100%; max-width: 280px; background: transparent; border: 1px solid rgba(212,175,55,0.5); color: var(--gold); text-decoration: none; padding: 15px 20px; border-radius: 8px; font-size: 1.1rem; letter-spacing: 3px; transition: 0.3s; }
+        .btn-rsvp:hover { background: var(--gold); color: var(--navy); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(212,175,55,0.2); }
+        .btn-rsvp span { margin-right: 15px; font-size: 1.3rem; }
 
-        /* FOOTER */
-        .footer { padding: 40px 20px; text-align: center; background-color: #0b1120; color: #fff; }
-        .footer-names { font-size: 2.5rem; color: var(--gold); margin-bottom: 15px; }
-        .footer-text { font-size: 0.75rem; color: rgba(255,255,255,0.4); letter-spacing: 2px; text-transform: uppercase; }
+        /* =========================================
+           6. FOOTER
+           ========================================= */
+        .footer { padding: 40px 20px; text-align: center; background-color: #080b12; color: #fff; border-top: 1px solid rgba(255,255,255,0.05); }
+        .footer-names { font-size: 2rem; color: var(--gold); margin-bottom: 15px; opacity: 0.8; }
+        .footer-text { font-size: 0.7rem; color: rgba(255,255,255,0.3); letter-spacing: 2px; text-transform: uppercase; }
 
     </style>
 </head>
@@ -134,26 +153,28 @@
     <div class="mobile-container">
         
         <div id="envelope-wrapper">
-            <h2 class="serif" style="font-size: 2.2rem; margin-bottom: 30px; color: var(--navy); letter-spacing: 3px;">Aastha & Anupam</h2>
-            
-            <div class="envelope-container" id="envelope-container" onclick="openEnvelope()">
-                <div class="envelope-back"></div>
+            <div class="envelope-content-box">
+                <h2 class="serif" style="font-size: 2.2rem; margin-bottom: 20px; color: #fff; letter-spacing: 3px; text-shadow: 0 2px 10px rgba(0,0,0,0.8);">Aastha & Anupam</h2>
                 
-                <div class="letter">
-                    <div class="sans save-text">Save the Date</div>
-                    <div class="serif reveal-date">May 3</div>
-                    <div class="sans reveal-year">2026</div>
+                <div class="envelope-container" id="envelope-container" onclick="openEnvelope()">
+                    <div class="envelope-back"></div>
+                    
+                    <div class="letter">
+                        <div class="sans save-text">Save the Date</div>
+                        <div class="cursive reveal-date">May 3</div>
+                        <div class="sans reveal-year">2026</div>
+                    </div>
+                    
+                    <div class="envelope-front-left"></div>
+                    <div class="envelope-front-right"></div>
+                    <div class="envelope-bottom"></div>
+                    <div class="envelope-flap"></div>
+                    
+                    <div class="wax-seal"></div>
                 </div>
                 
-                <div class="envelope-front-left"></div>
-                <div class="envelope-front-right"></div>
-                <div class="envelope-bottom"></div>
-                <div class="envelope-flap"></div>
-                
-                <div class="wax-seal"></div>
+                <p class="sans tap-hint" id="tap-hint">Tap to open</p>
             </div>
-            
-            <p class="sans tap-hint" id="tap-hint">Tap to break seal</p>
         </div>
 
         <audio id="weddingAudio" loop preload="auto"><source src="music.mp3.mp3" type="audio/mpeg"></audio>
@@ -162,25 +183,25 @@
             
             <section class="hero">
                 <div class="hero-content">
-                    <div class="sans hero-top-text" data-aos="fade-down" data-aos-duration="1500">We invite you to celebrate</div>
+                    <div class="sans hero-top-text" data-aos="fade-down" data-aos-duration="1500">Welcome to our beginning</div>
                     
                     <div data-aos="zoom-in" data-aos-duration="2000" data-aos-delay="300">
                         <div class="serif hero-names">AASTHA</div>
-                        <div class="cursive hero-and">and</div>
+                        <div class="cursive hero-and">&</div>
                         <div class="serif hero-names">ANUPAM</div>
                     </div>
                     
                     <div class="hero-divider" data-aos="fade-in" data-aos-delay="800"></div>
                     
-                    <div class="serif hero-date" data-aos="fade-up" data-aos-delay="1000">03 May 2026</div>
+                    <div class="sans hero-date" data-aos="fade-up" data-aos-delay="1000">3 May 2026</div>
                     <div class="sans hero-location" data-aos="fade-up" data-aos-delay="1200">
-                        Hotel Taj Theog<br>Shimla Hills, Himachal Pradesh
+                        Shimla Hills, Himachal Pradesh
                     </div>
                 </div>
             </section>
 
             <section class="countdown-section">
-                <div class="sans cd-title" data-aos="fade-up">Time left until we say I Do</div>
+                <div class="sans cd-title" data-aos="fade-up">Awaiting the magic</div>
                 <div class="timer-row" data-aos="fade-up" data-aos-delay="200">
                     <div class="t-box"><span class="serif t-num" id="days">00</span><span class="sans t-label">Days</span></div>
                     <div class="t-box"><span class="serif t-num" id="hours">00</span><span class="sans t-label">Hours</span></div>
@@ -190,71 +211,71 @@
             </section>
 
             <section class="events-section">
-                <div class="cursive section-title" data-aos="fade-up">The Celebrations</div>
+                <div class="cursive section-title" data-aos="fade-up">The Details</div>
                 
                 <div class="event-card" data-aos="fade-up">
-                    <div class="event-img" style="background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=800&auto=format&fit=crop');"></div>
+                    <div class="event-img" style="background-image: url('mehendi.png');"></div>
                     <div class="event-content">
                         <div class="sans e-date">30 April 2026 • 4:00 PM</div>
                         <div class="serif e-name">Mehendi & Hi-Tea</div>
                         <div class="sans e-desc">Join us amidst the pines to kick off the celebrations with vibrant colors and joy.</div>
-                        <a href="https://maps.google.com/?q=Taj+Theog+Resort+and+Spa+Shimla" target="_blank" class="sans btn-map">View Location</a>
+                        <a href="https://maps.google.com/?q=Taj+Theog+Resort+and+Spa+Shimla" target="_blank" class="sans btn-map">Get Directions</a>
                     </div>
                 </div>
 
                 <div class="event-card" data-aos="fade-up">
-                    <div class="event-img" style="background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=800&auto=format&fit=crop');"></div>
+                    <div class="event-img" style="background-image: url('engagement.png');"></div>
                     <div class="event-content">
                         <div class="sans e-date">1 May 2026 • 7:00 PM</div>
-                        <div class="serif e-name">Engagement Ceremony</div>
-                        <div class="sans e-desc">An evening of rings, revelry, and romance overlooking the Shimla valley.</div>
-                        <a href="https://maps.google.com/?q=Taj+Theog+Resort+and+Spa+Shimla" target="_blank" class="sans btn-map">View Location</a>
+                        <div class="serif e-name">Engagement</div>
+                        <div class="sans e-desc">An evening of rings, revelry, and romance overlooking the valley.</div>
+                        <a href="https://maps.google.com/?q=Taj+Theog+Resort+and+Spa+Shimla" target="_blank" class="sans btn-map">Get Directions</a>
                     </div>
                 </div>
 
                 <div class="event-card" data-aos="fade-up">
-                    <div class="event-img" style="background-image: url('https://images.unsplash.com/photo-1506744626753-1fa44df14d28?q=80&w=800&auto=format&fit=crop');"></div>
+                    <div class="event-img" style="background-image: url('haldi.png');"></div>
                     <div class="event-content">
                         <div class="sans e-date">2 May 2026 • 11:00 AM</div>
                         <div class="serif e-name">Haldi Ceremony</div>
                         <div class="sans e-desc">Tilak at 11 AM followed by Haldi at 2:30 PM. Join us at the Amphitheater.</div>
-                        <a href="https://maps.google.com/?q=Dusit+Fagu" target="_blank" class="sans btn-map">View Location</a>
+                        <a href="https://maps.google.com/?q=Dusit+Fagu" target="_blank" class="sans btn-map">Get Directions</a>
                     </div>
                 </div>
                 
                 <div class="event-card" data-aos="fade-up">
-                    <div class="event-img" style="background-image: url('https://images.unsplash.com/photo-1478147424036-cb1c4c622bc7?q=80&w=800&auto=format&fit=crop');"></div>
+                    <div class="event-img" style="background-image: url('sangeet.png');"></div>
                     <div class="event-content">
                         <div class="sans e-date">2 May 2026 • 7:00 PM</div>
                         <div class="serif e-name">Sangeet Night</div>
                         <div class="sans e-desc">Dance the night away under the mountain stars at The Terrace Lawn.</div>
-                        <a href="https://maps.google.com/?q=Dusit+Fagu" target="_blank" class="sans btn-map">View Location</a>
+                        <a href="https://maps.google.com/?q=Dusit+Fagu" target="_blank" class="sans btn-map">Get Directions</a>
                     </div>
                 </div>
 
                 <div class="event-card" data-aos="fade-up">
-                    <div class="event-img" style="background-image: url('https://images.unsplash.com/photo-1583156340160-776dc6f0174c?q=80&w=800&auto=format&fit=crop');"></div>
+                    <div class="event-img" style="background-image: url('wedding.png');"></div>
                     <div class="event-content">
                         <div class="sans e-date">3 May 2026 • 3:30 PM</div>
                         <div class="serif e-name">The Wedding</div>
                         <div class="sans e-desc">Varmala at 5:00 PM. Phera at 8:00 PM. Witness our union at Hotel Taj Theog.</div>
-                        <a href="https://maps.google.com/?q=Taj+Theog+Resort+and+Spa+Shimla" target="_blank" class="sans btn-map">View Location</a>
+                        <a href="https://maps.google.com/?q=Taj+Theog+Resort+and+Spa+Shimla" target="_blank" class="sans btn-map">Get Directions</a>
                     </div>
                 </div>
 
                 <div class="event-card" data-aos="fade-up">
-                    <div class="event-img" style="background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=800&auto=format&fit=crop');"></div>
+                    <div class="event-img" style="background-image: url('gala%20dinner.png');"></div>
                     <div class="event-content">
                         <div class="sans e-date">4 May 2026 • 7:30 PM</div>
                         <div class="serif e-name">Gala Dinner</div>
-                        <div class="sans e-desc">A grand closing to our celebrations at Hyatt Centric Sector 17, Chandigarh.</div>
-                        <a href="https://maps.google.com/?q=Hyatt+Centric+Sector+17+Chandigarh" target="_blank" class="sans btn-map">View Location</a>
+                        <div class="sans e-desc">A grand closing to our celebrations at Hyatt Centric Sector 17.</div>
+                        <a href="https://maps.google.com/?q=Hyatt+Centric+Sector+17+Chandigarh" target="_blank" class="sans btn-map">Get Directions</a>
                     </div>
                 </div>
             </section>
 
             <section class="rsvp-section">
-                <div class="serif rsvp-title" data-aos="fade-up">RSVP</div>
+                <div class="cursive rsvp-title" data-aos="fade-up">RSVP</div>
                 <div class="sans rsvp-subtitle" data-aos="fade-up">Kindly confirm your presence by April 15</div>
                 
                 <div class="rsvp-numbers" data-aos="zoom-in" data-aos-delay="200">
@@ -268,8 +289,8 @@
             </section>
 
             <section class="footer">
-                <div class="cursive footer-names" data-aos="fade-up">Aastha & Anupam</div>
-                <div class="sans footer-text" data-aos="fade-up">Looking forward to seeing you in Shimla</div>
+                <div class="serif footer-names" data-aos="fade-up">Aastha & Anupam</div>
+                <div class="sans footer-text" data-aos="fade-up">See you in the hills</div>
             </section>
 
         </div>
@@ -277,13 +298,11 @@
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        // AOS Bug Fix & Envelope Reveal Logic
         let isOpening = false;
         function openEnvelope() {
             if (isOpening) return;
             isOpening = true;
             
-            // Start envelope opening animation (Seal breaks, flap opens, date reveals)
             document.getElementById('envelope-container').classList.add('open');
             document.getElementById('tap-hint').style.opacity = '0';
             
@@ -295,20 +314,17 @@
                 setTimeout(() => {
                     wrapper.style.display = 'none';
                     
-                    // Show website
                     mainSite.style.display = 'block';
                     void mainSite.offsetWidth; 
                     
                     mainSite.style.opacity = '1';
                     document.getElementById('weddingAudio').play().catch(e => console.log("Audio skipped"));
                     
-                    // Start scrolling animations
                     AOS.init({ duration: 1200, once: true, offset: 50 });
                 }, 800); 
-            }, 2000); // 2 seconds to let them read the "May 3 2026" card before fading out
+            }, 2000); 
         }
 
-        // Timer Logic
         const target = new Date("May 3, 2026 15:30:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
