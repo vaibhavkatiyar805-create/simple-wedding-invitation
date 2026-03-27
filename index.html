@@ -27,23 +27,32 @@
         .sans { font-family: 'Montserrat', sans-serif; }
 
         /* =========================================
-           1. THE LUXURY ENVELOPE REVEAL
+           1. THE LUXURY ENVELOPE REVEAL (WITH ANIMATIONS)
            ========================================= */
         #envelope-screen { 
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 99999; 
-            background-color: #050A08; display: flex; flex-direction: column; justify-content: center; align-items: center; 
-            transition: opacity 1s ease; 
+            background-color: #040806; display: flex; flex-direction: column; justify-content: center; align-items: center; 
+            transition: opacity 1s ease; overflow: hidden;
         }
+
+        /* Floating Fireflies for Envelope Screen */
+        .env-firefly { position: absolute; width: 3px; height: 3px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 10px 2px var(--gold); z-index: 0; animation: drift 8s infinite alternate ease-in-out; opacity: 0.6; }
+        @keyframes drift { 0% { transform: translate(0, 0); opacity: 0.2; } 50% { opacity: 0.8; } 100% { transform: translate(30px, -50px); opacity: 0.2; } }
+
+        /* Floating Lanterns for Envelope Screen */
+        .env-lantern { position: absolute; bottom: -100px; width: 35px; height: 50px; background: radial-gradient(circle at 50% 50%, #ffdaa3, #ff8c00); border-radius: 5px 5px 10px 10px; box-shadow: 0 0 30px rgba(255, 140, 0, 0.6), inset 0 0 10px rgba(255,255,255,0.4); z-index: 0; opacity: 0; animation: floatUp linear infinite; filter: blur(1px); }
+        .env-lantern::after { content: ''; position: absolute; bottom: -4px; left: 13px; width: 8px; height: 8px; background: rgba(0,0,0,0.5); border-radius: 50%; filter: blur(2px); }
+        @keyframes floatUp { 0% { transform: translateY(0) scale(0.8) rotate(-5deg); opacity: 0; } 20% { opacity: 0.6; } 100% { transform: translateY(-120vh) scale(1.2) rotate(5deg); opacity: 0; } }
         
-        .env-title { font-size: 2.5rem; color: var(--gold); margin-bottom: 40px; letter-spacing: 4px; text-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        .env-title { font-size: clamp(2rem, 5vw, 2.5rem); color: var(--gold); margin-bottom: 40px; letter-spacing: 4px; text-shadow: 0 4px 15px rgba(0,0,0,0.5); z-index: 10; text-align: center;}
         
-        .env-wrapper { position: relative; width: 350px; height: 230px; cursor: pointer; }
+        .env-wrapper { position: relative; width: 350px; height: 230px; cursor: pointer; z-index: 10; }
         
         /* Envelope Parts */
         .env-back { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #0D1A15; border-radius: 5px; box-shadow: 0 20px 50px rgba(0,0,0,0.8); border: 1px solid rgba(212, 175, 55, 0.2); z-index: 1; }
         
         /* The Letter that slides out */
-        .env-letter { position: absolute; top: 10px; left: 15px; width: 320px; height: 200px; background: #FDFBF7; border-radius: 5px; z-index: 2; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 2px solid var(--gold); transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1) 0.6s; } /* 0.6s delay waits for flap to open */
+        .env-letter { position: absolute; top: 10px; left: 15px; width: 320px; height: 200px; background: #FDFBF7; border-radius: 5px; z-index: 2; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 2px solid var(--gold); transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1) 0.6s; } 
         .letter-top { font-size: 1.2rem; color: #0A1410; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 10px; }
         .letter-date { font-size: 4rem; color: var(--gold); line-height: 1; }
         
@@ -54,16 +63,18 @@
         
         .env-flap { position: absolute; top: 0; left: 0; width: 0; height: 0; border-left: 175px solid transparent; border-right: 175px solid transparent; border-top: 135px solid #152A22; z-index: 5; transform-origin: top; transition: transform 0.6s ease; }
         
-        /* Gold Seal */
-        .env-seal { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: radial-gradient(circle, #D4AF37, #997A15); border-radius: 50%; z-index: 6; display: flex; justify-content: center; align-items: center; color: #fff; font-size: 1.8rem; text-shadow: 0 1px 3px rgba(0,0,0,0.5); box-shadow: 0 4px 10px rgba(0,0,0,0.5); transition: opacity 0.3s ease; }
-        .env-seal::after { content: 'A'; font-family: 'Great Vibes', cursive; }
+        /* Custom Logo Wax Seal */
+        .env-seal { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 75px; height: 75px; background: radial-gradient(circle, #D4AF37, #997A15); border-radius: 50%; z-index: 6; display: flex; justify-content: center; align-items: center; box-shadow: 0 5px 15px rgba(0,0,0,0.6), inset 0 2px 6px rgba(255,255,255,0.4); transition: opacity 0.3s ease; border: 2px solid rgba(212,175,55,0.8); overflow: hidden; }
+        
+        /* Mix-blend-mode multiply will magically remove the white background of your uploaded logo and emboss the gold text into the wax! */
+        .env-seal img { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply; opacity: 0.9; }
 
         /* Animation Classes */
         .env-wrapper.open .env-seal { opacity: 0; }
         .env-wrapper.open .env-flap { transform: rotateX(180deg); z-index: 1; }
         .env-wrapper.open .env-letter { transform: translateY(-140px); z-index: 6; box-shadow: 0 15px 30px rgba(0,0,0,0.5); }
         
-        .tap-msg { margin-top: 60px; font-size: 0.8rem; letter-spacing: 6px; color: var(--gold); text-transform: uppercase; animation: fadePulse 2s infinite; transition: opacity 0.3s; }
+        .tap-msg { margin-top: 60px; font-size: 0.8rem; letter-spacing: 6px; color: var(--gold); text-transform: uppercase; animation: fadePulse 2s infinite; transition: opacity 0.3s; z-index: 10;}
         @keyframes fadePulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
 
         /* =========================================
@@ -106,7 +117,7 @@
         .fc-rel strong { color: var(--white); font-weight: 400; letter-spacing: 1px; }
 
         /* =========================================
-           5. EVENTS GRID (Laptop & Mobile Perfect)
+           5. EVENTS GRID
            ========================================= */
         .events { padding: 100px 20px; background-color: #080F0C; text-align: center; }
         .ev-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
@@ -123,7 +134,7 @@
         .e-btn:hover { background: var(--gold); color: var(--bg-dark); }
 
         /* =========================================
-           6. CLASSY RSVP (Numbers Only in Boxes)
+           6. CLASSY RSVP (Numbers Only)
            ========================================= */
         .rsvp { padding: 120px 20px; background-color: var(--bg-dark); text-align: center; border-top: 1px solid rgba(212,175,55,0.2); }
         .r-subtitle { font-size: 1rem; color: var(--text-light); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 50px; }
@@ -147,6 +158,16 @@
 <body>
 
     <div id="envelope-screen">
+        
+        <div class="env-lantern" style="left: 15%; animation-duration: 12s; animation-delay: 0s;"></div>
+        <div class="env-lantern" style="left: 75%; animation-duration: 15s; animation-delay: 2s; width: 25px; height: 35px;"></div>
+        <div class="env-lantern" style="left: 45%; animation-duration: 10s; animation-delay: 5s;"></div>
+        
+        <div class="env-firefly" style="top: 20%; left: 20%;"></div>
+        <div class="env-firefly" style="top: 60%; left: 80%; animation-delay: 1s;"></div>
+        <div class="env-firefly" style="top: 80%; left: 30%; animation-delay: 2s;"></div>
+        <div class="env-firefly" style="top: 30%; left: 70%; animation-delay: 3s;"></div>
+
         <div class="serif env-title">Aastha & Anupam</div>
         
         <div class="env-wrapper" id="env-wrapper" onclick="openEnvelope()">
@@ -161,7 +182,10 @@
             <div class="env-right"></div>
             <div class="env-bottom"></div>
             <div class="env-flap"></div>
-            <div class="env-seal"></div>
+            
+            <div class="env-seal">
+                <img src="logo.png" alt="A&A Logo">
+            </div>
         </div>
         
         <div class="sans tap-msg" id="tap-msg">Tap to reveal</div>
@@ -252,7 +276,7 @@
                 
                 <div class="ev-card" data-aos="fade-up">
                     <div class="ev-img" style="background-image: url('https://images.unsplash.com/photo-1478147424036-cb1c4c622bc7?q=80&w=800&auto=format&fit=crop');"></div>
-                    <div class="event-content ev-content">
+                    <div class="ev-content">
                         <div class="sans e-date">2 May 2026 • 7:00 PM</div>
                         <div class="serif e-name">Sangeet Night</div>
                         <div class="sans e-desc">Dance the night away under the mountain stars at The Terrace Lawn, Dusit.</div>
@@ -327,14 +351,14 @@
                     
                     const mainSite = document.getElementById('main-site');
                     mainSite.style.display = 'block';
-                    void mainSite.offsetWidth; // Force layout calculation
+                    void mainSite.offsetWidth; 
                     
                     mainSite.style.opacity = '1';
                     document.getElementById('weddingAudio').play().catch(e => console.log("Audio requires interaction"));
                     
                     AOS.init({ duration: 1200, once: true, offset: 50 });
                 }, 1000); 
-            }, 5000); // <-- THIS IS THE 5 SECOND WAIT TIME YOU REQUESTED
+            }, 5000); // <-- 5 SECOND WAIT TIME
         }
 
         // Countdown Logic
