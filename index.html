@@ -31,44 +31,58 @@
            ========================================= */
         #envelope-screen { 
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 99999; 
-            background-color: #050A08; display: flex; flex-direction: column; justify-content: center; align-items: center; 
-            transition: opacity 1s ease; 
+            background-color: #040806; display: flex; flex-direction: column; justify-content: center; align-items: center; 
+            transition: opacity 1s ease; overflow: hidden;
         }
+
+        /* Floating Animated Elements */
+        .env-firefly { position: absolute; width: 3px; height: 3px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 10px 2px var(--gold); z-index: 0; animation: drift 8s infinite alternate ease-in-out; opacity: 0.6; }
+        @keyframes drift { 0% { transform: translate(0, 0); opacity: 0.2; } 50% { opacity: 0.8; } 100% { transform: translate(30px, -50px); opacity: 0.2; } }
+
+        .env-lantern { position: absolute; bottom: -100px; width: 35px; height: 50px; background: radial-gradient(circle at 50% 50%, #ffdaa3, #ff8c00); border-radius: 5px 5px 10px 10px; box-shadow: 0 0 30px rgba(255, 140, 0, 0.6), inset 0 0 10px rgba(255,255,255,0.4); z-index: 0; opacity: 0; animation: floatUp linear infinite; filter: blur(1px); }
+        .env-lantern::after { content: ''; position: absolute; bottom: -4px; left: 13px; width: 8px; height: 8px; background: rgba(0,0,0,0.5); border-radius: 50%; filter: blur(2px); }
+        @keyframes floatUp { 0% { transform: translateY(0) scale(0.8) rotate(-5deg); opacity: 0; } 20% { opacity: 0.6; } 100% { transform: translateY(-120vh) scale(1.2) rotate(5deg); opacity: 0; } }
         
-        .env-title { font-size: 2.5rem; color: var(--gold); margin-bottom: 40px; letter-spacing: 4px; text-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        .env-title { font-size: clamp(2rem, 5vw, 2.5rem); color: var(--gold); margin-bottom: 40px; letter-spacing: 4px; text-shadow: 0 4px 15px rgba(0,0,0,0.5); z-index: 10; text-align: center;}
         
-        .env-wrapper { position: relative; width: 350px; height: 230px; cursor: pointer; }
+        .env-wrapper { position: relative; width: 350px; height: 230px; cursor: pointer; z-index: 10; }
         
         /* Envelope Parts */
         .env-back { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #0D1A15; border-radius: 5px; box-shadow: 0 20px 50px rgba(0,0,0,0.8); border: 1px solid rgba(212, 175, 55, 0.2); z-index: 1; }
         
-        /* The Letter that slides out */
-        .env-letter { position: absolute; top: 10px; left: 15px; width: 320px; height: 200px; background: #FDFBF7; border-radius: 5px; z-index: 2; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 2px solid var(--gold); transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1) 0.6s; } 
-        .letter-top { font-size: 1.2rem; color: #0A1410; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 10px; }
-        .letter-date { font-size: 4rem; color: var(--gold); line-height: 1; }
+        /* The Upgraded Letter that slides out SLOWLY */
+        .env-letter { position: absolute; top: 15px; left: 15px; width: 320px; height: 190px; background: #FDFBF7; border-radius: 5px; z-index: 2; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 1px solid var(--gold); 
+        /* 0.8s delay lets the flap fully open first, 1.5s duration makes the slide smooth and elegant */
+        transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1) 0.8s; } 
+        
+        /* Delicate inner border for the card */
+        .env-letter::before { content: ''; position: absolute; top: 6px; left: 6px; right: 6px; bottom: 6px; border: 1px dashed rgba(212, 175, 55, 0.6); pointer-events: none; }
+        
+        .letter-top { font-size: 2.2rem; color: var(--gold); margin-bottom: 5px; font-weight: 400; line-height: 1;}
+        .letter-date { font-size: 3rem; color: #0A1410; letter-spacing: 3px; font-weight: 500;}
+        .letter-year { font-size: 1rem; color: var(--gold); letter-spacing: 5px; margin-top: 5px; }
         
         /* Flaps */
         .env-left { position: absolute; top: 0; left: 0; width: 0; height: 0; border-top: 115px solid transparent; border-bottom: 115px solid transparent; border-left: 175px solid #11221C; z-index: 3; }
         .env-right { position: absolute; top: 0; right: 0; width: 0; height: 0; border-top: 115px solid transparent; border-bottom: 115px solid transparent; border-right: 175px solid #0F1E18; z-index: 3; }
         .env-bottom { position: absolute; bottom: 0; left: 0; width: 0; height: 0; border-left: 175px solid transparent; border-right: 175px solid transparent; border-bottom: 130px solid #0A1410; z-index: 4; }
-        .env-flap { position: absolute; top: 0; left: 0; width: 0; height: 0; border-left: 175px solid transparent; border-right: 175px solid transparent; border-top: 135px solid #152A22; z-index: 5; transform-origin: top; transition: transform 0.6s ease; }
         
-        /* Custom Logo Gold Seal */
-        ./* Custom Logo White & Gold Seal */
+        .env-flap { position: absolute; top: 0; left: 0; width: 0; height: 0; border-left: 175px solid transparent; border-right: 175px solid transparent; border-top: 135px solid #152A22; z-index: 5; transform-origin: top; transition: transform 0.8s ease; }
+        
+        /* Custom White Logo Seal */
         .env-seal { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 85px; height: 85px; background: #FFFFFF; border-radius: 50%; z-index: 6; display: flex; justify-content: center; align-items: center; box-shadow: 0 8px 20px rgba(0,0,0,0.8), inset 0 0 8px rgba(212,175,55,0.3); transition: opacity 0.3s ease; border: 2px solid var(--gold); overflow: hidden; }
-        
-        /* Removed blend mode so your gold logo pops, and zoomed it slightly to fit perfectly */
         .env-seal img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.15); }
+
         /* Animation Classes */
         .env-wrapper.open .env-seal { opacity: 0; }
         .env-wrapper.open .env-flap { transform: rotateX(180deg); z-index: 1; }
-        .env-wrapper.open .env-letter { transform: translateY(-140px); z-index: 6; box-shadow: 0 15px 30px rgba(0,0,0,0.5); }
+        .env-wrapper.open .env-letter { transform: translateY(-160px); z-index: 6; box-shadow: 0 15px 30px rgba(0,0,0,0.6); }
         
-        .tap-msg { margin-top: 60px; font-size: 0.8rem; letter-spacing: 6px; color: var(--gold); text-transform: uppercase; animation: fadePulse 2s infinite; transition: opacity 0.3s; }
+        .tap-msg { margin-top: 60px; font-size: 0.8rem; letter-spacing: 6px; color: var(--gold); text-transform: uppercase; animation: fadePulse 2s infinite; transition: opacity 0.3s; z-index: 10;}
         @keyframes fadePulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
 
         /* =========================================
-           2. RESPONSIVE HERO SECTION (With Reveal)
+           2. RESPONSIVE HERO SECTION (With Reveal & Scroll Hint)
            ========================================= */
         .hero { position: relative; width: 100%; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1920&auto=format&fit=crop') no-repeat center center; background-size: cover; }
         .hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(10,20,16,0.3) 0%, rgba(10,20,16,0.9) 100%); z-index: 1; }
@@ -79,7 +93,7 @@
         .h-and { font-size: clamp(2.5rem, 5vw, 4rem); color: var(--gold); margin: -10px 0; }
         
         /* The Tap to Reveal Section */
-        .reveal-wrapper { position: relative; min-height: 160px; display: flex; justify-content: center; align-items: center; margin-top: 40px; width: 100%; }
+        .reveal-wrapper { position: relative; min-height: 200px; display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 40px; width: 100%; }
         
         .reveal-btn { cursor: pointer; color: var(--gold); letter-spacing: 4px; text-transform: uppercase; font-size: clamp(0.7rem, 2vw, 0.9rem); transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1); border: 1px solid rgba(212,175,55,0.4); padding: 15px 35px; border-radius: 4px; background: rgba(10,20,16,0.5); backdrop-filter: blur(3px); position: absolute; z-index: 5;}
         .reveal-btn:hover { background: rgba(212,175,55,0.1); border-color: var(--gold); }
@@ -88,9 +102,12 @@
         .revealed-content { position: absolute; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; transform: translateY(20px) scale(0.95); transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1); pointer-events: none; z-index: 4; }
         .revealed-content.active { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
         
-        /* Clean Typography exactly like your screenshot */
         .rev-date { font-size: clamp(1.6rem, 3.5vw, 2.5rem); letter-spacing: 6px; color: var(--white); font-weight: 400; margin-bottom: 20px; }
         .rev-loc { font-size: clamp(0.85rem, 2vw, 1.2rem); letter-spacing: 4px; color: rgba(255,255,255,0.85); line-height: 2; text-transform: uppercase; }
+        
+        /* SCROLL DOWN HINT */
+        .scroll-hint { margin-top: 40px; font-size: 0.75rem; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; animation: bounce 2s infinite; opacity: 0.9; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
 
         /* =========================================
            3. COUNTDOWN
@@ -118,7 +135,7 @@
         .fc-rel strong { color: var(--white); font-weight: 400; letter-spacing: 1px; }
 
         /* =========================================
-           5. EVENTS GRID (Laptop & Mobile Perfect)
+           5. EVENTS GRID
            ========================================= */
         .events { padding: 100px 20px; background-color: #080F0C; text-align: center; }
         .ev-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
@@ -135,7 +152,7 @@
         .e-btn:hover { background: var(--gold); color: var(--bg-dark); }
 
         /* =========================================
-           6. CLASSY RSVP (Numbers Only in Boxes)
+           6. CLASSY RSVP
            ========================================= */
         .rsvp { padding: 120px 20px; background-color: var(--bg-dark); text-align: center; border-top: 1px solid rgba(212,175,55,0.2); }
         .r-subtitle { font-size: 1rem; color: var(--text-light); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 50px; }
@@ -159,20 +176,32 @@
 <body>
 
     <div id="envelope-screen">
+        
+        <div class="env-lantern" style="left: 15%; animation-duration: 12s; animation-delay: 0s;"></div>
+        <div class="env-lantern" style="left: 75%; animation-duration: 15s; animation-delay: 2s; width: 25px; height: 35px;"></div>
+        <div class="env-lantern" style="left: 45%; animation-duration: 10s; animation-delay: 5s;"></div>
+        
+        <div class="env-firefly" style="top: 20%; left: 20%;"></div>
+        <div class="env-firefly" style="top: 60%; left: 80%; animation-delay: 1s;"></div>
+        <div class="env-firefly" style="top: 80%; left: 30%; animation-delay: 2s;"></div>
+        <div class="env-firefly" style="top: 30%; left: 70%; animation-delay: 3s;"></div>
+
         <div class="serif env-title">Aastha & Anupam</div>
         
         <div class="env-wrapper" id="env-wrapper" onclick="openEnvelope()">
             <div class="env-back"></div>
             
             <div class="env-letter">
-                <div class="sans letter-top">Save the Date</div>
-                <div class="serif letter-date">May 3</div>
+                <div class="cursive letter-top">Save the Date</div>
+                <div class="serif letter-date">MAY 3</div>
+                <div class="sans letter-year">2026</div>
             </div>
             
             <div class="env-left"></div>
             <div class="env-right"></div>
             <div class="env-bottom"></div>
             <div class="env-flap"></div>
+            
             <div class="env-seal">
                  <img src="logo.png" alt="Logo">
             </div>
@@ -201,6 +230,8 @@
                         <div class="sans rev-date">3 MAY 2026</div>
                         <div class="sans rev-loc">HOTEL TAJ THEOG</div>
                         <div class="sans rev-loc">SHIMLA HILLS, HIMACHAL PRADESH</div>
+                        
+                        <div class="sans scroll-hint">Scroll down to navigate <br> ↓</div>
                     </div>
                 </div>
 
@@ -329,7 +360,7 @@
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        // 1. Envelope Logic with 5-Second Wait
+        // 1. Envelope Logic with 3-Second Wait and Slower Slide-out
         let isOpening = false;
         function openEnvelope() {
             if (isOpening) return;
@@ -338,6 +369,7 @@
             document.getElementById('env-wrapper').classList.add('open');
             document.getElementById('tap-msg').style.opacity = '0';
             
+            // Reduced to 3 seconds wait time
             setTimeout(() => {
                 const envScreen = document.getElementById('envelope-screen');
                 envScreen.style.opacity = '0';
@@ -354,10 +386,10 @@
                     
                     AOS.init({ duration: 1200, once: true, offset: 50 });
                 }, 1000); 
-            }, 5000); 
+            }, 3000); // Changed from 5000 to 3000
         }
 
-        // 2. Tap to Reveal Logic on Hero Screen
+        // 2. Tap to Reveal Logic
         function revealDateDetails() {
             const btn = document.getElementById('reveal-btn');
             const content = document.getElementById('revealed-content');
