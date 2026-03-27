@@ -27,7 +27,7 @@
         .sans { font-family: 'Montserrat', sans-serif; }
 
         /* =========================================
-           1. THE LUXURY ENVELOPE REVEAL
+           1. THE LUXURY 3D ENVELOPE REVEAL (UPGRADED REALISM)
            ========================================= */
         #envelope-screen { 
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 99999; 
@@ -45,15 +45,20 @@
         
         .env-title { font-size: clamp(2rem, 5vw, 2.5rem); color: var(--gold); margin-bottom: 40px; letter-spacing: 4px; text-shadow: 0 4px 15px rgba(0,0,0,0.5); z-index: 10; text-align: center;}
         
-        .env-wrapper { position: relative; width: 350px; height: 230px; cursor: pointer; z-index: 10; }
+        .env-wrapper { position: relative; width: 350px; height: 230px; cursor: pointer; z-index: 10; transform-style: preserve-3d; }
         
-        /* Envelope Parts */
-        .env-back { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #0D1A15; border-radius: 5px; box-shadow: 0 20px 50px rgba(0,0,0,0.8); border: 1px solid rgba(212, 175, 55, 0.2); z-index: 1; }
+        /* THE LAYER MAGIC: Envelope Parts */
         
-        /* The Upgraded Letter that slides out SLOWLY */
-        .env-letter { position: absolute; top: 15px; left: 15px; width: 320px; height: 190px; background: #FDFBF7; border-radius: 5px; z-index: 2; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 1px solid var(--gold); 
-        /* 0.8s delay lets the flap fully open first, 1.5s duration makes the slide smooth and elegant */
-        transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1) 0.8s; } 
+        /* Layer 1: The solid background of the cavity */
+        .env-back-panel { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #0D1A15; border-radius: 5px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); z-index: 1; border: 1px solid rgba(212, 175, 55, 0.2); }
+        
+        /* Layer 2: The actual cavity 'depth' effect using inner shadows */
+        .env-cavity { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: transparent; z-index: 2; box-shadow: inset 0 0 40px 5px rgba(0,0,0,0.9); }
+        
+        /* Layer 3: The upgraded Letter that slides out SLOWLY from the cavity */
+        .env-letter { position: absolute; top: 15px; left: 15px; width: 320px; height: 190px; background: #FDFBF7; border-radius: 5px; z-index: 3; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 1px solid var(--gold); 
+        /* Letter is behind Layer 4 to complete the 3D look */
+        transform: translateY(0); transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1) 0.8s; } 
         
         /* Delicate inner border for the card */
         .env-letter::before { content: ''; position: absolute; top: 6px; left: 6px; right: 6px; bottom: 6px; border: 1px dashed rgba(212, 175, 55, 0.6); pointer-events: none; }
@@ -62,21 +67,24 @@
         .letter-date { font-size: 3rem; color: #0A1410; letter-spacing: 3px; font-weight: 500;}
         .letter-year { font-size: 1rem; color: var(--gold); letter-spacing: 5px; margin-top: 5px; }
         
-        /* Flaps */
-        .env-left { position: absolute; top: 0; left: 0; width: 0; height: 0; border-top: 115px solid transparent; border-bottom: 115px solid transparent; border-left: 175px solid #11221C; z-index: 3; }
-        .env-right { position: absolute; top: 0; right: 0; width: 0; height: 0; border-top: 115px solid transparent; border-bottom: 115px solid transparent; border-right: 175px solid #0F1E18; z-index: 3; }
-        .env-bottom { position: absolute; bottom: 0; left: 0; width: 0; height: 0; border-left: 175px solid transparent; border-right: 175px solid transparent; border-bottom: 130px solid #0A1410; z-index: 4; }
+        /* Flaps and 3D Cavity Edges */
+        .env-edge-left { position: absolute; top: 0; left: 0; width: 0; height: 0; border-top: 115px solid transparent; border-bottom: 115px solid transparent; border-left: 175px solid #11221C; z-index: 4; border-radius: 5px 0 0 5px;}
+        .env-edge-right { position: absolute; top: 0; right: 0; width: 0; height: 0; border-top: 115px solid transparent; border-bottom: 115px solid transparent; border-right: 175px solid #0F1E18; z-index: 4; border-radius: 0 5px 5px 0;}
         
-        .env-flap { position: absolute; top: 0; left: 0; width: 0; height: 0; border-left: 175px solid transparent; border-right: 175px solid transparent; border-top: 135px solid #152A22; z-index: 5; transform-origin: top; transition: transform 0.8s ease; }
+        /* THIS IS THE TRIANGULAR FLAP THE LETTER SLIDES BEHIND */
+        .env-flap-front-bottom { position: absolute; bottom: 0; left: 0; width: 0; height: 0; border-left: 175px solid transparent; border-right: 175px solid transparent; border-bottom: 130px solid #0A1410; z-index: 5; box-shadow: 0 -5px 15px 2px rgba(0,0,0,0.5); border-radius: 0 0 5px 5px; }
+        
+        .env-flap-top { position: absolute; top: 0; left: 0; width: 0; height: 0; border-left: 175px solid transparent; border-right: 175px solid transparent; border-top: 135px solid #152A22; z-index: 6; transform-origin: top; transition: transform 0.8s ease; border-radius: 5px 5px 0 0;}
         
         /* Custom White Logo Seal */
-        .env-seal { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 85px; height: 85px; background: #FFFFFF; border-radius: 50%; z-index: 6; display: flex; justify-content: center; align-items: center; box-shadow: 0 8px 20px rgba(0,0,0,0.8), inset 0 0 8px rgba(212,175,55,0.3); transition: opacity 0.3s ease; border: 2px solid var(--gold); overflow: hidden; }
+        .env-seal { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 85px; height: 85px; background: #FFFFFF; border-radius: 50%; z-index: 7; display: flex; justify-content: center; align-items: center; box-shadow: 0 8px 20px rgba(0,0,0,0.8), inset 0 0 8px rgba(212,175,55,0.3); transition: opacity 0.3s ease; border: 2px solid var(--gold); overflow: hidden; }
         .env-seal img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.15); }
 
         /* Animation Classes */
         .env-wrapper.open .env-seal { opacity: 0; }
-        .env-wrapper.open .env-flap { transform: rotateX(180deg); z-index: 1; }
-        .env-wrapper.open .env-letter { transform: translateY(-160px); z-index: 6; box-shadow: 0 15px 30px rgba(0,0,0,0.6); }
+        .env-wrapper.open .env-flap-top { transform: rotateX(180deg); z-index: 1; }
+        /* Slips out from behind the front triangle but above the edges */
+        .env-wrapper.open .env-letter { transform: translateY(-160px); z-index: 4; box-shadow: 0 15px 30px rgba(0,0,0,0.6); }
         
         .tap-msg { margin-top: 60px; font-size: 0.8rem; letter-spacing: 6px; color: var(--gold); text-transform: uppercase; animation: fadePulse 2s infinite; transition: opacity 0.3s; z-index: 10;}
         @keyframes fadePulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
@@ -152,7 +160,7 @@
         .e-btn:hover { background: var(--gold); color: var(--bg-dark); }
 
         /* =========================================
-           6. CLASSY RSVP
+           6. CLASSY RSVP (Numbers Only)
            ========================================= */
         .rsvp { padding: 120px 20px; background-color: var(--bg-dark); text-align: center; border-top: 1px solid rgba(212,175,55,0.2); }
         .r-subtitle { font-size: 1rem; color: var(--text-light); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 50px; }
@@ -189,7 +197,10 @@
         <div class="serif env-title">Aastha & Anupam</div>
         
         <div class="env-wrapper" id="env-wrapper" onclick="openEnvelope()">
-            <div class="env-back"></div>
+            
+            <div class="env-back-panel"></div>
+            
+            <div class="env-cavity"></div>
             
             <div class="env-letter">
                 <div class="cursive letter-top">Save the Date</div>
@@ -197,10 +208,12 @@
                 <div class="sans letter-year">2026</div>
             </div>
             
-            <div class="env-left"></div>
-            <div class="env-right"></div>
-            <div class="env-bottom"></div>
-            <div class="env-flap"></div>
+            <div class="env-edge-left"></div>
+            <div class="env-edge-right"></div>
+            
+            <div class="env-flap-front-bottom"></div>
+            
+            <div class="env-flap-top"></div>
             
             <div class="env-seal">
                  <img src="logo.png" alt="Logo">
@@ -231,7 +244,7 @@
                         <div class="sans rev-loc">HOTEL TAJ THEOG</div>
                         <div class="sans rev-loc">SHIMLA HILLS, HIMACHAL PRADESH</div>
                         
-                        <div class="sans scroll-hint">Scroll down for more <br> ↓</div>
+                        <div class="sans scroll-hint">Scroll down to navigate <br> ↓</div>
                     </div>
                 </div>
 
@@ -360,7 +373,7 @@
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        // 1. Envelope Logic with 3-Second Wait and Slower Slide-out
+        // 1. Envelope Logic with 3-Second Wait and slower slide-out
         let isOpening = false;
         function openEnvelope() {
             if (isOpening) return;
@@ -386,10 +399,10 @@
                     
                     AOS.init({ duration: 1200, once: true, offset: 50 });
                 }, 1000); 
-            }, 3000); // Changed from 5000 to 3000
+            }, 3000); 
         }
 
-        // 2. Tap to Reveal Logic
+        // 2. Tap to Reveal Logic on Hero Screen
         function revealDateDetails() {
             const btn = document.getElementById('reveal-btn');
             const content = document.getElementById('revealed-content');
@@ -413,4 +426,3 @@
     </script>
 </body>
 </html>
-
