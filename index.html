@@ -54,9 +54,11 @@
         .env-flap { position: absolute; top: 0; left: 0; width: 0; height: 0; border-left: 175px solid transparent; border-right: 175px solid transparent; border-top: 135px solid #152A22; z-index: 5; transform-origin: top; transition: transform 0.6s ease; }
         
         /* Custom Logo Gold Seal */
-        .env-seal { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 75px; height: 75px; background: radial-gradient(circle, #D4AF37, #997A15); border-radius: 50%; z-index: 6; display: flex; justify-content: center; align-items: center; box-shadow: 0 5px 15px rgba(0,0,0,0.6), inset 0 2px 6px rgba(255,255,255,0.4); transition: opacity 0.3s ease; border: 2px solid rgba(212,175,55,0.8); overflow: hidden; }
-        .env-seal img { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply; opacity: 0.9; }
-
+        ./* Custom Logo White & Gold Seal */
+        .env-seal { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 85px; height: 85px; background: #FFFFFF; border-radius: 50%; z-index: 6; display: flex; justify-content: center; align-items: center; box-shadow: 0 8px 20px rgba(0,0,0,0.8), inset 0 0 8px rgba(212,175,55,0.3); transition: opacity 0.3s ease; border: 2px solid var(--gold); overflow: hidden; }
+        
+        /* Removed blend mode so your gold logo pops, and zoomed it slightly to fit perfectly */
+        .env-seal img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.15); }
         /* Animation Classes */
         .env-wrapper.open .env-seal { opacity: 0; }
         .env-wrapper.open .env-flap { transform: rotateX(180deg); z-index: 1; }
