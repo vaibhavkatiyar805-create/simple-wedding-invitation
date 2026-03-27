@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     
     <style>
-        :root { --gold: #d4af37; --dark-blue: #1e293b; --cream: #faf9f6; --text: #4a4a4a; --warm-yellow: #fdf5e6; }
+        :root { --gold: #d4af37; --dark-blue: #1e293b; --cream: #faf9f6; --text: #4a4a4a; --warm-yellow: #fdf5e6; --light-gray: #f9f9f9; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { background-color: var(--cream); font-family: 'Montserrat', sans-serif; color: var(--text); overflow-x: hidden; scroll-behavior: smooth; }
 
@@ -36,7 +36,7 @@
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             text-align: center; z-index: 1; padding-top: 15px;
         }
-        .ganesh-reveal img { width: 80px; margin-bottom: 10px; opacity: 0.8; }
+        .ganesh-reveal img { width: 100px; max-height: 120px; object-fit: contain; margin-bottom: 10px; opacity: 0.9; }
         .ganesh-reveal h3 { font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--dark-blue); font-weight: 600; letter-spacing: 2px; }
         
         /* The Gold Canvas on top */
@@ -100,7 +100,7 @@
         .relation-text { font-size: 0.95rem; margin-bottom: 8px; line-height: 1.6; }
         .relation-text strong { color: var(--dark-blue); font-weight: 600; }
 
-        /* 5. EVENTS TIMELINE (WITH YOUR PNGS) */
+        /* 5. EVENTS TIMELINE */
         .events-section { padding: 100px 20px; background: var(--cream); text-align: center; }
         .section-title { font-family: 'Great Vibes', cursive; font-size: 4.5rem; color: var(--gold); margin-bottom: 60px; }
         
@@ -135,6 +135,18 @@
         .btn-wa { background: #25D366; color: white; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2); font-size: 1rem; padding: 15px 45px; border: none; }
         .btn-wa:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(37, 211, 102, 0.4); }
 
+        /* 7. COMPLIMENTS & FOOTER SECTION */
+        .compliments-section { padding: 80px 20px 40px; background: var(--light-gray); text-align: center; }
+        .compliments-title { font-family: 'Cinzel', serif; font-size: 2rem; color: var(--gold); letter-spacing: 4px; margin-bottom: 40px; text-transform: uppercase; }
+        .compliments-box {
+            background: white; border-radius: 15px; padding: 40px; max-width: 800px; margin: 0 auto 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .compliments-names { font-family: 'Cinzel', serif; font-size: 1.2rem; font-weight: 600; color: var(--dark-blue); margin-bottom: 25px; padding-bottom: 25px; border-bottom: 1px solid rgba(0,0,0,0.1); }
+        .compliments-text { font-size: 1rem; color: #666; line-height: 1.8; }
+        
+        .footer-text { font-size: 0.9rem; color: #888; margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.05); }
+
         @media (max-width: 768px) {
             .hero-names { font-size: 3.5rem; }
             .hero-weds { letter-spacing: 10px; }
@@ -146,6 +158,7 @@
             .event-img { min-height: 250px; }
             .event-card::after { left: 20px !important; top: 0 !important; transform: translate(-50%, -50%) !important; }
             .btn-map { align-self: flex-start !important; }
+            .compliments-title { font-size: 1.5rem; }
         }
     </style>
 </head>
@@ -156,7 +169,7 @@
         
         <div class="heart-mask-container">
             <div class="ganesh-reveal">
-                <img src="ganesh2.png>
+                <img src="ganesh2.png" alt="Ganesh Ji">
                 <h3>Save the Date</h3>
             </div>
             <canvas id="scratch-canvas" width="280" height="280"></canvas>
@@ -225,7 +238,6 @@
             <h2 class="section-title" data-aos="zoom-in">The Celebrations</h2>
             
             <div class="timeline">
-                
                 <div class="event-card" data-aos="fade-up">
                     <div class="event-img" style="background-image: url('mehendi.png');"></div>
                     <div class="event-info">
@@ -289,13 +301,23 @@
             </div>
         </section>
 
-        <section class="section" style="background: var(--warm-yellow); padding: 100px 20px; text-align: center;">
-            <h2 class="section-title" style="color: var(--dark-blue); margin-bottom: 20px;" data-aos="fade-up">Bless Our Journey</h2>
-            <p style="opacity: 0.8; margin-bottom: 50px; font-size: 1.2rem;">We look forward to celebrating with you.</p>
+        <section class="compliments-section">
             
-            <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;" data-aos="zoom-in">
+            <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 80px;" data-aos="zoom-in">
                 <a href="https://wa.me/919872904973?text=Hi%20Aastha,%20confirming%20my%20presence%20for%20the%20wedding!" class="btn btn-wa">RSVP to Aastha</a>
                 <a href="https://wa.me/917837210001?text=Hi%20Anupam,%20confirming%20my%20presence%20for%20the%20wedding!" class="btn btn-wa">RSVP to Anupam</a>
+            </div>
+
+            <h2 class="compliments-title" data-aos="fade-up">With Best Compliments From</h2>
+            
+            <div class="compliments-box" data-aos="fade-up" data-aos-delay="200">
+                <div class="compliments-names">Amitabh, Krishn, Anjali, Aditi, Divya</div>
+                <p class="compliments-text">Your presence will make our celebrations complete. We hope to see you in Himachal Pradesh.</p>
+            </div>
+            
+            <div class="footer-text">
+                <p>Looking forward to seeing you</p>
+                <p>Families of Anupam & Aastha</p>
             </div>
         </section>
     </div>
