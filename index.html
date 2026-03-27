@@ -8,151 +8,43 @@
     <link rel="stylesheet" href="https://unpkg.com/bulma@0.8.0/css/bulma.min.css" />
     <link rel="stylesheet" type="text/css" href="css/menikah.css" />
     <link rel="stylesheet" type="text/css" href="css/jquery.countdown.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Great+Vibes&family=Montserrat:wght@600&display=swap" rel="stylesheet">
     
     <style>
-      :root { --gold: #c5a059; --cream: #f9f7f2; }
-      body { background-color: var(--cream); font-family: 'Playfair Display', serif; overflow-x: hidden; }
-      
-      /* FIX: Reveal Overlay Logic */
+      :root { --gold: #c5a059; --dark: #1a1a1a; --cream: #fdfaf5; }
+      body { background-color: var(--cream); font-family: 'Playfair Display', serif; }
+
+      /* SCRATCH / VIEW OVERLAY */
       #reveal-overlay {
         position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background: #1a1a1a; color: white; z-index: 9999;
+        background: var(--dark); color: white; z-index: 10000;
         display: flex; flex-direction: column; justify-content: center; align-items: center;
-        transition: opacity 0.8s ease, visibility 0.8s;
+        transition: all 0.8s ease-in-out;
       }
-      #reveal-overlay.hidden { 
-        opacity: 0; 
-        visibility: hidden; 
-        pointer-events: none; 
-      }
+      #reveal-overlay.hidden { opacity: 0; visibility: hidden; transform: scale(1.1); pointer-events: none; }
 
       .reveal-btn {
-        padding: 15px 40px; border: 2px solid var(--gold); background: transparent;
-        color: var(--gold); cursor: pointer; font-size: 1.2rem; letter-spacing: 3px;
-        transition: 0.3s; margin-top: 20px;
+        padding: 20px 50px; border: 3px solid var(--gold); background: transparent;
+        color: var(--gold); cursor: pointer; font-size: 1.5rem; font-weight: bold;
+        letter-spacing: 4px; transition: 0.4s; margin-top: 30px; font-family: 'Montserrat', sans-serif;
       }
-      .reveal-btn:hover { background: var(--gold); color: white; }
+      .reveal-btn:hover { background: var(--gold); color: white; transform: scale(1.05); }
 
-      /* Classy Styling */
-      .title-font { font-family: 'Great Vibes', cursive; color: var(--gold); font-size: 5rem !important; }
-      .wedding-photo { width: 100%; border-radius: 5px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 20px; }
-      .event-card { background: white; padding: 30px; border: 1px solid #e0e0e0; border-radius: 0; position: relative; height: 100%; }
-      
-      #hitungmundur { display: flex; justify-content: center; gap: 20px; margin: 30px 0; }
-      #hitungmundur li { list-style: none; text-align: center; color: #4a4a4a; }
-      #hitungmundur span { font-size: 2.5rem; display: block; font-weight: 700; color: var(--gold); }
-      
-      /* Music Toggle Button (Floating) */
-      #music-control {
-        position: fixed; bottom: 20px; right: 20px; z-index: 1000;
-        background: white; border-radius: 50%; width: 50px; height: 50px;
-        display: flex; justify-content: center; align-items: center;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.2); cursor: pointer;
+      /* BIG COUNTDOWN STYLING */
+      #hitungmundur { 
+        display: flex; justify-content: center; gap: 15px; margin: 40px 0; 
+        background: white; padding: 25px; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.05);
       }
-    </style>
-  </head>
-
-  <body>
-    <audio id="myAudio" loop>
-      <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-      </audio>
-
-    <div id="music-control" onclick="toggleMusic()">
-      <img id="music-icon" src="https://img.icons8.com/ios-filled/50/c5a059/high-volume.png" width="25">
-    </div>
-
-    <div id="reveal-overlay">
-      <h2 class="subtitle is-3 has-text-white" style="font-family: 'Great Vibes'">Anupam & Aastha</h2>
-      <p class="has-text-grey-light">ARE GETTING MARRIED</p>
-      <button class="reveal-btn" onclick="startExperience()">VIEW INVITATION</button>
-    </div>
-
-    <div class="header-wrapper" id="home">
-      <section class="hero is-fullheight">
-        <div class="hero-body">
-          <div class="container has-text-centered">
-            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200" class="wedding-photo" style="max-width: 600px;" alt="Wedding">
-            <h1 class="title-font">Anupam & Aastha</h1>
-            <p class="is-size-4">3rd May 2026 | Shimla Hills</p>
-
-            <ul id="hitungmundur">
-              <li><span class="days">00</span><p>Days</p></li>
-              <li><span class="hours">00</span><p>Hrs</p></li>
-              <li><span class="minutes">00</span><p>Min</p></li>
-              <li><span class="seconds">00</span><p>Sec</p></li>
-            </ul>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <section class="section" id="Waktu">
-      <div class="container">
-        <h2 class="title-font has-text-centered is-size-1 mb-6">The Celebrations</h2>
-        <div class="columns is-multiline">
-          <div class="column is-4">
-            <div class="event-card has-text-centered">
-              <p class="has-text-weight-bold">30 APRIL 2026</p>
-              <h4 class="is-size-4 mt-2">Mehendi & Hi-Tea</h4>
-              <p>4:00 PM | Hotel Taj Theog</p>
-            </div>
-          </div>
-          <div class="column is-4">
-            <div class="event-card has-text-centered" style="border: 1px solid var(--gold)">
-              <p class="has-text-weight-bold">3 MAY 2026</p>
-              <h4 class="is-size-4 mt-2">The Wedding</h4>
-              <p>3:30 PM | Hotel Taj Theog</p>
-            </div>
-          </div>
-          <div class="column is-4">
-            <div class="event-card has-text-centered">
-              <p class="has-text-weight-bold">4 MAY 2026</p>
-              <h4 class="is-size-4 mt-2">Gala Dinner</h4>
-              <p>7:30 PM | Hyatt Centric, Chandigarh</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section has-text-centered" id="rsvp">
-      <h2 class="title-font">Kindly RSVP</h2>
-      <p>+91 98729 04973 | +91 78372 10001</p>
-      <div class="mt-5">
-         <a href="https://api.whatsapp.com/send?phone=919872904973" class="button is-dark">CONFIRM VIA WHATSAPP</a>
-      </div>
-    </section>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="js/jquery.countdown.js"></script>
-    <script>
-      const audio = document.getElementById('myAudio');
-      const overlay = document.getElementById('reveal-overlay');
-
-      function startExperience() {
-        // Hide Overlay
-        overlay.classList.add('hidden');
-        // Play Music
-        audio.play().catch(e => console.log("Audio play failed, needs user interaction"));
+      #hitungmundur li { list-style: none; text-align: center; min-width: 70px; }
+      #hitungmundur span { 
+        font-size: 3.5rem !important; /* BIG FONT */
+        line-height: 1; font-weight: 800; color: var(--gold); font-family: 'Montserrat', sans-serif;
       }
+      #hitungmundur p { font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; color: #888; margin-top: 5px; }
 
-      function toggleMusic() {
-        if (audio.paused) {
-          audio.play();
-          document.getElementById('music-icon').src = "https://img.icons8.com/ios-filled/50/c5a059/high-volume.png";
-        } else {
-          audio.pause();
-          document.getElementById('music-icon').src = "https://img.icons8.com/ios-filled/50/c5a059/mute.png";
-        }
-      }
-
-      $(function() {
-        $('#hitungmundur').countdown({
-          date: '05/03/2026 15:30:00',
-          offset: +5.5
-        });
-      });
-    </script>
-  </body>
-</html>
+      /* BIG BUTTONS (MAPS & CONTACT) */
+      .btn-big {
+        width: 100%; max-width: 400px; padding: 20px !important;
+        font-size: 1.3rem !important; font-weight: bold !important;
+        text-transform: uppercase; letter-spacing: 2px;
+        border-radius: 50px !important; margin: 10px 0;
