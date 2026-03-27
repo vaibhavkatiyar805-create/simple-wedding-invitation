@@ -29,8 +29,8 @@
         .tap-hint { margin-top: 60px; font-family: 'Playfair Display', serif; font-size: 1rem; letter-spacing: 4px; color: #2a5945; animation: pulse 2s infinite; transition: opacity 0.3s; }
         @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
 
-        /* 2. MINIMALIST CANVA HERO SECTION */
-        .hero-minimal { position: relative; width: 100%; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding-top: 10vh; background: linear-gradient(to bottom, #fdfbf9 0%, #ffffff 20%); }
+        /* 2. CANVA HERO SECTION (Now with Video-Like Motion) */
+        .hero-minimal { position: relative; width: 100%; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding-top: 8vh; background: linear-gradient(to bottom, #fdfbf9 0%, #ffffff 20%); }
         .names-block { text-align: center; display: flex; flex-direction: column; align-items: center; line-height: 0.9; }
         .name-serif { font-family: 'Playfair Display', serif; font-size: 3.2rem; font-weight: 400; letter-spacing: 2px; color: var(--text-main); text-transform: uppercase; }
         .name-and { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: var(--text-light); margin: -5px 0 -5px -60px; }
@@ -38,9 +38,26 @@
         .date-block { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 15px; }
         .date-month { font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: var(--text-main); transform: translateY(-15px) translateX(20px); z-index: 2; }
         .date-day { font-family: 'Playfair Display', serif; font-size: 7rem; font-weight: 400; color: var(--text-main); letter-spacing: -2px; line-height: 0.8; z-index: 1; }
-        .hero-details { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--text-light); text-align: center; line-height: 1.6; margin-bottom: 40px; letter-spacing: 0.5px; }
-        .hero-image-box { width: 90%; max-width: 500px; height: 50vh; border-radius: 15px 15px 0 0; overflow: hidden; margin-top: auto; box-shadow: 0 -10px 40px rgba(0,0,0,0.03); }
-        .hero-image-box img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+        .hero-details { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--text-light); text-align: center; line-height: 1.6; margin-bottom: 30px; letter-spacing: 0.5px; }
+        
+        /* The Magic Video-Like Box */
+        .hero-image-box { 
+            width: 90%; max-width: 500px; height: 55vh; border-radius: 20px 20px 0 0; 
+            overflow: hidden; margin-top: auto; box-shadow: 0 -10px 40px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        
+        /* THE CINEMATIC ANIMATION (Makes photo feel like a slow video) */
+        .hero-image-box img, .hero-image-box video { 
+            width: 100%; height: 100%; object-fit: cover; object-position: center; 
+            animation: cinematicZoom 15s infinite alternate ease-in-out;
+            transform-origin: center top;
+        }
+
+        @keyframes cinematicZoom {
+            0% { transform: scale(1) translateY(0); }
+            100% { transform: scale(1.1) translateY(-2%); }
+        }
 
         /* 3. CANVA STYLE COUNTDOWN */
         .countdown-minimal { padding: 60px 20px; text-align: center; background: #ffffff; }
@@ -58,184 +75,10 @@
         /* 4. CLEAN EVENTS SECTION */
         .events-minimal { padding: 80px 20px; background: #faf9f7; text-align: center; }
         .section-cursive { font-family: 'Great Vibes', cursive; font-size: 4rem; color: var(--text-main); margin-bottom: 40px; }
-        .event-clean-card { max-width: 600px; margin: 0 auto 50px; background: #fff; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 1px solid #f0f0f0; }
+        .event-clean-card { max-width: 600px; margin: 0 auto 50px; background: #fff; padding: 40px 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 1px solid #f0f0f0; transition: transform 0.3s ease; }
+        .event-clean-card:hover { transform: translateY(-5px); }
         .ec-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--text-main); margin-bottom: 10px; font-style: italic; }
         .ec-desc { font-family: 'Montserrat', sans-serif; font-size: 0.85rem; color: var(--text-light); line-height: 1.8; margin-bottom: 20px; }
         .ec-divider { width: 30px; border: none; border-top: 1px solid var(--text-main); margin: 0 auto 20px; }
         .btn-clean { display: inline-block; padding: 10px 25px; border: 1px solid var(--text-main); color: var(--text-main); text-decoration: none; font-family: 'Montserrat', sans-serif; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; border-radius: 30px; transition: 0.3s; }
-        .btn-clean:hover { background: var(--text-main); color: #fff; }
-
-        /* 5. RSVP & FOOTER */
-        .rsvp-section { padding: 80px 20px; text-align: center; background: #fff; }
-        .rsvp-title { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 400; line-height: 1; margin-bottom: 20px; }
-        .rsvp-date { font-family: 'Great Vibes', cursive; font-size: 2.5rem; margin-bottom: 40px; color: var(--text-light); }
-        .btn-rsvp { display: inline-block; padding: 15px 40px; background: var(--text-main); color: #fff; text-decoration: none; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; border-radius: 30px; margin: 10px; }
-        .footer-clean { padding: 40px 20px; text-align: center; font-family: 'Montserrat', sans-serif; font-size: 0.75rem; color: #aaa; letter-spacing: 1px; }
-
-        @media (max-width: 768px) {
-            .name-serif { font-size: 2.6rem; }
-            .name-and { font-size: 2.2rem; margin: -5px 0 -5px -40px; }
-            .date-month { font-size: 3rem; transform: translateY(-10px) translateX(20px); }
-            .date-day { font-size: 6rem; }
-            .t-num { font-size: 2.2rem; }
-            .t-colon { font-size: 1.8rem; }
-        }
-    </style>
-</head>
-<body>
-
-    <div id="envelope-wrapper">
-        <h2 style="font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 20px; color: #163025; letter-spacing: 2px; font-style: italic;">Aastha & Anupam</h2>
-        
-        <div class="envelope-container" id="envelope-container" onclick="openEnvelope()">
-            <div class="envelope-back"></div>
-            <div class="letter">
-                <img src="ganesh2.png" alt="Ganesh Ji">
-                <h3>Save the Date</h3>
-            </div>
-            <div class="envelope-front-left"></div>
-            <div class="envelope-front-right"></div>
-            <div class="envelope-bottom"></div>
-            <div class="envelope-flap"></div>
-        </div>
-        <p class="tap-hint" id="tap-hint">TAP TO OPEN</p>
-    </div>
-
-    <audio id="weddingAudio" loop preload="auto"><source src="music.mp3.mp3" type="audio/mpeg"></audio>
-
-    <div id="main-site" style="visibility: hidden; opacity: 0; transition: opacity 1.5s ease;">
-        
-        <section class="hero-minimal">
-            <div class="names-block" data-aos="fade-down" data-aos-duration="1500">
-                <div class="name-serif">AASTHA</div>
-                <div class="name-and">and</div>
-                <div class="name-serif">ANUPAM</div>
-            </div>
-            
-            <hr class="hero-divider" data-aos="fade-in" data-aos-delay="300">
-            
-            <div class="date-block" data-aos="zoom-in" data-aos-delay="500">
-                <div class="date-month">May</div>
-                <div class="date-day">3</div>
-            </div>
-            
-            <div class="hero-details" data-aos="fade-up" data-aos-delay="700">
-                Three thirty in the afternoon<br>
-                Hotel Taj Theog, Shimla Hills<br>
-                2026
-            </div>
-
-            <div class="hero-image-box" data-aos="fade-up" data-aos-delay="1000">
-                <img src="hero.png" alt="Couple Portrait">
-            </div>
-        </section>
-
-        <section class="countdown-minimal">
-            <div class="cd-heading-box" data-aos="fade-up">
-                <div class="cd-time">TIME</div>
-                <div class="cd-left">LEFT UNTIL</div>
-                <div class="cd-wedding">THE WEDDING</div>
-            </div>
-            
-            <div class="timer-clean" data-aos="fade-up" data-aos-delay="200">
-                <div class="t-box"><span class="t-num" id="days">00</span><p class="t-label">Days</p></div>
-                <span class="t-colon">:</span>
-                <div class="t-box"><span class="t-num" id="hours">00</span><p class="t-label">Hours</p></div>
-                <span class="t-colon">:</span>
-                <div class="t-box"><span class="t-num" id="mins">00</span><p class="t-label">Minutes</p></div>
-                <span class="t-colon">:</span>
-                <div class="t-box"><span class="t-num t-red" id="secs">00</span><p class="t-label">Seconds</p></div>
-            </div>
-        </section>
-
-        <section class="events-minimal">
-            <div class="section-cursive" data-aos="fade-up">Details</div>
-            
-            <div class="event-clean-card" data-aos="fade-up">
-                <div class="ec-title">Mehendi & Hi-Tea</div>
-                <hr class="ec-divider">
-                <div class="ec-desc">Join us to kick off the celebrations.<br>30 April 2026 • 4:00 PM Onwards<br>Hotel Taj Theog, Shimla</div>
-                <a href="https://maps.google.com/?q=Taj+Theog+Resort+and+Spa+Shimla" target="_blank" class="btn-clean">Map Link</a>
-            </div>
-
-            <div class="event-clean-card" data-aos="fade-up">
-                <div class="ec-title">Engagement</div>
-                <hr class="ec-divider">
-                <div class="ec-desc">Rings & Revelry.<br>1 May 2026 • 7:00 PM Onwards<br>Hotel Taj Theog, Shimla</div>
-                <a href="https://maps.google.com/?q=Taj+Theog+Resort+and+Spa+Shimla" target="_blank" class="btn-clean">Map Link</a>
-            </div>
-
-            <div class="event-clean-card" data-aos="fade-up">
-                <div class="ec-title">Haldi & Sangeet</div>
-                <hr class="ec-divider">
-                <div class="ec-desc">Tilak: 11 AM | Haldi: 2:30 PM | Sangeet: 7 PM<br>2 May 2026<br>Amphitheater & Terrace Lawn, Dusit</div>
-                <a href="https://maps.google.com/?q=Dusit+Fagu" target="_blank" class="btn-clean">Map Link</a>
-            </div>
-
-            <div class="event-clean-card" data-aos="fade-up">
-                <div class="ec-title">The Wedding</div>
-                <hr class="ec-divider">
-                <div class="ec-desc">Varmala: 5:00 PM | Phera: 8:00 PM<br>3 May 2026<br>Hotel Taj Theog, Shimla</div>
-                <a href="https://maps.google.com/?q=Taj+Theog+Resort+and+Spa+Shimla" target="_blank" class="btn-clean">Map Link</a>
-            </div>
-            
-            <div class="event-clean-card" data-aos="fade-up">
-                <div class="ec-title">Gala Dinner</div>
-                <hr class="ec-divider">
-                <div class="ec-desc">7:30 PM Onwards<br>4 May 2026<br>Hyatt Centric Sector 17, Chandigarh</div>
-                <a href="https://maps.google.com/?q=Hyatt+Centric+Sector+17+Chandigarh" target="_blank" class="btn-clean">Map Link</a>
-            </div>
-        </section>
-
-        <section class="rsvp-section">
-            <div class="rsvp-title" data-aos="fade-up">RSVP</div>
-            <div class="rsvp-date" data-aos="fade-up">by April 15</div>
-            <div style="margin-bottom: 30px; font-family: 'Montserrat'; font-size: 0.9rem; color: #666;" data-aos="fade-up">Kindly let us know if you can join us<br>in this celebration of love.</div>
-            
-            <div data-aos="zoom-in">
-                <a href="https://wa.me/919872904973?text=Hi%20Aastha,%20confirming%20my%20presence%20for%20the%20wedding!" class="btn-rsvp">RSVP Aastha</a>
-                <a href="https://wa.me/917837210001?text=Hi%20Anupam,%20confirming%20my%20presence%20for%20the%20wedding!" class="btn-rsvp" style="background: #333;">RSVP Anupam</a>
-            </div>
-        </section>
-
-        <div class="footer-clean">
-            WE CAN'T WAIT TO CELEBRATE WITH YOU<br><br>
-            Made with ❤️ for Aastha & Anupam
-        </div>
-    </div>
-
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script>
-        let isOpening = false;
-        function openEnvelope() {
-            if (isOpening) return;
-            isOpening = true;
-            document.getElementById('envelope-container').classList.add('open');
-            document.getElementById('tap-hint').style.opacity = '0';
-            
-            setTimeout(() => {
-                const wrapper = document.getElementById('envelope-wrapper');
-                const mainSite = document.getElementById('main-site');
-                wrapper.style.opacity = '0';
-                setTimeout(() => {
-                    wrapper.style.display = 'none';
-                    mainSite.style.visibility = 'visible';
-                    mainSite.style.opacity = '1';
-                    document.getElementById('weddingAudio').play().catch(e => console.log("Audio needed user interaction"));
-                    AOS.init({ duration: 1000, once: true, offset: 50 });
-                }, 800); 
-            }, 1500); 
-        }
-
-        const target = new Date("May 3, 2026 15:30:00").getTime();
-        setInterval(() => {
-            const now = new Date().getTime();
-            const d = target - now;
-            document.getElementById("days").innerText = Math.max(0, Math.floor(d / (1000 * 60 * 60 * 24))).toString().padStart(2, '0');
-            document.getElementById("hours").innerText = Math.max(0, Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).toString().padStart(2, '0');
-            document.getElementById("mins").innerText = Math.max(0, Math.floor((d % (1000 * 60 * 60)) / (1000 * 60))).toString().padStart(2, '0');
-            document.getElementById("secs").innerText = Math.max(0, Math.floor((d % (1000 * 60)) / 1000)).toString().padStart(2, '0');
-        }, 1000);
-    </script>
-</body>
-</html>
+        .btn-clean:hover { background: var(--text-main); color: #fff;
