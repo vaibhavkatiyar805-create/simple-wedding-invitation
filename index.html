@@ -2,89 +2,252 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> 
     <title>Aastha & Anupam | The Royal Wedding</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    
     <style>
-        :root { --gold: #c5a059; --dark: #1a1a1a; --cream: #fdfaf5; }
+        :root { --gold: #d4af37; --dark-blue: #1e293b; --cream: #faf9f6; --text: #333; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background-color: var(--cream); font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
+        body { background-color: var(--cream); font-family: 'Montserrat', sans-serif; color: var(--text); overflow-x: hidden; scroll-behavior: smooth; }
 
-        /* SCRATCH REVEAL */
-        #scratch-container {
+        /* 1. SCRATCH OVERLAY */
+        #scratch-wrapper {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 10000; background: #fff; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; text-align: center;
+            z-index: 99999; background: #fff; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; transition: opacity 1.5s ease;
         }
-        .canvas-wrapper { position: relative; width: 300px; height: 300px; border-radius: 50%; }
-        canvas { position: absolute; top: 0; left: 0; cursor: crosshair; border-radius: 50%; touch-action: none; }
+        .canvas-container { position: relative; width: 300px; height: 300px; border-radius: 50%; box-shadow: 0 10px 40px rgba(0,0,0,0.1); background: url('https://img.icons8.com/ios-filled/500/d4af37/wedding-rings.png') no-repeat center/contain; }
+        canvas { position: absolute; top: 0; left: 0; border-radius: 50%; cursor: crosshair; touch-action: none; }
+        .scratch-hint { margin-top: 35px; font-family: 'Cinzel', serif; font-size: 1.2rem; letter-spacing: 4px; color: var(--gold); animation: pulse 2s infinite; }
 
-        /* GHIBLI HERO SECTION */
+        /* 2. FRAMER-STYLE HERO SECTION */
         .hero { 
-            height: 100vh; display: flex; flex-direction: column; justify-content: center; 
-            align-items: center; text-align: center; color: white;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1920'); 
-            background-size: cover; background-position: center; background-attachment: fixed;
+            position: relative; height: 100vh; width: 100vw; display: flex; flex-direction: column; 
+            justify-content: center; align-items: center; text-align: center; overflow: hidden;
+            /* Using the AI Image you generated */
+            background: url('http://googleusercontent.com/image_generation_content/0') no-repeat center bottom;
+            background-size: cover; background-attachment: fixed;
         }
-        .hero h1 { font-family: 'Playfair Display', serif; font-size: 4rem; letter-spacing: 10px; color: var(--gold); text-transform: uppercase; }
-        .hero h1 span { display: block; font-family: 'Great Vibes', cursive; font-size: 3rem; text-transform: lowercase; letter-spacing: 2px; }
+        .hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(20,30,50,0.6) 0%, rgba(20,30,50,0.2) 50%, rgba(0,0,0,0.6) 100%); z-index: 1; }
         
-        /* DISCOVER BUTTON */
-        .btn-discover {
-            padding: 15px 45px; border: 1px solid rgba(255,255,255,0.6); border-radius: 50px;
-            color: white; text-decoration: none; font-size: 0.8rem; letter-spacing: 3px;
-            background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); text-transform: uppercase;
-        }
+        .hero-content { position: relative; z-index: 10; padding: 20px; }
+        .hero-names { font-family: 'Cinzel', serif; font-size: 5.5rem; color: #fff; line-height: 1.1; text-shadow: 0 4px 20px rgba(0,0,0,0.5); font-weight: 600; letter-spacing: 5px; }
+        .hero-weds { font-family: 'Montserrat', sans-serif; font-size: 1.2rem; color: var(--gold); letter-spacing: 12px; margin: 15px 0; text-transform: uppercase; }
 
-        #main-content { visibility: hidden; }
+        /* 3. CSS FLOATING LANTERNS (The Framer Magic) */
+        .lantern {
+            position: absolute; bottom: -100px; width: 40px; height: 60px;
+            background: radial-gradient(circle at 50% 50%, #ffdaa3, #ff8c00);
+            border-radius: 5px 5px 10px 10px; box-shadow: 0 0 30px rgba(255, 140, 0, 0.8), inset 0 0 10px rgba(255,255,255,0.5);
+            z-index: 5; opacity: 0; animation: floatUp linear infinite;
+        }
+        .lantern::after { content: ''; position: absolute; bottom: -5px; left: 15px; width: 10px; height: 10px; background: rgba(0,0,0,0.4); border-radius: 50%; filter: blur(2px); }
+        
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(0.8) rotate(-5deg); opacity: 0; }
+            20% { opacity: 0.9; }
+            100% { transform: translateY(-120vh) scale(1.2) rotate(5deg); opacity: 0; }
+        }
+        @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+
+        /* 4. GLASSMORPHISM COUNTDOWN */
+        .glass-panel {
+            position: relative; z-index: 10; display: flex; gap: 20px; margin-top: 40px;
+            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.2); border-radius: 15px; padding: 20px 40px; box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        .time-box { text-align: center; color: white; min-width: 60px; }
+        .time-box span { font-family: 'Cinzel', serif; font-size: 2.5rem; display: block; }
+        .time-box p { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.8; }
+
+        /* 5. SECTIONS & TIMELINE */
+        .section { padding: 100px 20px; text-align: center; }
+        .title-elegant { font-family: 'Cinzel', serif; font-size: 3rem; color: var(--gold); margin-bottom: 50px; }
+        
+        .timeline { max-width: 800px; margin: 0 auto; position: relative; }
+        .timeline::before { content: ''; position: absolute; width: 2px; background: var(--gold); top: 0; bottom: 0; left: 50%; transform: translateX(-50%); opacity: 0.3; }
+        
+        .event-card {
+            background: white; border-radius: 10px; padding: 40px; margin-bottom: 40px;
+            width: 45%; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: left;
+        }
+        .event-card:nth-child(odd) { float: left; clear: both; }
+        .event-card:nth-child(even) { float: right; clear: both; text-align: right; }
+        .event-card::after { content: ''; position: absolute; top: 40px; width: 16px; height: 16px; background: var(--gold); border-radius: 50%; }
+        .event-card:nth-child(odd)::after { right: -48px; }
+        .event-card:nth-child(even)::after { left: -48px; }
+
+        .event-date { color: var(--gold); font-weight: 600; letter-spacing: 2px; font-size: 0.9rem; }
+        .event-name { font-family: 'Cinzel', serif; font-size: 1.8rem; margin: 10px 0; color: var(--dark-blue); }
+
+        /* 6. BUTTONS */
+        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 12px 30px; border-radius: 50px; font-size: 0.8rem; font-weight: 600; letter-spacing: 2px; text-decoration: none; transition: 0.3s; margin-top: 15px; border: 1px solid transparent; text-transform: uppercase; }
+        .btn-map { background: transparent; color: var(--dark-blue); border-color: var(--dark-blue); }
+        .btn-map:hover { background: var(--dark-blue); color: white; }
+        .btn-wa { background: #25D366; color: white; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3); font-size: 1rem; padding: 15px 40px; }
+        .btn-wa:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(37, 211, 102, 0.4); }
+
+        /* Clearfix for timeline */
+        .clearfix::after { content: ""; clear: both; display: table; }
+
+        @media (max-width: 768px) {
+            .hero-names { font-size: 3.5rem; }
+            .timeline::before { left: 20px; }
+            .event-card { width: 100%; float: none !important; text-align: left !important; padding: 30px 20px 30px 50px; }
+            .event-card::after { left: 12px !important; }
+        }
     </style>
 </head>
 <body>
-    <div id="scratch-container">
-        <div class="canvas-wrapper"><canvas id="scratch-canvas" width="300" height="300"></canvas></div>
-        <p style="margin-top:20px; color:var(--gold); letter-spacing:2px;">SCRATCH TO REVEAL</p>
+
+    <div id="scratch-wrapper">
+        <h2 style="font-family: 'Cinzel', serif; font-size: 2.5rem; margin-bottom: 30px; color: var(--dark-blue);">Aastha & Anupam</h2>
+        <div class="canvas-container">
+            <canvas id="scratch-canvas" width="300" height="300"></canvas>
+        </div>
+        <p class="scratch-hint">SCRATCH TO REVEAL</p>
     </div>
 
-    <audio id="bgMusic" loop><source src="music.mp3" type="audio/mpeg"></audio>
+    <audio id="weddingAudio" loop preload="auto"><source src="music.mp3" type="audio/mpeg"></audio>
 
-    <div id="main-content">
-        <header class="hero">
-            <h1>AASTHA <span>weds</span> ANUPAM</h1>
-            <p style="margin: 20px 0; letter-spacing: 5px;">3 MAY 2026 • SHIMLA HILLS</p>
-            <a href="#details" class="btn-discover">DISCOVER THE DETAILS</a>
-        </header>
+    <div id="main-site" style="visibility: hidden; opacity: 0; transition: opacity 1.5s ease;">
+        
+        <section class="hero">
+            <div class="lantern" style="left: 10%; animation-duration: 12s; animation-delay: 0s;"></div>
+            <div class="lantern" style="left: 30%; animation-duration: 15s; animation-delay: 2s; width: 30px; height: 45px;"></div>
+            <div class="lantern" style="left: 50%; animation-duration: 18s; animation-delay: 5s;"></div>
+            <div class="lantern" style="left: 70%; animation-duration: 14s; animation-delay: 1s; width: 50px; height: 75px;"></div>
+            <div class="lantern" style="left: 85%; animation-duration: 16s; animation-delay: 4s;"></div>
+
+            <div class="hero-content" data-aos="zoom-in" data-aos-duration="1500">
+                <div class="hero-names">AASTHA</div>
+                <div class="hero-weds">WEDS</div>
+                <div class="hero-names">ANUPAM</div>
+                
+                <div class="glass-panel" data-aos="fade-up" data-aos-delay="500">
+                    <div class="time-box"><span id="days">00</span><p>Days</p></div>
+                    <div class="time-box"><span>:</span><p></p></div>
+                    <div class="time-box"><span id="hours">00</span><p>Hrs</p></div>
+                    <div class="time-box"><span>:</span><p></p></div>
+                    <div class="time-box"><span id="mins">00</span><p>Min</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" style="background: var(--cream);">
+            <h2 class="title-elegant" data-aos="fade-up">The Celebrations</h2>
+            
+            <div class="timeline clearfix">
+                <div class="event-card" data-aos="fade-right">
+                    <div class="event-date">30 APRIL 2026</div>
+                    <h3 class="event-name">Mehendi & Hi-Tea</h3>
+                    <p>4:00 PM Onwards<br>Hotel Taj Theog, Shimla</p>
+                    <a href="https://maps.google.com" target="_blank" class="btn btn-map">📍 Get Directions</a>
+                </div>
+
+                <div class="event-card" data-aos="fade-left">
+                    <div class="event-date">1 MAY 2026</div>
+                    <h3 class="event-name">Engagement Ceremony</h3>
+                    <p>7:00 PM Onwards<br>Hotel Taj Theog, Shimla</p>
+                </div>
+
+                <div class="event-card" data-aos="fade-right">
+                    <div class="event-date">2 MAY 2026</div>
+                    <h3 class="event-name">Haldi & Sangeet</h3>
+                    <p>Tilak & Haldi: 11:00 AM<br>Sangeet Night: 7:00 PM<br>Dusit Amphitheater</p>
+                </div>
+
+                <div class="event-card" data-aos="fade-left" style="border: 2px solid var(--gold);">
+                    <div class="event-date">3 MAY 2026</div>
+                    <h3 class="event-name">The Wedding</h3>
+                    <p>Varmala: 5:00 PM | Phera: 8:00 PM<br>Hotel Taj Theog, Shimla</p>
+                    <a href="https://maps.google.com" target="_blank" class="btn btn-map">📍 Get Directions</a>
+                </div>
+
+                <div class="event-card" data-aos="fade-right">
+                    <div class="event-date">4 MAY 2026</div>
+                    <h3 class="event-name">Gala Dinner</h3>
+                    <p>7:30 PM Onwards<br>Hyatt Centric, Sector 17, Chandigarh</p>
+                    <a href="https://maps.google.com" target="_blank" class="btn btn-map">📍 Get Directions</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" style="background: var(--dark-blue); color: white;">
+            <h2 class="title-elegant" style="color: white;" data-aos="fade-up">Bless Our Journey</h2>
+            <p style="opacity: 0.8; margin-bottom: 40px; font-size: 1.2rem;">Your presence will make our celebrations truly memorable.</p>
+            
+            <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;" data-aos="zoom-in">
+                <a href="https://wa.me/919872904973?text=Hi%20Aastha,%20I'll%20be%20there!" class="btn btn-wa">RSVP to Aastha</a>
+                <a href="https://wa.me/917837210001?text=Hi%20Anupam,%20I'll%20be%20there!" class="btn btn-wa">RSVP to Anupam</a>
+            </div>
+        </section>
     </div>
 
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
+        // --- 1. SCRATCH LOGIC ---
         const canvas = document.getElementById('scratch-canvas');
         const ctx = canvas.getContext('2d');
-        let drawing = false;
+        let isScratching = false;
 
-        ctx.fillStyle = '#c5a059';
-        ctx.fillRect(0, 0, 300, 300);
+        ctx.fillStyle = '#d4af37';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#1e293b";
+        ctx.font = "bold 22px Montserrat";
+        ctx.textAlign = "center";
+        ctx.fillText("SCRATCH ME", canvas.width/2, canvas.height/2 + 8);
 
-        function scratch(e) {
-            if (!drawing) return;
+        function handleScratch(e) {
+            if (!isScratching) return;
             const rect = canvas.getBoundingClientRect();
-            const x = (e.clientX || e.touches[0].clientX) - rect.left;
-            const y = (e.clientY || e.touches[0].clientY) - rect.top;
-            ctx.globalCompositeOperation = 'destination-out';
-            ctx.beginPath(); ctx.arc(x, y, 35, 0, Math.PI * 2); ctx.fill();
+            const x = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
+            const y = (e.clientY || (e.touches && e.touches[0].clientY)) - rect.top;
             
-            const pix = ctx.getImageData(0,0,300,300).data;
-            let count = 0;
-            for(let i=3; i<pix.length; i+=4) { if(pix[i]===0) count++; }
-            if(count > 40000) {
-                document.getElementById('scratch-container').style.display='none';
-                document.getElementById('main-content').style.visibility='visible';
-                document.getElementById('bgMusic').play();
-            }
+            ctx.globalCompositeOperation = 'destination-out';
+            ctx.beginPath();
+            ctx.arc(x, y, 35, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Reveal at 40%
+            const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+            let clearCount = 0;
+            for (let i = 3; i < pixels.length; i += 4) { if (pixels[i] === 0) clearCount++; }
+            if (clearCount > (pixels.length / 4) * 0.40) enterSite();
         }
-        canvas.addEventListener('mousedown', () => drawing=true);
-        canvas.addEventListener('touchstart', () => drawing=true);
-        window.addEventListener('mouseup', () => drawing=false);
-        canvas.addEventListener('mousemove', scratch);
-        canvas.addEventListener('touchmove', scratch);
+
+        function enterSite() {
+            const wrapper = document.getElementById('scratch-wrapper');
+            const mainSite = document.getElementById('main-site');
+            wrapper.style.opacity = '0';
+            setTimeout(() => {
+                wrapper.style.display = 'none';
+                mainSite.style.visibility = 'visible';
+                mainSite.style.opacity = '1';
+                document.getElementById('weddingAudio').play();
+                AOS.init({ duration: 1000, once: true, offset: 50 });
+            }, 1000);
+        }
+
+        canvas.addEventListener('mousedown', () => isScratching = true);
+        canvas.addEventListener('touchstart', (e) => { isScratching = true; e.preventDefault(); }, {passive: false});
+        window.addEventListener('mouseup', () => isScratching = false);
+        window.addEventListener('touchend', () => isScratching = false);
+        canvas.addEventListener('mousemove', handleScratch);
+        canvas.addEventListener('touchmove', (e) => { handleScratch(e); e.preventDefault(); }, {passive: false});
+
+        // --- 2. TIMER LOGIC ---
+        const target = new Date("May 3, 2026 15:30:00").getTime();
+        setInterval(() => {
+            const now = new Date().getTime();
+            const d = target - now;
+            document.getElementById("days").innerText = Math.max(0, Math.floor(d / (1000 * 60 * 60 * 24))).toString().padStart(2, '0');
+            document.getElementById("hours").innerText = Math.max(0, Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).toString().padStart(2, '0');
+            document.getElementById("mins").innerText = Math.max(0, Math.floor((d % (1000 * 60 * 60)) / (1000 * 60))).toString().padStart(2, '0');
+        }, 1000);
     </script>
 </body>
 </html>
