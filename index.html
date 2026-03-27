@@ -3,168 +3,98 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> 
-    <title>Aastha & Anupam | The Royal Wedding</title>
+    <title>Aastha & Anupam | Wedding Invitation</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     
     <style>
-        :root { --gold: #d4af37; --dark-blue: #1e293b; --cream: #faf9f6; --text: #4a4a4a; --warm-yellow: #fdf5e6; --light-gray: #f9f9f9; }
+        :root { --text-main: #1a1a1a; --text-light: #555555; --bg-color: #ffffff; --accent-red: #d9534f; --line-color: #cccccc; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background-color: var(--cream); font-family: 'Montserrat', sans-serif; color: var(--text); overflow-x: hidden; scroll-behavior: smooth; }
+        body { background-color: var(--bg-color); font-family: 'Montserrat', sans-serif; color: var(--text-main); overflow-x: hidden; scroll-behavior: smooth; }
 
-        /* 1. ROYAL GREEN ENVELOPE REVEAL (Kept Exactly as you wanted) */
+        /* 1. GREEN ENVELOPE (Stays the same) */
         #envelope-wrapper { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 99999; background: #fff; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 1.5s ease; }
         .envelope-container { position: relative; width: 320px; height: 200px; cursor: pointer; margin-top: 20px; }
         .envelope-back { position: absolute; width: 100%; height: 100%; background: #163025; border-radius: 5px; z-index: 1; box-shadow: 0 15px 40px rgba(0,0,0,0.15); }
-        .letter { position: absolute; top: 10px; left: 10px; width: 300px; height: 180px; background: var(--warm-yellow); border-radius: 5px; z-index: 2; transition: transform 0.6s ease 0.4s, z-index 0s 0.4s; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border: 2px solid var(--gold); }
-        .letter img { width: 75px; max-height: 90px; object-fit: contain; margin-bottom: 10px; opacity: 0.9; }
-        .letter h3 { font-family: 'Cinzel', serif; font-size: 1.2rem; color: var(--dark-blue); font-weight: 700; margin: 0; letter-spacing: 2px; }
+        .letter { position: absolute; top: 10px; left: 10px; width: 300px; height: 180px; background: #fffdf9; border-radius: 5px; z-index: 2; transition: transform 0.6s ease 0.4s, z-index 0s 0.4s; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border: 1px solid #e0e0e0; }
+        .letter img { width: 75px; max-height: 90px; object-fit: contain; margin-bottom: 10px; }
+        .letter h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #163025; font-weight: 500; margin: 0; letter-spacing: 2px; text-transform: uppercase; }
         .envelope-front-left { position: absolute; top: 0; left: 0; width: 0; height: 0; border-top: 100px solid transparent; border-bottom: 100px solid transparent; border-left: 160px solid #2a5945; z-index: 3; }
         .envelope-front-right { position: absolute; top: 0; right: 0; width: 0; height: 0; border-top: 100px solid transparent; border-bottom: 100px solid transparent; border-right: 160px solid #254d3c; z-index: 3; }
         .envelope-bottom { position: absolute; bottom: 0; left: 0; width: 0; height: 0; border-left: 160px solid transparent; border-right: 160px solid transparent; border-bottom: 110px solid #1e4031; z-index: 4; }
         .envelope-flap { position: absolute; top: 0; left: 0; width: 0; height: 0; border-left: 160px solid transparent; border-right: 160px solid transparent; border-top: 115px solid #326b52; z-index: 5; transform-origin: top; transition: transform 0.5s ease; }
         .envelope-container.open .envelope-flap { transform: rotateX(180deg); z-index: 1; }
         .envelope-container.open .letter { transform: translateY(-80px); z-index: 6; }
-        .tap-hint { margin-top: 60px; font-family: 'Cinzel', serif; font-size: 1.2rem; letter-spacing: 4px; color: #2a5945; animation: pulse 2s infinite; transition: opacity 0.3s; }
+        .tap-hint { margin-top: 60px; font-family: 'Playfair Display', serif; font-size: 1rem; letter-spacing: 4px; color: #2a5945; animation: pulse 2s infinite; transition: opacity 0.3s; }
         @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
 
-        /* 2. MINIMALIST EDITORIAL HERO SECTION (The New Canva Style) */
-        .hero-minimal { 
-            position: relative; height: 100vh; width: 100vw; display: flex; flex-direction: column; 
-            background-color: #ffffff; overflow: hidden;
-        }
-
-        .hero-text-container {
-            flex-shrink: 0; display: flex; flex-direction: column; align-items: center; 
-            padding-top: 12vh; z-index: 10; width: 100%; text-align: center;
-        }
-
-        .names-minimal { 
-            font-family: 'Playfair Display', serif; font-size: 3rem; color: #1a1a1a; 
-            display: flex; align-items: center; justify-content: center; gap: 15px; 
-            letter-spacing: 3px; line-height: 1;
-        }
+        /* 2. MINIMALIST CANVA HERO SECTION */
+        .hero-minimal { position: relative; width: 100%; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding-top: 10vh; background: linear-gradient(to bottom, #fdfbf9 0%, #ffffff 20%); }
         
-        .cursive-and { 
-            font-family: 'Great Vibes', cursive; font-size: 2.5rem; text-transform: lowercase; 
-            color: #333; margin-top: 5px;
-        }
-
-        .minimal-divider { 
-            width: 80px; border: 0; border-top: 1px solid #ccc; margin: 30px auto; 
-        }
-
-        .date-minimal { 
-            display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 15px; 
-        }
+        .names-block { text-align: center; display: flex; flex-direction: column; align-items: center; line-height: 0.9; }
+        .name-serif { font-family: 'Playfair Display', serif; font-size: 3.2rem; font-weight: 400; letter-spacing: 2px; color: var(--text-main); text-transform: uppercase; }
+        .name-and { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: var(--text-light); margin: -5px 0 -5px -60px; }
         
-        .month-cursive { 
-            font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: #1a1a1a; 
-            transform: translateY(-10px); /* Adjusts position to look like signature */
-        }
+        .hero-divider { width: 150px; border: none; border-top: 1px solid var(--line-color); margin: 30px 0; }
         
-        .day-number { 
-            font-family: 'Playfair Display', serif; font-size: 7rem; line-height: 0.8; 
-            color: #1a1a1a; font-weight: 400; letter-spacing: -2px;
-        }
-
-        .details-minimal { 
-            font-family: 'Montserrat', sans-serif; font-size: 0.8rem; color: #555; 
-            line-height: 1.8; letter-spacing: 1px; text-transform: uppercase; margin-top: 10px;
-        }
-
-        /* The Image Area */
-        .hero-image-container { 
-            flex-grow: 1; width: 100%; position: relative; margin-top: 20px; 
-        }
+        .date-block { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 15px; }
+        .date-month { font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: var(--text-main); transform: translateY(-15px) translateX(20px); z-index: 2; }
+        .date-day { font-family: 'Playfair Display', serif; font-size: 7rem; font-weight: 400; color: var(--text-main); letter-spacing: -2px; line-height: 0.8; z-index: 1; }
         
-        .hero-couple-img { 
-            width: 100%; height: 100%; object-fit: cover; object-position: center top; 
-        }
+        .hero-details { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--text-light); text-align: center; line-height: 1.6; margin-bottom: 40px; letter-spacing: 0.5px; }
         
-        /* Smooth fade from white text area into the photo */
-        .fade-overlay-top { 
-            position: absolute; top: -2px; left: 0; width: 100%; height: 120px; 
-            background: linear-gradient(to bottom, #ffffff 0%, transparent 100%); 
-        }
+        .hero-image-box { width: 90%; max-width: 500px; height: 50vh; border-radius: 15px 15px 0 0; overflow: hidden; margin-top: auto; box-shadow: 0 -10px 40px rgba(0,0,0,0.03); }
+        .hero-image-box img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
 
-        /* 3. COUNTDOWN SECTION */
-        .countdown-section { padding: 80px 20px; background: var(--dark-blue); text-align: center; position: relative; z-index: 20; color: white; }
-        .countdown-title { font-family: 'Cinzel', serif; font-size: 2.2rem; color: var(--gold); margin-bottom: 30px; letter-spacing: 3px; font-weight: 400; text-transform: uppercase; }
-        .timer-wrapper { display: flex; gap: 20px; justify-content: center; max-width: 600px; margin: 0 auto; flex-wrap: wrap; }
-        .time-box { text-align: center; min-width: 70px; }
-        .time-box span { font-family: 'Cinzel', serif; font-size: 3.5rem; display: block; font-weight: 500; color: white; text-shadow: 0 4px 15px rgba(0,0,0,0.3); }
-        .time-box p { font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-top: 5px; }
+        /* 3. CANVA STYLE COUNTDOWN */
+        .countdown-minimal { padding: 60px 20px; text-align: center; background: #ffffff; }
+        .cd-heading-box { margin-bottom: 30px; font-family: 'Playfair Display', serif; color: var(--text-main); line-height: 1.2; letter-spacing: 3px; }
+        .cd-time { font-size: 1.5rem; letter-spacing: 6px; }
+        .cd-left { font-size: 1.8rem; letter-spacing: 4px; font-style: italic; color: var(--text-light); }
+        .cd-wedding { font-size: 1.5rem; letter-spacing: 6px; }
+        
+        .timer-clean { display: flex; justify-content: center; align-items: center; gap: 10px; font-family: 'Playfair Display', serif; }
+        .t-box { display: flex; flex-direction: column; align-items: center; min-width: 60px; }
+        .t-num { font-size: 3rem; font-weight: 400; color: var(--text-main); line-height: 1; }
+        .t-label { font-family: 'Montserrat', sans-serif; font-size: 0.65rem; color: #999; text-transform: lowercase; letter-spacing: 1px; margin-top: 5px; }
+        .t-colon { font-size: 2.5rem; color: var(--line-color); transform: translateY(-10px); }
+        .t-red { color: var(--accent-red); }
 
-        /* 4. WELCOME & FAMILY SECTION */
-        .family-section { padding: 100px 20px; background: var(--warm-yellow); text-align: center; position: relative; }
-        .welcome-msg { max-width: 800px; margin: 0 auto 60px; font-size: 1.1rem; line-height: 1.8; color: var(--text); font-style: italic; }
-        .family-grid { display: flex; justify-content: center; gap: 40px; max-width: 1000px; margin: 0 auto; flex-wrap: wrap; }
-        .family-box { background: white; border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 5px; padding: 50px 30px 40px; width: 45%; min-width: 320px; box-shadow: 0 15px 30px rgba(0, 0, 0, 0.04); position: relative; }
-        .family-box::before { content: 'ॐ'; position: absolute; top: -25px; left: 50%; transform: translateX(-50%); font-size: 2.5rem; color: var(--gold); background: var(--warm-yellow); padding: 0 20px; }
-        .family-title { font-family: 'Cinzel', serif; font-size: 1.8rem; color: var(--dark-blue); border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 15px; margin-bottom: 20px; }
-        .main-name { font-family: 'Cinzel', serif; font-size: 1.4rem; color: var(--gold); font-weight: bold; margin-bottom: 15px; }
-        .relation-text { font-size: 0.95rem; margin-bottom: 8px; line-height: 1.6; }
-        .relation-text strong { color: var(--dark-blue); font-weight: 600; }
+        /* 4. CLEAN EVENTS SECTION */
+        .events-minimal { padding: 80px 20px; background: #faf9f7; text-align: center; }
+        .section-cursive { font-family: 'Great Vibes', cursive; font-size: 4rem; color: var(--text-main); margin-bottom: 40px; }
+        
+        .event-clean-card { max-width: 600px; margin: 0 auto 50px; background: #fff; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 1px solid #f0f0f0; }
+        .ec-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--text-main); margin-bottom: 10px; font-style: italic; }
+        .ec-desc { font-family: 'Montserrat', sans-serif; font-size: 0.85rem; color: var(--text-light); line-height: 1.8; margin-bottom: 20px; }
+        .ec-divider { width: 30px; border: none; border-top: 1px solid var(--text-main); margin: 0 auto 20px; }
+        
+        .btn-clean { display: inline-block; padding: 10px 25px; border: 1px solid var(--text-main); color: var(--text-main); text-decoration: none; font-family: 'Montserrat', sans-serif; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; border-radius: 30px; transition: 0.3s; }
+        .btn-clean:hover { background: var(--text-main); color: #fff; }
 
-        /* 5. EVENTS TIMELINE */
-        .events-section { padding: 100px 20px; background: var(--cream); text-align: center; }
-        .section-title { font-family: 'Great Vibes', cursive; font-size: 4.5rem; color: var(--gold); margin-bottom: 60px; }
-        .timeline { max-width: 900px; margin: 0 auto; position: relative; }
-        .timeline::before { content: ''; position: absolute; width: 1px; background: var(--gold); top: 0; bottom: 0; left: 50%; transform: translateX(-50%); opacity: 0.4; }
-        .event-card { display: flex; background: white; border-radius: 5px; margin-bottom: 50px; width: 100%; box-shadow: 0 15px 40px rgba(0,0,0,0.06); position: relative; overflow: hidden; text-align: left; }
-        .event-card::after { content: ''; position: absolute; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; background: var(--gold); border: 4px solid var(--cream); border-radius: 50%; z-index: 2; }
-        .event-card:nth-child(odd) { flex-direction: row; }
-        .event-card:nth-child(even) { flex-direction: row-reverse; text-align: right; }
-        .event-card:nth-child(odd)::after { left: 50%; transform: translate(-50%, -50%); }
-        .event-card:nth-child(even)::after { right: 50%; transform: translate(50%, -50%); }
+        /* 5. RSVP & FOOTER */
+        .rsvp-section { padding: 80px 20px; text-align: center; background: #fff; }
+        .rsvp-title { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 400; line-height: 1; margin-bottom: 20px; }
+        .rsvp-date { font-family: 'Great Vibes', cursive; font-size: 2.5rem; margin-bottom: 40px; color: var(--text-light); }
+        .btn-rsvp { display: inline-block; padding: 15px 40px; background: var(--text-main); color: #fff; text-decoration: none; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; border-radius: 30px; margin: 10px; }
+        
+        .footer-clean { padding: 40px 20px; text-align: center; font-family: 'Montserrat', sans-serif; font-size: 0.75rem; color: #aaa; letter-spacing: 1px; }
 
-        .event-img { width: 50%; min-height: 350px; background-size: cover; background-position: center; position: relative; }
-        .event-img::after { content: ''; position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(45deg, rgba(212,175,55,0.1), transparent); }
-        .event-info { width: 50%; padding: 50px 40px; display: flex; flex-direction: column; justify-content: center; }
-        .e-date { color: var(--gold); font-weight: 600; letter-spacing: 3px; font-size: 0.85rem; text-transform: uppercase; }
-        .e-name { font-family: 'Cinzel', serif; font-size: 2.2rem; margin: 15px 0; color: var(--dark-blue); }
-        .e-desc { font-size: 0.95rem; line-height: 1.8; margin-bottom: 25px; color: #666; }
-
-        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 12px 25px; border-radius: 50px; font-size: 0.75rem; font-weight: 600; letter-spacing: 2px; text-decoration: none; transition: 0.3s; text-transform: uppercase; }
-        .btn-map { background: transparent; color: var(--dark-blue); border: 1px solid rgba(30, 41, 59, 0.3); align-self: flex-start; }
-        .event-card:nth-child(even) .btn-map { align-self: flex-end; }
-        .btn-map:hover { background: var(--dark-blue); color: white; border-color: var(--dark-blue); }
-        .btn-wa { background: #25D366; color: white; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2); font-size: 1rem; padding: 15px 45px; border: none; }
-        .btn-wa:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(37, 211, 102, 0.4); }
-
-        /* 6. COMPLIMENTS SECTION */
-        .compliments-section { padding: 80px 20px 40px; background: var(--light-gray); text-align: center; }
-        .compliments-title { font-family: 'Cinzel', serif; font-size: 2rem; color: var(--gold); letter-spacing: 4px; margin-bottom: 40px; text-transform: uppercase; }
-        .compliments-box { background: white; border-radius: 15px; padding: 40px; max-width: 800px; margin: 0 auto 50px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        .compliments-names { font-family: 'Cinzel', serif; font-size: 1.2rem; font-weight: 600; color: var(--dark-blue); margin-bottom: 25px; padding-bottom: 25px; border-bottom: 1px solid rgba(0,0,0,0.1); }
-        .compliments-text { font-size: 1rem; color: #666; line-height: 1.8; }
-        .footer-text { font-size: 0.9rem; color: #888; margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.05); }
-
-        /* Responsive Design for Mobile (Crucial for the new font sizes) */
         @media (max-width: 768px) {
-            .names-minimal { flex-direction: column; gap: 5px; font-size: 2.8rem; }
-            .cursive-and { font-size: 2rem; margin: -10px 0; }
-            .day-number { font-size: 5.5rem; }
-            .month-cursive { font-size: 3rem; transform: translateY(-5px); }
-            
-            .countdown-title { font-size: 1.6rem; }
-            .time-box span { font-size: 2.5rem; }
-            .timeline::before { left: 20px; }
-            .event-card { flex-direction: column !important; text-align: left !important; }
-            .event-img, .event-info { width: 100%; }
-            .event-img { min-height: 250px; }
-            .event-card::after { left: 20px !important; top: 0 !important; transform: translate(-50%, -50%) !important; }
-            .btn-map { align-self: flex-start !important; }
-            .compliments-title { font-size: 1.5rem; }
+            .name-serif { font-size: 2.6rem; }
+            .name-and { font-size: 2.2rem; margin: -5px 0 -5px -40px; }
+            .date-month { font-size: 3rem; transform: translateY(-10px) translateX(20px); }
+            .date-day { font-size: 6rem; }
+            .t-num { font-size: 2.2rem; }
+            .t-colon { font-size: 1.8rem; }
         }
     </style>
 </head>
 <body>
 
     <div id="envelope-wrapper">
-        <h2 style="font-family: 'Cinzel', serif; font-size: 2.5rem; margin-bottom: 20px; color: var(--dark-blue);">Aastha & Anupam</h2>
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 20px; color: #163025; letter-spacing: 2px; font-style: italic;">Aastha & Anupam</h2>
         
         <div class="envelope-container" id="envelope-container" onclick="openEnvelope()">
             <div class="envelope-back"></div>
@@ -177,7 +107,6 @@
             <div class="envelope-bottom"></div>
             <div class="envelope-flap"></div>
         </div>
-
         <p class="tap-hint" id="tap-hint">TAP TO OPEN</p>
     </div>
 
@@ -186,176 +115,123 @@
     <div id="main-site" style="visibility: hidden; opacity: 0; transition: opacity 1.5s ease;">
         
         <section class="hero-minimal">
-            <div class="hero-text-container" data-aos="fade-down" data-aos-duration="1500">
-                <div class="names-minimal">
-                    <span>AASTHA</span>
-                    <span class="cursive-and">and</span>
-                    <span>ANUPAM</span>
-                </div>
-                
-                <hr class="minimal-divider">
-                
-                <div class="date-minimal">
-                    <span class="month-cursive">May</span>
-                    <span class="day-number">3</span>
-                </div>
-                
-                <div class="details-minimal">
-                    Three thirty in the afternoon<br>
-                    Hotel Taj Theog, Shimla Hills<br>
-                    2026
-                </div>
-            </div>
-
-            <div class="hero-image-container" data-aos="fade-up" data-aos-duration="2000">
-                <div class="fade-overlay-top"></div>
-                <img src="hero.png" alt="Aastha and Anupam" class="hero-couple-img">
-            </div>
-        </section>
-
-        <section class="countdown-section">
-            <h2 class="countdown-title" data-aos="fade-up">Countdown to 3 May 2026</h2>
-            <div class="timer-wrapper" data-aos="fade-up" data-aos-delay="200">
-                <div class="time-box"><span id="days">00</span><p>Days</p></div>
-                <div class="time-box"><span id="hours">00</span><p>Hours</p></div>
-                <div class="time-box"><span id="mins">00</span><p>Mins</p></div>
-                <div class="time-box"><span id="secs">00</span><p>Secs</p></div>
-            </div>
-        </section>
-
-        <section class="family-section">
-            <p class="welcome-msg" data-aos="fade-up">
-                "With the blessings of our beloved families, we invite you to be a part of our beautiful journey. Join us as we weave our traditions, love, and laughter into a lifetime of memories amidst the enchanting hills of Himachal Pradesh."
-            </p>
-            
-            <div class="family-grid">
-                <div class="family-box" data-aos="fade-right">
-                    <h3 class="family-title">Bride's Family</h3>
-                    <p class="main-name">Ms. Aastha Kapil</p>
-                    <p class="relation-text">Daughter of<br><strong>Mr. Digvijay Kapil & Mrs. Radhika Kapil</strong></p>
-                    <p class="relation-text" style="margin-top: 15px;">Granddaughter of<br><strong>Late. Shiv Kumar Kapil & Late. Nirmala Kapil</strong></p>
-                </div>
-
-                <div class="family-box" data-aos="fade-left">
-                    <h3 class="family-title">Groom's Family</h3>
-                    <p class="main-name">Mr. Anupam Rakshit</p>
-                    <p class="relation-text">Son of<br><strong>Mr. Abhay Kumar Srivastava & Mrs. Chanda Srivastava</strong></p>
-                    <p class="relation-text" style="margin-top: 15px;">Grandson of<br><strong>Late. Keshav Chandra Srivastava & Late. Shanti Devi</strong></p>
-                </div>
-            </div>
-        </section>
-
-        <section class="events-section">
-            <h2 class="section-title" data-aos="zoom-in">The Celebrations</h2>
-            
-            <div class="timeline">
-                <div class="event-card" data-aos="fade-up">
-                    <div class="event-img" style="background-image: url('mehendi.png');"></div>
-                    <div class="event-info">
-                        <div class="e-date">30 April 2026</div>
-                        <h3 class="e-name">Mehendi & Hi-Tea</h3>
-                        <p class="e-desc">4:00 PM Onwards<br>Hotel Taj Theog, Shimla</p>
-                        <a href="https://maps.google.com/?q=Taj+Theog+Resort+and+Spa+Shimla" target="_blank" class="btn btn-map">📍 Get Directions</a>
-                    </div>
-                </div>
-
-                <div class="event-card" data-aos="fade-up">
-                    <div class="event-img" style="background-image: url('engagement.png');"></div>
-                    <div class="event-info">
-                        <div class="e-date">1 May 2026</div>
-                        <h3 class="e-name">Engagement Ceremony</h3>
-                        <p class="e-desc">7:00 PM Onwards<br>Hotel Taj Theog, Shimla</p>
-                        <a href="https://maps.google.com/?q=Taj+Theog+Resort+and+Spa+Shimla" target="_blank" class="btn btn-map">📍 Get Directions</a>
-                    </div>
-                </div>
-
-                <div class="event-card" data-aos="fade-up">
-                    <div class="event-img" style="background-image: url('haldi.png');"></div>
-                    <div class="event-info">
-                        <div class="e-date">2 May 2026</div>
-                        <h3 class="e-name">Haldi Ceremony</h3>
-                        <p class="e-desc">Tilak: 11:00 AM | Haldi: 2:30 PM<br>Amphitheater, Dusit</p>
-                        <a href="https://maps.google.com/?q=Dusit+Fagu" target="_blank" class="btn btn-map">📍 Get Directions</a>
-                    </div>
-                </div>
-
-                <div class="event-card" data-aos="fade-up">
-                    <div class="event-img" style="background-image: url('sangeet.png');"></div>
-                    <div class="event-info">
-                        <div class="e-date">2 May 2026</div>
-                        <h3 class="e-name">Sangeet Night</h3>
-                        <p class="e-desc">7:00 PM Onwards<br>The Terrace Lawn, Dusit</p>
-                        <a href="https://maps.google.com/?q=Dusit+Fagu" target="_blank" class="btn btn-map">📍 Get Directions</a>
-                    </div>
-                </div>
-
-                <div class="event-card" data-aos="fade-up">
-                    <div class="event-img" style="background-image: url('wedding.png');"></div>
-                    <div class="event-info">
-                        <div class="e-date">3 May 2026</div>
-                        <h3 class="e-name">The Wedding</h3>
-                        <p class="e-desc">3:30 PM Onwards<br>Varmala: 5:00 PM | Phera: 8:00 PM<br>Hotel Taj Theog, Shimla</p>
-                        <a href="https://maps.google.com/?q=Taj+Theog+Resort+and+Spa+Shimla" target="_blank" class="btn btn-map">📍 Get Directions</a>
-                    </div>
-                </div>
-
-                <div class="event-card" data-aos="fade-up">
-                    <div class="event-img" style="background-image: url('gala%20dinner.png');"></div>
-                    <div class="event-info">
-                        <div class="e-date">4 May 2026</div>
-                        <h3 class="e-name">Gala Dinner</h3>
-                        <p class="e-desc">7:30 PM Onwards<br>Hyatt Centric Sector 17, Chandigarh</p>
-                        <a href="https://maps.google.com/?q=Hyatt+Centric+Sector+17+Chandigarh" target="_blank" class="btn btn-map">📍 Get Directions</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="compliments-section">
-            <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 80px;" data-aos="zoom-in">
-                <a href="https://wa.me/919872904973?text=Hi%20Aastha,%20confirming%20my%20presence%20for%20the%20wedding!" class="btn btn-wa">RSVP to Aastha</a>
-                <a href="https://wa.me/917837210001?text=Hi%20Anupam,%20confirming%20my%20presence%20for%20the%20wedding!" class="btn btn-wa">RSVP to Anupam</a>
-            </div>
-
-            <h2 class="compliments-title" data-aos="fade-up">With Best Compliments From</h2>
-            
-            <div class="compliments-box" data-aos="fade-up" data-aos-delay="200">
-                <div class="compliments-names">Amitabh, Krishn, Anjali, Aditi, Divya</div>
-                <p class="compliments-text">Your presence will make our celebrations complete. We hope to see you in Himachal Pradesh.</p>
+            <div class="names-block" data-aos="fade-down" data-aos-duration="1500">
+                <div class="name-serif">AASTHA</div>
+                <div class="name-and">and</div>
+                <div class="name-serif">ANUPAM</div>
             </div>
             
-            <div class="footer-text">
-                <p>Looking forward to seeing you</p>
-                <p>Families of Anupam & Aastha</p>
+            <hr class="hero-divider" data-aos="fade-in" data-aos-delay="300">
+            
+            <div class="date-block" data-aos="zoom-in" data-aos-delay="500">
+                <div class="date-month">May</div>
+                <div class="date-day">3</div>
+            </div>
+            
+            <div class="hero-details" data-aos="fade-up" data-aos-delay="700">
+                Three thirty in the afternoon<br>
+                Hotel Taj Theog, Shimla Hills<br>
+                2026
+            </div>
+
+            <div class="hero-image-box" data-aos="fade-up" data-aos-delay="1000">
+                <img src="hero.png" alt="Couple Portrait">
             </div>
         </section>
+
+        <section class="countdown-minimal">
+            <div class="cd-heading-box" data-aos="fade-up">
+                <div class="cd-time">TIME</div>
+                <div class="cd-left">LEFT UNTIL</div>
+                <div class="cd-wedding">THE WEDDING</div>
+            </div>
+            
+            <div class="timer-clean" data-aos="fade-up" data-aos-delay="200">
+                <div class="t-box"><span class="t-num" id="days">00</span><p class="t-label">Days</p></div>
+                <span class="t-colon">:</span>
+                <div class="t-box"><span class="t-num" id="hours">00</span><p class="t-label">Hours</p></div>
+                <span class="t-colon">:</span>
+                <div class="t-box"><span class="t-num" id="mins">00</span><p class="t-label">Minutes</p></div>
+                <span class="t-colon">:</span>
+                <div class="t-box"><span class="t-num t-red" id="secs">00</span><p class="t-label">Seconds</p></div>
+            </div>
+        </section>
+
+        <section class="events-minimal">
+            <div class="section-cursive" data-aos="fade-up">Details</div>
+            
+            <div class="event-clean-card" data-aos="fade-up">
+                <div class="ec-title">Mehendi & Hi-Tea</div>
+                <hr class="ec-divider">
+                <div class="ec-desc">Join us to kick off the celebrations.<br>30 April 2026 • 4:00 PM Onwards<br>Hotel Taj Theog, Shimla</div>
+                <a href="https://maps.google.com/?q=Taj+Theog+Resort+and+Spa+Shimla" target="_blank" class="btn-clean">Map Link</a>
+            </div>
+
+            <div class="event-clean-card" data-aos="fade-up">
+                <div class="ec-title">Engagement</div>
+                <hr class="ec-divider">
+                <div class="ec-desc">Rings & Revelry.<br>1 May 2026 • 7:00 PM Onwards<br>Hotel Taj Theog, Shimla</div>
+                <a href="https://maps.google.com/?q=Taj+Theog+Resort+and+Spa+Shimla" target="_blank" class="btn-clean">Map Link</a>
+            </div>
+
+            <div class="event-clean-card" data-aos="fade-up">
+                <div class="ec-title">Haldi & Sangeet</div>
+                <hr class="ec-divider">
+                <div class="ec-desc">Tilak: 11 AM | Haldi: 2:30 PM | Sangeet: 7 PM<br>2 May 2026<br>Amphitheater & Terrace Lawn, Dusit</div>
+                <a href="https://maps.google.com/?q=Dusit+Fagu" target="_blank" class="btn-clean">Map Link</a>
+            </div>
+
+            <div class="event-clean-card" data-aos="fade-up">
+                <div class="ec-title">The Wedding</div>
+                <hr class="ec-divider">
+                <div class="ec-desc">Varmala: 5:00 PM | Phera: 8:00 PM<br>3 May 2026<br>Hotel Taj Theog, Shimla</div>
+                <a href="https://maps.google.com/?q=Taj+Theog+Resort+and+Spa+Shimla" target="_blank" class="btn-clean">Map Link</a>
+            </div>
+            
+            <div class="event-clean-card" data-aos="fade-up">
+                <div class="ec-title">Gala Dinner</div>
+                <hr class="ec-divider">
+                <div class="ec-desc">7:30 PM Onwards<br>4 May 2026<br>Hyatt Centric Sector 17, Chandigarh</div>
+                <a href="https://maps.google.com/?q=Hyatt+Centric+Sector+17+Chandigarh" target="_blank" class="btn-clean">Map Link</a>
+            </div>
+        </section>
+
+        <section class="rsvp-section">
+            <div class="rsvp-title" data-aos="fade-up">RSVP</div>
+            <div class="rsvp-date" data-aos="fade-up">by April 15</div>
+            <div style="margin-bottom: 30px; font-family: 'Montserrat'; font-size: 0.9rem; color: #666;" data-aos="fade-up">Kindly let us know if you can join us<br>in this celebration of love.</div>
+            
+            <div data-aos="zoom-in">
+                <a href="https://wa.me/919872904973?text=Hi%20Aastha,%20confirming%20my%20presence%20for%20the%20wedding!" class="btn-rsvp">RSVP Aastha</a>
+                <a href="https://wa.me/917837210001?text=Hi%20Anupam,%20confirming%20my%20presence%20for%20the%20wedding!" class="btn-rsvp" style="background: #333;">RSVP Anupam</a>
+            </div>
+        </section>
+
+        <div class="footer-clean">
+            WE CAN'T WAIT TO CELEBRATE WITH YOU<br><br>
+            Made with ❤️ for Aastha & Anupam
+        </div>
     </div>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
         // --- 1. ENVELOPE OPEN LOGIC ---
         let isOpening = false;
-
         function openEnvelope() {
             if (isOpening) return;
             isOpening = true;
-            
             document.getElementById('envelope-container').classList.add('open');
             document.getElementById('tap-hint').style.opacity = '0';
             
             setTimeout(() => {
                 const wrapper = document.getElementById('envelope-wrapper');
                 const mainSite = document.getElementById('main-site');
-                
                 wrapper.style.opacity = '0';
-                
                 setTimeout(() => {
                     wrapper.style.display = 'none';
                     mainSite.style.visibility = 'visible';
                     mainSite.style.opacity = '1';
-                    
                     document.getElementById('weddingAudio').play().catch(e => console.log("Audio needed user interaction"));
-                    
                     AOS.init({ duration: 1000, once: true, offset: 50 });
                 }, 800); 
             }, 1500); 
