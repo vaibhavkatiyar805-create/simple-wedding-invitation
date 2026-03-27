@@ -45,7 +45,7 @@
         .tap-hint { margin-top: 60px; font-family: 'Playfair Display', serif; font-size: 1rem; letter-spacing: 4px; color: #2a5945; animation: pulse 2s infinite; transition: opacity 0.3s; }
         @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
 
-        /* 2. HERO SECTION (Warm Pearl Bg) */
+        /* 2. HERO SECTION */
         .hero { padding: 60px 20px 0; text-align: center; background-color: var(--bg-pearl); }
         .hero-names { font-size: 2.5rem; line-height: 1; letter-spacing: 2px; color: var(--gold); margin-bottom: 15px; }
         .hero-and { font-size: 2rem; margin: -10px 0 -10px 0; color: var(--text-light); }
@@ -56,7 +56,7 @@
         .hero-img-box { width: 100%; border-radius: 15px 15px 0 0; overflow: hidden; box-shadow: 0 -10px 30px rgba(0,0,0,0.05); }
         .hero-img-box img { width: 100%; height: auto; object-fit: cover; display: block; }
 
-        /* 3. COUNTDOWN (Soft Sand Bg) */
+        /* 3. COUNTDOWN */
         .countdown-section { padding: 50px 20px; text-align: center; background-color: var(--bg-sand); }
         .cd-title { font-size: 1.5rem; letter-spacing: 3px; margin-bottom: 30px; color: var(--text-main); text-transform: uppercase; }
         .timer-row { display: flex; justify-content: center; align-items: center; gap: 15px; }
@@ -64,13 +64,24 @@
         .t-num { font-size: 2.2rem; font-weight: 500; color: var(--gold); line-height: 1; }
         .t-label { font-size: 0.65rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; font-weight: 600; }
 
-        /* 4. EVENTS SECTION (Pale Sage Green Bg) */
+        /* 4. FAMILY SECTION (Added Back!) */
+        .family-section { padding: 60px 20px; background-color: var(--bg-pearl); text-align: center; }
+        .family-title { font-size: 3.5rem; color: var(--text-main); margin-bottom: 15px; }
+        .family-msg { font-size: 0.9rem; color: var(--text-light); line-height: 1.6; margin-bottom: 40px; padding: 0 10px; font-style: italic; }
+        
+        .family-card { background: #fff; border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 15px; padding: 30px 20px; margin-bottom: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.04); position: relative; }
+        .family-card::before { content: 'ॐ'; position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font-size: 2rem; color: var(--gold); background: #fff; padding: 0 15px; border-radius: 50%; }
+        .fc-heading { font-size: 1.4rem; color: var(--text-main); margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid var(--bg-sand); padding-bottom: 10px; }
+        .fc-name { font-size: 1.6rem; color: var(--gold); margin-bottom: 15px; font-style: italic; }
+        .fc-relation { font-size: 0.85rem; color: var(--text-light); line-height: 1.8; }
+        .fc-relation strong { color: var(--text-main); font-weight: 600; }
+
+        /* 5. EVENTS SECTION */
         .events-section { padding: 60px 20px; background-color: var(--bg-sage); text-align: center; }
-        .events-title { font-size: 4rem; margin-bottom: 40px; color: var(--text-main); text-shadow: 1px 1px 2px rgba(0,0,0,0.05); }
+        .events-title { font-size: 3.5rem; margin-bottom: 40px; color: var(--text-main); }
         
         .event-card { background: #fff; border-radius: 15px; overflow: hidden; margin-bottom: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: left; }
         .event-img { width: 100%; height: 220px; background-color: #f0f0f0; background-size: cover; background-position: center; position: relative; }
-        /* Light gold gradient overlay on images */
         .event-img::after { content: ''; position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to bottom, rgba(255,255,255,0) 50%, rgba(255,255,255,1) 100%); }
         
         .event-content { padding: 25px; position: relative; z-index: 2; background: #fff; margin-top: -30px; }
@@ -80,7 +91,7 @@
         .btn-map { display: inline-block; padding: 10px 20px; border: 1px solid var(--gold); color: var(--gold); text-decoration: none; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; border-radius: 30px; transition: 0.3s; }
         .btn-map:hover { background: var(--gold); color: #fff; }
 
-        /* 5. RSVP FORM SECTION (Warm Pearl Bg with Card) */
+        /* 6. RSVP FORM SECTION */
         .rsvp-section { padding: 60px 20px; text-align: center; background-color: var(--bg-pearl); }
         .rsvp-title { font-size: 3rem; color: var(--gold); margin-bottom: 10px; line-height: 1; }
         .rsvp-subtitle { font-size: 0.85rem; color: var(--text-light); margin-bottom: 40px; line-height: 1.6; }
@@ -111,7 +122,7 @@
         .footer-names { font-size: 2rem; color: var(--gold); margin-bottom: 10px; }
         .footer-text { font-size: 0.75rem; color: #aaa; letter-spacing: 1px; line-height: 1.8; }
 
-        /* Toast Notification (Green Success Banner) */
+        /* Toast Notification */
         #toast { position: fixed; top: -100px; left: 50%; transform: translateX(-50%); background: #e8f5e9; border: 1px solid #4caf50; color: #2e7d32; padding: 15px 30px; border-radius: 30px; font-size: 0.85rem; display: flex; align-items: center; gap: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: top 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); z-index: 9999; }
         #toast.show { top: 30px; }
         .toast-icon { background: #4caf50; color: white; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 0.6rem; }
@@ -142,7 +153,7 @@
 
         <audio id="weddingAudio" loop preload="auto"><source src="music.mp3.mp3" type="audio/mpeg"></audio>
 
-        <div id="main-site" style="visibility: hidden; opacity: 0; transition: opacity 1.5s ease;">
+        <div id="main-site" style="display: none; opacity: 0; transition: opacity 1s ease;">
             
             <section class="hero">
                 <div data-aos="fade-down" data-aos-duration="1500">
@@ -174,6 +185,25 @@
                     <div class="t-box"><span class="serif t-num" id="hours">00</span><span class="sans t-label">Hrs</span></div>
                     <div class="t-box"><span class="serif t-num" id="mins">00</span><span class="sans t-label">Mins</span></div>
                     <div class="t-box"><span class="serif t-num" id="secs" style="color: var(--accent-red);">00</span><span class="sans t-label">Secs</span></div>
+                </div>
+            </section>
+
+            <section class="family-section">
+                <div class="cursive family-title" data-aos="fade-up">Our Families</div>
+                <p class="sans family-msg" data-aos="fade-up">With the blessings of our beloved families, we invite you to be a part of our beautiful journey.</p>
+                
+                <div class="family-card" data-aos="fade-up">
+                    <div class="serif fc-heading">Bride's Family</div>
+                    <div class="serif fc-name">Ms. Aastha Kapil</div>
+                    <p class="sans fc-relation">Daughter of<br><strong>Mr. Digvijay Kapil & Mrs. Radhika Kapil</strong></p>
+                    <p class="sans fc-relation" style="margin-top: 10px;">Granddaughter of<br><strong>Late. Shiv Kumar Kapil & Late. Nirmala Kapil</strong></p>
+                </div>
+                
+                <div class="family-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="serif fc-heading">Groom's Family</div>
+                    <div class="serif fc-name">Mr. Anupam Rakshit</div>
+                    <p class="sans fc-relation">Son of<br><strong>Mr. Abhay Kumar Srivastava & Mrs. Chanda Srivastava</strong></p>
+                    <p class="sans fc-relation" style="margin-top: 10px;">Grandson of<br><strong>Late. Keshav Chandra Srivastava & Late. Shanti Devi</strong></p>
                 </div>
             </section>
 
@@ -247,7 +277,6 @@
                 
                 <div class="form-card" data-aos="fade-up" data-aos-delay="200">
                     <form id="rsvpForm" onsubmit="submitForm(event)">
-                        
                         <div class="form-group">
                             <label class="sans form-label">Will you attend?</label>
                             <div class="attending-options">
@@ -262,12 +291,10 @@
                             </div>
                             <input type="hidden" id="attending" required>
                         </div>
-
                         <div class="form-group">
                             <label class="sans form-label">Full Name</label>
                             <input type="text" placeholder="Enter your name" required>
                         </div>
-
                         <div class="form-group">
                             <label class="sans form-label">Total Guests (Including you)</label>
                             <select required>
@@ -278,7 +305,6 @@
                                 <option value="4+">4+</option>
                             </select>
                         </div>
-
                         <div class="form-group">
                             <label class="sans form-label">Dietary Requirements</label>
                             <div class="check-group">
@@ -287,12 +313,10 @@
                                 <label class="check-item"><input type="checkbox" name="diet" value="Gluten-free"> Gluten-free</label>
                             </div>
                         </div>
-
                         <div class="form-group">
                             <label class="sans form-label">A Message for the Couple</label>
                             <textarea placeholder="Write your wishes here..."></textarea>
                         </div>
-
                         <button type="submit" class="sans submit-btn" id="submitBtn">Send RSVP</button>
                     </form>
                 </div>
@@ -308,9 +332,7 @@
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 1000, once: true, offset: 30 });
-
-        // Envelope Reveal Logic
+        // Envelope & AOS Bug Fix Logic
         let isOpening = false;
         function openEnvelope() {
             if (isOpening) return;
@@ -322,13 +344,19 @@
                 const wrapper = document.getElementById('envelope-wrapper');
                 const mainSite = document.getElementById('main-site');
                 wrapper.style.opacity = '0';
+                
                 setTimeout(() => {
                     wrapper.style.display = 'none';
-                    mainSite.style.visibility = 'visible';
+                    
+                    // THIS FIXES THE INVISIBLE EVENTS
+                    mainSite.style.display = 'block';
+                    void mainSite.offsetWidth; // Force browser to register layout
+                    
                     mainSite.style.opacity = '1';
-                    document.getElementById('weddingAudio').play().catch(e => console.log("Audio needed user interaction"));
-                    // Trigger scroll animations for items already in view
-                    setTimeout(() => AOS.refresh(), 100);
+                    document.getElementById('weddingAudio').play().catch(e => console.log("Audio skipped"));
+                    
+                    // Init animations ONLY after website is fully visible
+                    AOS.init({ duration: 1000, once: true, offset: 50 });
                 }, 800); 
             }, 1500); 
         }
@@ -348,7 +376,6 @@
         function selectAttending(isAccepting) {
             document.getElementById('btn-accept').classList.remove('selected');
             document.getElementById('btn-decline').classList.remove('selected');
-            
             if(isAccepting) {
                 document.getElementById('btn-accept').classList.add('selected');
                 document.getElementById('attending').value = "Accept";
@@ -360,32 +387,23 @@
 
         function submitForm(e) {
             e.preventDefault(); 
-            
             if(!document.getElementById('attending').value) {
                 alert("Please select if you will attend.");
                 return;
             }
-
             const btn = document.getElementById('submitBtn');
             btn.innerText = "Sending...";
             btn.disabled = true;
-
             setTimeout(() => {
                 btn.innerText = "Send RSVP";
                 btn.disabled = false;
-                
                 const toast = document.getElementById('toast');
                 toast.classList.add('show');
-                
                 document.getElementById('rsvpForm').reset();
                 document.getElementById('btn-accept').classList.remove('selected');
                 document.getElementById('btn-decline').classList.remove('selected');
                 document.getElementById('attending').value = "";
-
-                setTimeout(() => {
-                    toast.classList.remove('show');
-                }, 3000);
-
+                setTimeout(() => { toast.classList.remove('show'); }, 3000);
             }, 1500);
         }
     </script>
