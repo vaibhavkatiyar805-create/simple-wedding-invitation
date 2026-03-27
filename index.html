@@ -1,436 +1,250 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> 
-    <title>Aastha & Anupam | The Royal Wedding</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    
-    <style>
-        :root { --gold: #d4af37; --dark-blue: #1e293b; --cream: #faf9f6; --text: #4a4a4a; --warm-yellow: #fdf5e6; --light-gray: #f9f9f9; }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background-color: var(--cream); font-family: 'Montserrat', sans-serif; color: var(--text); overflow-x: hidden; scroll-behavior: smooth; }
+<title>Wedding Invitation</title>
 
-        /* 1. HEART SCRATCH & GANESH REVEAL (WITH ROYAL ENHANCEMENTS) */
-        #scratch-wrapper {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 99999; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; transition: opacity 1.5s ease;
-            /* Silk Texture Gradient */
-            background: radial-gradient(circle at center, #ffffff 0%, #fdf5e6 100%);
-        }
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-        /* Royal Corner Borders */
-        .border-frame, .border-frame-2 { position: absolute; top: 20px; left: 20px; right: 20px; bottom: 20px; z-index: 2; pointer-events: none; }
-        .border-frame { border: 1px solid rgba(212, 175, 55, 0.2); }
-        .border-frame::before, .border-frame::after, .border-frame-2::before, .border-frame-2::after { content: ''; position: absolute; width: 40px; height: 40px; border: 2px solid var(--gold); }
-        .border-frame::before { top: -6px; left: -6px; border-right: none; border-bottom: none; }
-        .border-frame::after { bottom: -6px; right: -6px; border-left: none; border-top: none; }
-        .border-frame-2::before { top: -6px; right: -6px; border-left: none; border-bottom: none; }
-        .border-frame-2::after { bottom: -6px; left: -6px; border-right: none; border-top: none; }
+<!-- Animation Library -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-        /* Floating Gold Sparkles */
-        .sparkle { position: absolute; width: 4px; height: 4px; background: white; border-radius: 50%; box-shadow: 0 0 12px 2px var(--gold); z-index: 3; animation: twinkle 3s infinite alternate ease-in-out; }
-        @keyframes twinkle { 0% { opacity: 0.1; transform: scale(0.6); } 100% { opacity: 0.8; transform: scale(1.2); } }
+<style>
 
-        /* Romantic Whisper Text */
-        .romantic-whisper { font-family: 'Great Vibes', cursive; font-size: 2rem; color: var(--gold); text-align: center; margin-bottom: 25px; z-index: 10; text-shadow: 0 2px 5px rgba(0,0,0,0.05); padding: 0 20px; line-height: 1.3; }
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #fff8f0;
+  color: #333;
+  text-align: center;
+}
 
-        /* The Heart Mask */
-        .heart-mask-container {
-            position: relative; width: 280px; height: 280px; margin: 0 auto;
-            -webkit-mask-image: url('https://img.icons8.com/ios-filled/500/ffffff/like.png');
-            -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; -webkit-mask-position: center;
-            mask-image: url('https://img.icons8.com/ios-filled/500/ffffff/like.png');
-            mask-size: contain; mask-repeat: no-repeat; mask-position: center;
-            background: var(--warm-yellow); box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            z-index: 10;
-        }
-        
-        /* The Ganesh Graphic hiding underneath */
-        .ganesh-reveal {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-align: center; z-index: 1; padding-top: 15px;
-        }
-        .ganesh-reveal img { width: 100px; max-height: 120px; object-fit: contain; margin-bottom: 10px; opacity: 0.9; }
-        .ganesh-reveal h3 { font-family: 'Cinzel', serif; font-size: 1.1rem; color: var(--dark-blue); font-weight: 600; letter-spacing: 2px; }
-        
-        /* The Gold Canvas on top */
-        canvas { position: absolute; top: 0; left: 0; z-index: 2; cursor: crosshair; touch-action: none; transition: opacity 1s ease; }
-        
-        .scratch-hint { position: relative; z-index: 10; margin-top: 30px; font-family: 'Cinzel', serif; font-size: 1.2rem; letter-spacing: 4px; color: var(--gold); animation: pulse 2s infinite; }
-        .tap-reveal { position: relative; z-index: 10; margin-top: 15px; font-family: 'Montserrat', sans-serif; font-size: 0.85rem; letter-spacing: 2px; color: #888; cursor: pointer; text-decoration: underline; transition: 0.3s; padding: 10px; }
-        .tap-reveal:hover { color: var(--gold); }
+/* HERO SECTION */
 
-        /* 2. HERO SECTION */
-        .hero { 
-            position: relative; height: 100vh; width: 100vw; display: flex; flex-direction: column; 
-            justify-content: center; align-items: center; text-align: center; overflow: hidden;
-            background: url('http://googleusercontent.com/image_generation_content/0') no-repeat center bottom;
-            background-size: cover; background-attachment: fixed;
-        }
-        .hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(20,30,50,0.4) 0%, rgba(20,30,50,0.1) 50%, rgba(0,0,0,0.8) 100%); z-index: 1; }
-        
-        .hero-content { position: relative; z-index: 10; padding: 20px; width: 100%; max-width: 800px; transform: translateY(-5%); }
-        .hero-names { font-family: 'Cinzel', serif; font-size: 6rem; color: #fff; line-height: 1.1; text-shadow: 0 10px 30px rgba(0,0,0,0.6); font-weight: 500; letter-spacing: 8px; }
-        .hero-weds { font-family: 'Montserrat', sans-serif; font-size: 1.2rem; color: var(--gold); letter-spacing: 15px; margin: 20px 0; text-transform: uppercase; font-weight: 300; }
+.hero {
+  background-image: url("https://images.unsplash.com/photo-1523438885200-e635ba2c371e");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
-        .scroll-down { position: absolute; bottom: 40px; z-index: 10; color: white; display: flex; flex-direction: column; align-items: center; opacity: 0.8; animation: bounce 2s infinite; }
-        .scroll-down span { font-family: 'Montserrat', sans-serif; font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 10px; }
-        .scroll-down i { width: 1px; height: 40px; background: linear-gradient(transparent, var(--gold)); }
+.hero h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 70px;
+  margin: 0;
+}
 
-        /* Lanterns */
-        .lantern {
-            position: absolute; bottom: -100px; width: 40px; height: 60px;
-            background: radial-gradient(circle at 50% 50%, #ffdaa3, #ff8c00);
-            border-radius: 5px 5px 10px 10px; box-shadow: 0 0 30px rgba(255, 140, 0, 0.8), inset 0 0 10px rgba(255,255,255,0.5);
-            z-index: 5; opacity: 0; animation: floatUp linear infinite;
-        }
-        .lantern::after { content: ''; position: absolute; bottom: -5px; left: 15px; width: 10px; height: 10px; background: rgba(0,0,0,0.4); border-radius: 50%; filter: blur(2px); }
-        
-        @keyframes floatUp { 0% { transform: translateY(0) scale(0.8) rotate(-5deg); opacity: 0; } 20% { opacity: 0.9; } 100% { transform: translateY(-120vh) scale(1.2) rotate(5deg); opacity: 0; } }
-        @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
-        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-15px); } 60% { transform: translateY(-7px); } }
+.hero h2 {
+  font-size: 28px;
+}
 
-        /* 3. COUNTDOWN SECTION */
-        .countdown-section { padding: 80px 20px; background: var(--dark-blue); text-align: center; position: relative; z-index: 20; color: white; }
-        .countdown-title { font-family: 'Cinzel', serif; font-size: 2.2rem; color: var(--gold); margin-bottom: 30px; letter-spacing: 3px; font-weight: 400; text-transform: uppercase; }
-        
-        .timer-wrapper { display: flex; gap: 20px; justify-content: center; max-width: 600px; margin: 0 auto; flex-wrap: wrap; }
-        .time-box { text-align: center; min-width: 70px; }
-        .time-box span { font-family: 'Cinzel', serif; font-size: 3.5rem; display: block; font-weight: 500; color: white; text-shadow: 0 4px 15px rgba(0,0,0,0.3); }
-        .time-box p { font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-top: 5px; }
+/* SECTION */
 
-        /* 4. WELCOME & FAMILY SECTION */
-        .family-section { padding: 100px 20px; background: var(--warm-yellow); text-align: center; position: relative; }
-        .welcome-msg { max-width: 800px; margin: 0 auto 60px; font-size: 1.1rem; line-height: 1.8; color: var(--text); font-style: italic; }
-        .family-grid { display: flex; justify-content: center; gap: 40px; max-width: 1000px; margin: 0 auto; flex-wrap: wrap; }
-        
-        .family-box {
-            background: white; border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 5px; padding: 50px 30px 40px;
-            width: 45%; min-width: 320px; box-shadow: 0 15px 30px rgba(0, 0, 0, 0.04); position: relative;
-        }
-        .family-box::before { content: 'ॐ'; position: absolute; top: -25px; left: 50%; transform: translateX(-50%); font-size: 2.5rem; color: var(--gold); background: var(--warm-yellow); padding: 0 20px; }
-        .family-title { font-family: 'Cinzel', serif; font-size: 1.8rem; color: var(--dark-blue); border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 15px; margin-bottom: 20px; }
-        .main-name { font-family: 'Cinzel', serif; font-size: 1.4rem; color: var(--gold); font-weight: bold; margin-bottom: 15px; }
-        .relation-text { font-size: 0.95rem; margin-bottom: 8px; line-height: 1.6; }
-        .relation-text strong { color: var(--dark-blue); font-weight: 600; }
+.section {
+  padding: 50px 20px;
+}
 
-        /* 5. EVENTS TIMELINE */
-        .events-section { padding: 100px 20px; background: var(--cream); text-align: center; }
-        .section-title { font-family: 'Great Vibes', cursive; font-size: 4.5rem; color: var(--gold); margin-bottom: 60px; }
-        
-        .timeline { max-width: 900px; margin: 0 auto; position: relative; }
-        .timeline::before { content: ''; position: absolute; width: 1px; background: var(--gold); top: 0; bottom: 0; left: 50%; transform: translateX(-50%); opacity: 0.4; }
-        
-        .event-card {
-            display: flex; background: white; border-radius: 5px; margin-bottom: 50px;
-            width: 100%; box-shadow: 0 15px 40px rgba(0,0,0,0.06); position: relative; overflow: hidden; text-align: left;
-        }
-        .event-card::after { content: ''; position: absolute; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; background: var(--gold); border: 4px solid var(--cream); border-radius: 50%; z-index: 2; }
-        
-        .event-card:nth-child(odd) { flex-direction: row; }
-        .event-card:nth-child(even) { flex-direction: row-reverse; text-align: right; }
-        .event-card:nth-child(odd)::after { left: 50%; transform: translate(-50%, -50%); }
-        .event-card:nth-child(even)::after { right: 50%; transform: translate(50%, -50%); }
+/* COUNTDOWN */
 
-        .event-img { width: 50%; min-height: 350px; background-size: cover; background-position: center; position: relative; }
-        .event-img::after { content: ''; position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(45deg, rgba(212,175,55,0.1), transparent); }
-        .event-info { width: 50%; padding: 50px 40px; display: flex; flex-direction: column; justify-content: center; }
+.countdown {
+  font-size: 26px;
+  font-weight: bold;
+  margin-top: 20px;
+}
 
-        .e-date { color: var(--gold); font-weight: 600; letter-spacing: 3px; font-size: 0.85rem; text-transform: uppercase; }
-        .e-name { font-family: 'Cinzel', serif; font-size: 2.2rem; margin: 15px 0; color: var(--dark-blue); }
-        .e-desc { font-size: 0.95rem; line-height: 1.8; margin-bottom: 25px; color: #666; }
+/* EVENT CARDS */
 
-        /* 6. BUTTONS */
-        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 12px 25px; border-radius: 50px; font-size: 0.75rem; font-weight: 600; letter-spacing: 2px; text-decoration: none; transition: 0.3s; text-transform: uppercase; }
-        .btn-map { background: transparent; color: var(--dark-blue); border: 1px solid rgba(30, 41, 59, 0.3); align-self: flex-start; }
-        .event-card:nth-child(even) .btn-map { align-self: flex-end; }
-        .btn-map:hover { background: var(--dark-blue); color: white; border-color: var(--dark-blue); }
-        
-        .btn-wa { background: #25D366; color: white; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2); font-size: 1rem; padding: 15px 45px; border: none; }
-        .btn-wa:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(37, 211, 102, 0.4); }
+.event-card {
+  background: white;
+  margin: 20px auto;
+  padding: 25px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
 
-        /* 7. COMPLIMENTS & FOOTER SECTION */
-        .compliments-section { padding: 80px 20px 40px; background: var(--light-gray); text-align: center; }
-        .compliments-title { font-family: 'Cinzel', serif; font-size: 2rem; color: var(--gold); letter-spacing: 4px; margin-bottom: 40px; text-transform: uppercase; }
-        .compliments-box {
-            background: white; border-radius: 15px; padding: 40px; max-width: 800px; margin: 0 auto 50px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-        }
-        .compliments-names { font-family: 'Cinzel', serif; font-size: 1.2rem; font-weight: 600; color: var(--dark-blue); margin-bottom: 25px; padding-bottom: 25px; border-bottom: 1px solid rgba(0,0,0,0.1); }
-        .compliments-text { font-size: 1rem; color: #666; line-height: 1.8; }
-        
-        .footer-text { font-size: 0.9rem; color: #888; margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.05); }
+/* BUTTON */
 
-        @media (max-width: 768px) {
-            .hero-names { font-size: 3.5rem; }
-            .hero-weds { letter-spacing: 10px; }
-            .countdown-title { font-size: 1.6rem; }
-            .time-box span { font-size: 2.5rem; }
-            .timeline::before { left: 20px; }
-            .event-card { flex-direction: column !important; text-align: left !important; }
-            .event-img, .event-info { width: 100%; }
-            .event-img { min-height: 250px; }
-            .event-card::after { left: 20px !important; top: 0 !important; transform: translate(-50%, -50%) !important; }
-            .btn-map { align-self: flex-start !important; }
-            .compliments-title { font-size: 1.5rem; }
-            .romantic-whisper { font-size: 1.5rem; }
-        }
-    </style>
+.button {
+  background: #d4af37;
+  color: white;
+  padding: 12px 22px;
+  border-radius: 25px;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+/* GALLERY */
+
+.gallery img {
+  width: 90%;
+  max-width: 300px;
+  border-radius: 12px;
+  margin: 10px;
+}
+
+/* FOOTER */
+
+.footer {
+  background: #222;
+  color: white;
+  padding: 20px;
+}
+
+</style>
 </head>
+
 <body>
 
-    <div id="scratch-wrapper">
-        <div class="border-frame"></div>
-        <div class="border-frame-2"></div>
-        
-        <div class="sparkle" style="top: 15%; left: 20%; animation-delay: 0s;"></div>
-        <div class="sparkle" style="top: 25%; left: 80%; animation-delay: 1s;"></div>
-        <div class="sparkle" style="top: 70%; left: 15%; animation-delay: 2s;"></div>
-        <div class="sparkle" style="top: 80%; left: 75%; animation-delay: 1.5s;"></div>
-        <div class="sparkle" style="top: 40%; left: 90%; animation-delay: 0.5s;"></div>
-        <div class="sparkle" style="top: 50%; left: 10%; animation-delay: 2.5s;"></div>
+<!-- MUSIC -->
 
-        <h2 style="position: relative; z-index: 10; font-family: 'Cinzel', serif; font-size: 2.5rem; margin-bottom: 10px; color: var(--dark-blue);">Aastha & Anupam</h2>
-        
-        <div class="romantic-whisper">Every love story is beautiful,<br>but ours is our favorite...</div>
-        
-        <div class="heart-mask-container">
-            <div class="ganesh-reveal">
-                <img src="ganesh2.png" alt="Ganesh Ji">
-                <h3>Save the Date</h3>
-            </div>
-            <canvas id="scratch-canvas" width="280" height="280"></canvas>
-        </div>
+<audio autoplay loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
 
-        <p class="scratch-hint">SCRATCH THE HEART</p>
-        <div class="tap-reveal" onclick="triggerReveal()">Or Tap to Reveal</div>
-    </div>
+<!-- HERO -->
 
-    <audio id="weddingAudio" loop preload="auto"><source src="music.mp3.mp3" type="audio/mpeg"></audio>
+<div class="hero">
 
-    <div id="main-site" style="visibility: hidden; opacity: 0; transition: opacity 1.5s ease;">
-        
-        <section class="hero">
-            <div class="lantern" style="left: 10%; animation-duration: 12s; animation-delay: 0s;"></div>
-            <div class="lantern" style="left: 30%; animation-duration: 15s; animation-delay: 2s; width: 30px; height: 45px;"></div>
-            <div class="lantern" style="left: 50%; animation-duration: 18s; animation-delay: 5s;"></div>
-            <div class="lantern" style="left: 70%; animation-duration: 14s; animation-delay: 1s; width: 50px; height: 75px;"></div>
-            <div class="lantern" style="left: 85%; animation-duration: 16s; animation-delay: 4s;"></div>
+<h1>Aayush & Riya</h1>
 
-            <div class="hero-content" data-aos="zoom-in" data-aos-duration="1500">
-                <div class="hero-names">AASTHA</div>
-                <div class="hero-weds">WEDS</div>
-                <div class="hero-names">ANUPAM</div>
-            </div>
+<h2>Are Getting Married</h2>
 
-            <div class="scroll-down">
-                <span>Scroll to Discover</span>
-                <i></i>
-            </div>
-        </section>
+<p>30 April 2026</p>
 
-        <section class="countdown-section">
-            <h2 class="countdown-title" data-aos="fade-up">Countdown to 3 May 2026</h2>
-            <div class="timer-wrapper" data-aos="fade-up" data-aos-delay="200">
-                <div class="time-box"><span id="days">00</span><p>Days</p></div>
-                <div class="time-box"><span id="hours">00</span><p>Hours</p></div>
-                <div class="time-box"><span id="mins">00</span><p>Mins</p></div>
-                <div class="time-box"><span id="secs">00</span><p>Secs</p></div>
-            </div>
-        </section>
+<div class="countdown" id="countdown"></div>
 
-        <section class="family-section">
-            <p class="welcome-msg" data-aos="fade-up">
-                "With the blessings of our beloved families, we invite you to be a part of our beautiful journey. Join us as we weave our traditions, love, and laughter into a lifetime of memories amidst the enchanting hills of Himachal Pradesh."
-            </p>
-            
-            <div class="family-grid">
-                <div class="family-box" data-aos="fade-right">
-                    <h3 class="family-title">Bride's Family</h3>
-                    <p class="main-name">Ms. Aastha Kapil</p>
-                    <p class="relation-text">Daughter of<br><strong>Mr. Digvijay Kapil & Mrs. Radhika Kapil</strong></p>
-                    <p class="relation-text" style="margin-top: 15px;">Granddaughter of<br><strong>Late. Shiv Kumar Kapil & Late. Nirmala Kapil</strong></p>
-                </div>
+</div>
 
-                <div class="family-box" data-aos="fade-left">
-                    <h3 class="family-title">Groom's Family</h3>
-                    <p class="main-name">Mr. Anupam Rakshit</p>
-                    <p class="relation-text">Son of<br><strong>Mr. Abhay Kumar Srivastava & Mrs. Chanda Srivastava</strong></p>
-                    <p class="relation-text" style="margin-top: 15px;">Grandson of<br><strong>Late. Keshav Chandra Srivastava & Late. Shanti Devi</strong></p>
-                </div>
-            </div>
-        </section>
+<!-- EVENTS -->
 
-        <section class="events-section">
-            <h2 class="section-title" data-aos="zoom-in">The Celebrations</h2>
-            
-            <div class="timeline">
-                <div class="event-card" data-aos="fade-up">
-                    <div class="event-img" style="background-image: url('mehendi.png');"></div>
-                    <div class="event-info">
-                        <div class="e-date">30 April 2026</div>
-                        <h3 class="e-name">Mehendi & Hi-Tea</h3>
-                        <p class="e-desc">4:00 PM Onwards<br>Hotel Taj Theog, Shimla</p>
-                        <a href="https://maps.google.com/?q=Taj+Theog+Resort+and+Spa+Shimla" target="_blank" class="btn btn-map">📍 Get Directions</a>
-                    </div>
-                </div>
+<div class="section">
 
-                <div class="event-card" data-aos="fade-up">
-                    <div class="event-img" style="background-image: url('engagement.png');"></div>
-                    <div class="event-info">
-                        <div class="e-date">1 May 2026</div>
-                        <h3 class="e-name">Engagement Ceremony</h3>
-                        <p class="e-desc">7:00 PM Onwards<br>Hotel Taj Theog, Shimla</p>
-                        <a href="https://maps.google.com/?q=Taj+Theog+Resort+and+Spa+Shimla" target="_blank" class="btn btn-map">📍 Get Directions</a>
-                    </div>
-                </div>
+<h2 data-aos="fade-up">Wedding Events</h2>
 
-                <div class="event-card" data-aos="fade-up">
-                    <div class="event-img" style="background-image: url('haldi.png');"></div>
-                    <div class="event-info">
-                        <div class="e-date">2 May 2026</div>
-                        <h3 class="e-name">Haldi Ceremony</h3>
-                        <p class="e-desc">Tilak: 11:00 AM | Haldi: 2:30 PM<br>Amphitheater, Dusit</p>
-                        <a href="https://maps.google.com/?q=Dusit+Fagu" target="_blank" class="btn btn-map">📍 Get Directions</a>
-                    </div>
-                </div>
+<div class="event-card" data-aos="zoom-in">
 
-                <div class="event-card" data-aos="fade-up">
-                    <div class="event-img" style="background-image: url('sangeet.png');"></div>
-                    <div class="event-info">
-                        <div class="e-date">2 May 2026</div>
-                        <h3 class="e-name">Sangeet Night</h3>
-                        <p class="e-desc">7:00 PM Onwards<br>The Terrace Lawn, Dusit</p>
-                        <a href="https://maps.google.com/?q=Dusit+Fagu" target="_blank" class="btn btn-map">📍 Get Directions</a>
-                    </div>
-                </div>
+<h3>Mehendi & Hi-Tea</h3>
 
-                <div class="event-card" data-aos="fade-up">
-                    <div class="event-img" style="background-image: url('wedding.png');"></div>
-                    <div class="event-info">
-                        <div class="e-date">3 May 2026</div>
-                        <h3 class="e-name">The Wedding</h3>
-                        <p class="e-desc">3:30 PM Onwards<br>Varmala: 5:00 PM | Phera: 8:00 PM<br>Hotel Taj Theog, Shimla</p>
-                        <a href="https://maps.google.com/?q=Taj+Theog+Resort+and+Spa+Shimla" target="_blank" class="btn btn-map">📍 Get Directions</a>
-                    </div>
-                </div>
+<p>30 April 2026</p>
 
-                <div class="event-card" data-aos="fade-up">
-                    <div class="event-img" style="background-image: url('gala%20dinner.png');"></div>
-                    <div class="event-info">
-                        <div class="e-date">4 May 2026</div>
-                        <h3 class="e-name">Gala Dinner</h3>
-                        <p class="e-desc">7:30 PM Onwards<br>Hyatt Centric Sector 17, Chandigarh</p>
-                        <a href="https://maps.google.com/?q=Hyatt+Centric+Sector+17+Chandigarh" target="_blank" class="btn btn-map">📍 Get Directions</a>
-                    </div>
-                </div>
+<p>4 PM onwards</p>
 
-            </div>
-        </section>
+<p>Hotel Taj Theog</p>
 
-        <section class="compliments-section">
-            
-            <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 80px;" data-aos="zoom-in">
-                <a href="https://wa.me/919872904973?text=Hi%20Aastha,%20confirming%20my%20presence%20for%20the%20wedding!" class="btn btn-wa">RSVP to Aastha</a>
-                <a href="https://wa.me/917837210001?text=Hi%20Anupam,%20confirming%20my%20presence%20for%20the%20wedding!" class="btn btn-wa">RSVP to Anupam</a>
-            </div>
+<a
+class="button"
+href="https://maps.google.com"
+target="_blank">
 
-            <h2 class="compliments-title" data-aos="fade-up">With Best Compliments From</h2>
-            
-            <div class="compliments-box" data-aos="fade-up" data-aos-delay="200">
-                <div class="compliments-names">Amitabh, Krishn, Anjali, Aditi, Divya</div>
-                <p class="compliments-text">Your presence will make our celebrations complete. We hope to see you in Himachal Pradesh.</p>
-            </div>
-            
-            <div class="footer-text">
-                <p>Looking forward to seeing you</p>
-                <p>Families of Anupam & Aastha</p>
-            </div>
-        </section>
-    </div>
+View Location
 
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script>
-        // --- 1. SCRATCH & REVEAL LOGIC ---
-        const canvas = document.getElementById('scratch-canvas');
-        const ctx = canvas.getContext('2d');
-        let isScratching = false;
-        let isRevealing = false;
+</a>
 
-        // Fill Gold (Removed "SCRATCH ME" text for a pure royal look)
-        ctx.fillStyle = '#d4af37';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+</div>
 
-        function handleScratch(e) {
-            if (!isScratching || isRevealing) return;
-            const rect = canvas.getBoundingClientRect();
-            const x = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
-            const y = (e.clientY || (e.touches && e.touches[0].clientY)) - rect.top;
-            
-            ctx.globalCompositeOperation = 'destination-out';
-            ctx.beginPath();
-            ctx.arc(x, y, 35, 0, Math.PI * 2);
-            ctx.fill();
-            
-            // Check clear percentage
-            const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
-            let clearCount = 0;
-            for (let i = 3; i < pixels.length; i += 4) { if (pixels[i] === 0) clearCount++; }
-            if (clearCount > (pixels.length / 4) * 0.40) triggerReveal();
-        }
+<div class="event-card" data-aos="zoom-in">
 
-        // The Magic 3-Second Pause Function
-        function triggerReveal() {
-            if (isRevealing) return;
-            isRevealing = true;
-            
-            // Step 1: Fade out the gold canvas completely to show Ganesh Ji
-            canvas.style.opacity = '0';
-            
-            // Step 2: Wait 3 seconds to take blessings, then open the website
-            setTimeout(() => {
-                const wrapper = document.getElementById('scratch-wrapper');
-                const mainSite = document.getElementById('main-site');
-                
-                // Fade out white screen
-                wrapper.style.opacity = '0';
-                
-                setTimeout(() => {
-                    wrapper.style.display = 'none';
-                    mainSite.style.visibility = 'visible';
-                    mainSite.style.opacity = '1';
-                    
-                    // Play music (Make sure music.mp3.mp3 exists in repo)
-                    document.getElementById('weddingAudio').play().catch(e => console.log("Audio needed user interaction"));
-                    
-                    // Start scrolling animations
-                    AOS.init({ duration: 1000, once: true, offset: 50 });
-                }, 1000); // 1s for fade transition
-            }, 3000); // The 3-second Ganesh Ji Pause
-        }
+<h3>Engagement Ceremony</h3>
 
-        canvas.addEventListener('mousedown', () => isScratching = true);
-        canvas.addEventListener('touchstart', (e) => { isScratching = true; e.preventDefault(); }, {passive: false});
-        window.addEventListener('mouseup', () => isScratching = false);
-        window.addEventListener('touchend', () => isScratching = false);
-        canvas.addEventListener('mousemove', handleScratch);
-        canvas.addEventListener('touchmove', (e) => { handleScratch(e); e.preventDefault(); }, {passive: false});
+<p>1 May 2026</p>
 
-        // --- 2. TIMER LOGIC (WITH SECONDS) ---
-        const target = new Date("May 3, 2026 15:30:00").getTime();
-        setInterval(() => {
-            const now = new Date().getTime();
-            const d = target - now;
-            document.getElementById("days").innerText = Math.max(0, Math.floor(d / (1000 * 60 * 60 * 24))).toString().padStart(2, '0');
-            document.getElementById("hours").innerText = Math.max(0, Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).toString().padStart(2, '0');
-            document.getElementById("mins").innerText = Math.max(0, Math.floor((d % (1000 * 60 * 60)) / (1000 * 60))).toString().padStart(2, '0');
-            document.getElementById("secs").innerText = Math.max(0, Math.floor((d % (1000 * 60)) / 1000)).toString().padStart(2, '0');
-        }, 1000);
-    </script>
+<p>7 PM onwards</p>
+
+<p>Hotel Taj Theog</p>
+
+<a
+class="button"
+href="https://maps.google.com"
+target="_blank">
+
+View Location
+
+</a>
+
+</div>
+
+</div>
+
+<!-- GALLERY -->
+
+<div class="section gallery">
+
+<h2 data-aos="fade-up">Our Memories</h2>
+
+<img
+src="https://images.unsplash.com/photo-1519741497674-611481863552">
+
+<img
+src="https://images.unsplash.com/photo-1520854221256-17451cc331bf">
+
+<img
+src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc">
+
+</div>
+
+<!-- FOOTER -->
+
+<div class="footer">
+
+<p>We are excited to celebrate with you ❤️</p>
+
+</div>
+
+<!-- COUNTDOWN SCRIPT -->
+
+<script>
+
+var countDate = new Date("April 30, 2026 16:00:00").getTime();
+
+var x = setInterval(function() {
+
+var now = new Date().getTime();
+
+var distance = countDate - now;
+
+var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+var hours = Math.floor(
+(distance % (1000 * 60 * 60 * 24))
+/
+(1000 * 60 * 60)
+);
+
+var minutes = Math.floor(
+(distance % (1000 * 60 * 60))
+/
+(1000 * 60)
+);
+
+document.getElementById("countdown").innerHTML =
+days + " Days "
++
+hours + " Hours "
++
+minutes + " Minutes ";
+
+}, 1000);
+
+</script>
+
+<!-- ANIMATION SCRIPT -->
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<script>
+AOS.init();
+</script>
+
 </body>
+
 </html>
