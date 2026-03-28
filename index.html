@@ -118,17 +118,36 @@
         /* =========================================
            4. FAMILIES
            ========================================= */
-        .family { padding: 100px 20px; background-color: var(--bg-dark); text-align: center; }
-        .sec-title { font-size: clamp(2.5rem, 5vw, 4rem); color: var(--gold); margin-bottom: 20px; }
-        .sec-sub { font-size: 1rem; color: var(--text-light); margin-bottom: 60px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.8; font-style: italic; }
-        
-        .fam-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; max-width: 1000px; margin: 0 auto; }
-        .fam-card { background: var(--bg-card); padding: 50px 30px; border-radius: 10px; border: 1px solid rgba(212, 175, 55, 0.1); transition: transform 0.4s ease; }
-        .fam-card:hover { transform: translateY(-10px); border-color: rgba(212, 175, 55, 0.4); }
-        .fc-title { font-size: 1.2rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; }
-        .fc-name { font-size: 2rem; color: var(--gold); margin-bottom: 20px; }
-        .fc-rel { font-size: 0.9rem; color: var(--text-light); line-height: 2; }
-        .fc-rel strong { color: var(--white); font-weight: 400; letter-spacing: 1px; }
+        /* 4. FAMILIES
+      ========================================= */
+   .family { padding: 100px 20px; background-color: var(--bg-dark); text-align: center; }
+   .sec-title { font-size: clamp(2.5rem, 5vw, 4rem); color: var(--gold); margin-bottom: 20px; }
+   .sec-sub { font-size: 1rem; color: var(--text-light); margin-bottom: 60px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.8; font-style: italic; }
+   
+   .fam-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; max-width: 1000px; margin: 0 auto; }
+   .fam-card { background: var(--bg-card); padding: 50px 30px; border-radius: 10px; border: 1px solid rgba(212, 175, 55, 0.1); transition: transform 0.4s ease; }
+   .fam-card:hover { transform: translateY(-10px); border-color: rgba(212, 175, 55, 0.4); }
+   .fc-title { font-size: 1.2rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; }
+   .fc-name { font-size: 2rem; color: var(--gold); margin-bottom: 20px; }
+   
+   /* ==== SIRF YAHAN CHANGES HUE HAIN 👇 ==== */
+   .fc-rel { 
+       font-size: 1rem; 
+       color: var(--text-light); /* Normal relation text light rahega taaki names pop karein */
+       line-height: 2; 
+       font-family: 'Times New Roman', Times, serif; /* Relation ("Son of") ke liye Italic Serif */
+       font-style: italic; 
+   }
+   
+   .fc-rel strong { 
+       color: var(--gold); /* Names Gold rahenge */
+       font-weight: 400; 
+       letter-spacing: 1px; 
+       white-space: nowrap; /* SABSE ZAROORI: Names ko ek line mein force karega */
+       font-family: 'Helvetica Neue', Arial, sans-serif; /* Names ko wapas clear/sidha dikhane ke liye */
+       font-style: normal; /* Names ko italic nahi hone dega */
+       display: block; /* Names ko automatically nayi line se shuru karega */
+   }
 
         /* =========================================
            5. EVENTS GRID
