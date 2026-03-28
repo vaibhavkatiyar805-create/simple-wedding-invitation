@@ -118,17 +118,65 @@
         /* =========================================
            4. FAMILIES
            ========================================= */
-        .family { padding: 100px 20px; background-color: var(--bg-dark); text-align: center; }
-        .sec-title { font-size: clamp(2.5rem, 5vw, 4rem); color: var(--gold); margin-bottom: 20px; }
-        .sec-sub { font-size: 1rem; color: var(--text-light); margin-bottom: 60px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.8; font-style: italic; }
-        
-        .fam-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; max-width: 1000px; margin: 0 auto; }
-        .fam-card { background: var(--bg-card); padding: 50px 30px; border-radius: 10px; border: 1px solid rgba(212, 175, 55, 0.1); transition: transform 0.4s ease; }
-        .fam-card:hover { transform: translateY(-10px); border-color: rgba(212, 175, 55, 0.4); }
-        .fc-title { font-size: 1.2rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; }
-        .fc-name { font-size: 2rem; color: var(--gold); margin-bottom: 20px; }
-        .fc-rel { font-size: 0.9rem; color: var(--text-light); line-height: 2; }
-        .fc-rel strong { color: var(--white); font-weight: 400; letter-spacing: 1px; }
+  /* Core Styling for both Family Cards */
+.fam-section {
+    display: flex;
+    justify-content: center; /* Center horizontally in flex */
+    align-items: flex-start; /* Optional: Align to top of flex container */
+    flex-wrap: wrap; /* Important for centering on all screens */
+    gap: 30px; /* Space between cards */
+    padding: 80px 20px;
+    max-width: 1200px;
+    margin: 0 auto; /* Center the whole section block */
+    background-color: #051A11;
+}
+
+.fam-card {
+    background-color: #122c20; /* Slightly lighter green box */
+    border-radius: 6px;
+    padding: 40px 20px;
+    text-align: center;
+    flex: 1;
+    max-width: 580px; /* Make cards wider to prevent text breaks */
+    box-sizing: border-box;
+}
+
+/* Style for text elements inside cards */
+.fam-card .fc-title {
+    font-size: 0.9rem;
+    letter-spacing: 4px;
+}
+
+.fam-card .fc-name {
+    color: #c4a777; /* Gold accent */
+    font-size: 2.2rem;
+    font-weight: 400;
+}
+
+.fam-card strong {
+    white-space: nowrap; /* Forces name to stay on one line */
+}
+
+/* Crucial Mobile Adjustment (Phone and Tablets) */
+@media (max-width: 768px) {
+    .fam-section {
+        flex-direction: column; /* Stack cards vertically */
+        align-items: center;
+        padding: 40px 10px;
+    }
+    
+    .fam-card {
+        width: 100%; /* Take full width minus padding */
+        max-width: none; /* Let it breathe full width */
+        margin-bottom: 20px;
+        padding: 30px 15px;
+    }
+
+    /* Reduce font size just enough on mobile to keep names on one line */
+    .fam-card .fc-rel strong {
+        font-size: 0.75rem; 
+    }
+}
 
         /* =========================================
            5. EVENTS GRID
