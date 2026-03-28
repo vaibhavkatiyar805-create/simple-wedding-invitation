@@ -118,32 +118,106 @@
         /* =========================================
            4. FAMILIES
            ========================================= */
- /* Tumhara original side-by-side layout */
-.fam-section {
-    display: flex;
-    justify-content: center; /* Dono boxes ko center mein rakhega */
-    gap: 40px; /* Boxes ke beech ka gap */
-    max-width: 1200px;
-    margin: 0 auto; /* Poore section ko center karega */
-    padding: 60px 20px;
-}
+<style>
+    .my-family-section {
+        background-color: #051A11; /* Dark background */
+        padding: 60px 20px;
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        flex-wrap: wrap; /* Important for phone */
+    }
 
-/* Tumhara original box style */
-.fam-card {
-    background-color: #122c20; /* Box ka background color */
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
-    padding: 40px 30px;
-    flex: 1; /* Dono boxes ko barabar size dega */
-    text-align: center;
-    max-width: 550px;
-}
+    .fam-card {
+        background-color: #122c20; /* Card color */
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 8px;
+        padding: 40px 20px;
+        text-align: center;
+        flex: 1;
+        min-width: 320px; /* Phone width */
+        max-width: 580px; /* Max width to fit names */
+        box-sizing: border-box;
+        color: white;
+    }
 
-/* BSS YE EK LINE CHAHIYE THI - Text ko ek line mein rakhne ke liye */
-.fam-card strong {
-    white-space: nowrap;
-}
+    .fc-title {
+        font-family: sans-serif;
+        font-size: 0.9rem;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+    }
 
+    .fc-name {
+        font-family: 'Times New Roman', serif;
+        color: #c4a777; /* Gold color */
+        font-size: 2.2rem;
+        margin-bottom: 20px;
+    }
+
+    .fc-rel {
+        font-family: sans-serif;
+        color: #d1d8d5;
+    }
+
+    /* THE MAGIC LINE THAT STOPS TEXT BREAKING */
+    .fam-card strong {
+        white-space: nowrap; 
+        color: white;
+        display: block;
+        margin-top: 5px;
+    }
+
+    /* Phone Fixes */
+    @media (max-width: 768px) {
+        .my-family-section {
+            flex-direction: column;
+            align-items: center;
+        }
+        .fam-card {
+            width: 100%;
+        }
+        /* Make text slightly smaller on phone so it fits one line */
+        .fam-card strong {
+            font-size: 0.8rem; 
+        }
+    }
+</style>
+
+<div class="my-family-section">
+    
+    <div class="fam-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="fc-title">Bride's Family</div>
+        <div class="fc-name">Ms. Aastha Kapil</div>
+        
+        <div class="fc-rel" style="font-size: 0.85rem; letter-spacing: 0px;">
+            Daughter of
+            <strong>Mr. Digvijay Kapil & Mrs. Radhika Kapil</strong>
+        </div>
+        
+        <div class="fc-rel" style="margin-top: 15px; font-size: 0.85rem; letter-spacing: 0px;">
+            Granddaughter of
+            <strong>Late Sh. Shiv Kumar Kapil & Late Smt. Nirmala Kapil</strong>
+        </div>
+    </div>
+
+    <div class="fam-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="fc-title">Groom's Family</div>
+        <div class="fc-name">Mr. Anupam Rakshit</div>
+        
+        <div class="fc-rel" style="font-size: 0.85rem; letter-spacing: 0px;">
+            Son of
+            <strong>Mr. Abhay Kumar Srivastava & Mrs. Chanda Srivastava</strong>
+        </div>
+        
+        <div class="fc-rel" style="margin-top: 15px; font-size: 0.85rem; letter-spacing: 0px;">
+            Grandson of
+            <strong>Late Sh. Keshav Chandra Srivastava & Late Smt. Shanti Devi</strong>
+        </div>
+    </div>
+
+</div>
         /* =========================================
            5. EVENTS GRID
            ========================================= */
