@@ -124,54 +124,27 @@
    .sec-title { font-size: clamp(2.5rem, 5vw, 4rem); color: var(--gold); margin-bottom: 20px; }
    .sec-sub { font-size: 1rem; color: var(--text-light); margin-bottom: 60px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.8; font-style: italic; }
    
-/* Container ko strictly force karo side-by-side (row) rehne ke liye */
+/* Tumhara Original, Perfect Grid Code */
 .fam-grid { 
-    display: flex !important; 
-    flex-direction: row !important; 
-    justify-content: center; 
-    align-items: stretch; /* Dono boxes ki height ek barabar lock karega */
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
     gap: 40px; 
-    max-width: 1100px; /* Thoda choda container */
+    max-width: 1000px; 
     margin: 0 auto; 
-    width: 100%; 
-    perspective: 1000px; /* 3D effect ke liye zaroori depth */
 }
 
-/* 3D Box Style (Dono barabar aadhi-aadhi jagah lenge) */
 .fam-card { 
-    flex: 1; 
-    min-width: 0; /* Text lamba hone par box ko bahar nikalne se rokega */
     background: var(--bg-card); 
     padding: 50px 30px; 
     border-radius: 10px; 
-    border: 1px solid rgba(212, 175, 55, 0.05); 
-    box-sizing: border-box; 
-    
-    /* Strong, Distinct Shadow for 3D depth */
-    box-shadow: 
-        0 15px 35px rgba(0,0,0,0.5), /* Nichi diffuse shadow */
-        0 5px 15px rgba(0,0,0,0.3);  /* Upar ki sharp shadow */
-        
-    /* Smooth Transition for Hover */
-    transition: transform 0.4s ease, box-shadow 0.4s ease; 
-    transform-style: preserve-3d; /* 3D content inside card */
+    border: 1px solid rgba(212, 175, 55, 0.1); 
+    transition: transform 0.4s ease; 
 }
 
-/* 3D Pop-Up Effect on Cursor Hover */
 .fam-card:hover { 
-    transform: translateY(-15px) rotateX(10deg) rotateY(-5deg); /* Thoda upar aur 3D rotate */
+    transform: translateY(-10px); 
     border-color: rgba(212, 175, 55, 0.4); 
-    
-    /* Shadow aur intensifiy karo hover pe depth dikhane ke liye */
-    box-shadow: 
-        0 25px 55px rgba(0,0,0,0.6), 
-        0 10px 25px rgba(0,0,0,0.4); 
 }
-
-/* Phone ke liye automatically stack karega (lekin tablet/laptop pe side-by-side rahega) */
-@media (max-width: 850px) {
-    .fam-grid {
-        flex-direction: column !important;
     }
 }
    .fc-title { font-size: 1.2rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; }
