@@ -139,15 +139,25 @@
        font-style: italic; 
    }
    
-   .fc-rel strong { 
-       color: var(--gold); /* Names Gold rahenge */
-       font-weight: 400; 
-       letter-spacing: 1px; 
-       white-space: nowrap; /* SABSE ZAROORI: Names ko ek line mein force karega */
-       font-family: 'Helvetica Neue', Arial, sans-serif; /* Names ko wapas clear/sidha dikhane ke liye */
-       font-style: normal; /* Names ko italic nahi hone dega */
-       display: block; /* Names ko automatically nayi line se shuru karega */
-   }
+  .fc-rel strong { 
+    color: var(--gold); /* ya #c4a777 */
+    font-weight: 400; 
+    letter-spacing: 1px; 
+    font-family: 'Helvetica Neue', Arial, sans-serif; 
+    font-style: normal; 
+    display: block; /* Nayi line pe force karega bina <br> ke */
+    font-size: 1.05rem !important; /* !important dono taraf size ekdam barabar lock kar dega */
+    margin: 5px 0; 
+}
+
+/* '&' ko white aur center karne ke liye naya class */
+.white-and {
+    color: #ffffff; 
+    font-family: 'Times New Roman', Times, serif; /* Normal text font */
+    font-style: normal;
+    font-size: 1rem;
+    display: block;
+}
 
         /* =========================================
            5. EVENTS GRID
@@ -320,21 +330,37 @@
                 <div class="fam-card" data-aos="fade-up">
                     <div class="sans fc-title">Bride's Family</div>
                     <div class="serif fc-name">Ms. Aastha Kapil</div>
-                    <div class="sans fc-rel">Daughter of<br><strong>Mr. Digvijay Kapil<br> &<br> Mrs. Radhika Kapil</strong></div>
-                    <div class="sans fc-rel" style="margin-top: 15px;">Granddaughter of<br><strong>Late Sh. Shiv Kumar Kapil<br> &<br> Late Smt. Nirmala Kapil</strong></div>
-                </div>
+                    <div class="fc-rel">
+    Daughter of
+    <strong>Mr. Digvijay Kapil</strong>
+    <span class="white-and">&</span>
+    <strong>Mrs. Radhika Kapil</strong>
+</div>
+
+<div class="fc-rel" style="margin-top: 20px;">
+    Granddaughter of
+    <strong>Late Sh. Shiv Kumar Kapil</strong>
+    <span class="white-and">&</span>
+    <strong>Late Smt. Nirmala Kapil</strong>
+</div>
                 
                 <div class="fam-card" data-aos="fade-up" data-aos-delay="200">
     <div class="sans fc-title">Groom's Family</div>
     <div class="serif fc-name">Mr. Anupam Rakshit</div>
     <div class="sans fc-rel" style="font-size: 0.85rem; letter-spacing: 0px;">
-        Son of<br>
-        <strong style="white-space: nowrap;">Mr. Abhay Kumar Srivastava<br> &<br> Mrs. Chanda Srivastava</strong>
-    </div>
-    <div class="sans fc-rel" style="margin-top: 15px; font-size: 0.85rem; letter-spacing: 0px;">
-        Grandson of<br>
-        <strong>Late Sh. Keshav Chandra Srivastava<br> &<br> Late Smt. Shanti Devi</strong>
-    </div>
+        <div class="fc-rel">
+    Son of
+    <strong>Mr. Abhay Kumar Srivastava</strong>
+    <span class="white-and">&</span>
+    <strong>Mrs. Chanda Srivastava</strong>
+</div>
+
+<div class="fc-rel" style="margin-top: 20px;">
+    Grandson of
+    <strong>Late Sh. Keshav Chandra Srivastava</strong>
+    <span class="white-and">&</span>
+    <strong>Late Smt. Shanti Devi</strong>
+</div>
 </div>
         </section>
 
