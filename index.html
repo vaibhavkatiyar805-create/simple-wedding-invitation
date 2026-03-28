@@ -9,16 +9,14 @@
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     
     <style>
-        /* THE ROYAL PALETTE - Blended Luxury Green & Gold */
         :root { 
-            --bg-dark: #0a1a10;        /* Deepest forest green for contrast */
-            --bg-medium: #152b1e;      /* Mid-tone for section blending */
-            --bg-card: #1d3d2a;        /* Card base color */
-            --gold: #D4AF37;           /* Classic Royal Gold */
-            --gold-light: #F3E5AB;     /* Champagne gold highlight */
+            --bg-dark: #0a1a10;
+            --bg-medium: #152b1e;
+            --bg-card: #1d3d2a;
+            --gold: #D4AF37;
+            --gold-light: #F3E5AB;
             --text-light: #E0E0E0;
             --white: #FFFFFF;
-            /* Gradient for smooth section transitions */
             --grad-royal: radial-gradient(circle at center, #1a3626 0%, #0a1a10 100%);
         }
         
@@ -29,31 +27,25 @@
         .cursive { font-family: 'Great Vibes', cursive; }
         .sans { font-family: 'Montserrat', sans-serif; }
 
-        /* =========================================
-           1. THE LUXURY 3D ENVELOPE REVEAL
-           ========================================= */
+        /* --- ENVELOPE REVEAL --- */
         #envelope-screen { 
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 99999; 
             background: radial-gradient(circle at center, #152b1e 0%, #050a07 100%);
             display: flex; flex-direction: column; justify-content: center; align-items: center; 
-            transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1); overflow: hidden;
+            transition: opacity 1.2s ease; overflow: hidden;
         }
 
-        /* Floating Elements */
         .env-firefly { position: absolute; width: 3px; height: 3px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 10px 2px var(--gold); z-index: 0; animation: drift 8s infinite alternate ease-in-out; opacity: 0.6; }
         @keyframes drift { 0% { transform: translate(0, 0); opacity: 0.2; } 50% { opacity: 0.8; } 100% { transform: translate(30px, -50px); opacity: 0.2; } }
 
         .env-lantern { position: absolute; bottom: -100px; width: 35px; height: 50px; background: radial-gradient(circle at 50% 50%, #ffdaa3, #ff8c00); border-radius: 5px 5px 10px 10px; box-shadow: 0 0 30px rgba(255, 140, 0, 0.6); z-index: 0; opacity: 0; animation: floatUp linear infinite; }
-        @keyframes floatUp { 0% { transform: translateY(0) scale(0.8) opacity: 0; } 20% { opacity: 0.6; } 100% { transform: translateY(-120vh) scale(1.2) opacity: 0; } }
+        @keyframes floatUp { 0% { transform: translateY(0) scale(0.8); opacity: 0; } 20% { opacity: 0.6; } 100% { transform: translateY(-120vh) scale(1.2); opacity: 0; } }
         
         .env-title { font-size: clamp(2rem, 5vw, 2.5rem); color: var(--gold); margin-bottom: 40px; letter-spacing: 4px; text-shadow: 0 4px 15px rgba(0,0,0,0.5); z-index: 10; text-align: center;}
         
-        .env-wrapper { position: relative; width: 350px; height: 230px; cursor: pointer; z-index: 10; transform-style: preserve-3d; transition: transform 0.6s ease; }
-        .env-wrapper:hover { transform: scale(1.02); }
-        
+        .env-wrapper { position: relative; width: 350px; height: 230px; cursor: pointer; z-index: 10; transform-style: preserve-3d; }
         .env-back-panel { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #0d1c13; border-radius: 5px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); z-index: 1; border: 1px solid rgba(212, 175, 55, 0.2); }
         .env-letter { position: absolute; top: 15px; left: 15px; width: 320px; height: 190px; background: #FDFBF7; border-radius: 5px; z-index: 3; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 1px solid var(--gold); transform: translateY(0); transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1) 0.8s; } 
-        
         .letter-top { font-size: 2.2rem; color: var(--gold); margin-bottom: 5px; line-height: 1;}
         .letter-date { font-size: 3rem; color: #1a3626; letter-spacing: 3px; font-weight: 500;}
         .letter-year { font-size: 1rem; color: var(--gold); letter-spacing: 5px; margin-top: 5px; }
@@ -62,8 +54,7 @@
         .env-edge-right { position: absolute; top: 0; right: 0; width: 0; height: 0; border-top: 115px solid transparent; border-bottom: 115px solid transparent; border-right: 175px solid #162e20; z-index: 4; }
         .env-flap-front-bottom { position: absolute; bottom: 0; left: 0; width: 0; height: 0; border-left: 175px solid transparent; border-right: 175px solid transparent; border-bottom: 130px solid #12261a; z-index: 5; box-shadow: 0 -5px 15px rgba(0,0,0,0.4); }
         .env-flap-top { position: absolute; top: 0; left: 0; width: 0; height: 0; border-left: 175px solid transparent; border-right: 175px solid transparent; border-top: 135px solid #1f422e; z-index: 6; transform-origin: top; transition: transform 0.8s ease; }
-        
-        .env-seal { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 85px; height: 85px; background: #FFFFFF; border-radius: 50%; z-index: 7; display: flex; justify-content: center; align-items: center; box-shadow: 0 8px 20px rgba(0,0,0,0.6); border: 2px solid var(--gold); overflow: hidden; }
+        .env-seal { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 85px; height: 85px; background: #FFFFFF; border-radius: 50%; z-index: 7; display: flex; justify-content: center; align-items: center; border: 2px solid var(--gold); overflow: hidden; }
         .env-seal img { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply; transform: scale(1.15); }
 
         .env-wrapper.open .env-seal { opacity: 0; }
@@ -72,90 +63,41 @@
         .tap-msg { margin-top: 60px; font-size: 0.8rem; letter-spacing: 6px; color: var(--gold); text-transform: uppercase; animation: fadePulse 2s infinite; z-index: 10;}
         @keyframes fadePulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
 
-        /* =========================================
-           2. RESPONSIVE HERO SECTION (Smoothed)
-           ========================================= */
-        .hero { position: relative; width: 100%; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1920&auto=format&fit=crop') no-repeat center center; background-size: cover; }
+        /* --- MAIN SITE --- */
+        .hero { position: relative; width: 100%; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1920&auto=format&fit=crop') no-repeat center center; background-size: cover; }
         .hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(10,26,16,0.4) 0%, rgba(10,26,16,0.8) 70%, var(--bg-dark) 100%); z-index: 1; }
-        
-        .hero-content { position: relative; z-index: 2; padding: 0 20px; width: 100%; max-width: 1200px; display: flex; flex-direction: column; align-items: center;}
-        .h-subtitle { font-size: 1rem; letter-spacing: 5px; color: var(--gold); text-transform: uppercase; margin-bottom: 30px; }
-        .h-names { font-size: clamp(3.5rem, 8vw, 7rem); line-height: 1.1; color: var(--white); margin-bottom: 10px; letter-spacing: 2px; }
-        .h-and { font-size: clamp(2.5rem, 5vw, 4rem); color: var(--gold); margin: -10px 0; }
-        
-        .reveal-wrapper { position: relative; min-height: 200px; display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 40px; width: 100%; }
-        .reveal-btn { cursor: pointer; color: var(--gold); letter-spacing: 4px; text-transform: uppercase; font-size: clamp(0.7rem, 2vw, 0.9rem); transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1); border: 1px solid rgba(212,175,55,0.4); padding: 15px 35px; border-radius: 4px; background: rgba(26,54,38,0.5); backdrop-filter: blur(3px); position: absolute; z-index: 5;}
-        .reveal-btn:hover { background: rgba(212,175,55,0.1); border-color: var(--gold); box-shadow: 0 0 20px rgba(212,175,55,0.2); }
-        .reveal-btn.hidden { opacity: 0; transform: translateY(-20px) scale(0.95); pointer-events: none; }
+        .hero-content { position: relative; z-index: 2; text-align: center; }
+        .h-names { font-size: clamp(3.5rem, 8vw, 7rem); color: var(--white); }
+        .h-and { font-size: clamp(2.5rem, 5vw, 4rem); color: var(--gold); }
 
-        .revealed-content { position: absolute; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; transform: translateY(20px) scale(0.95); transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1); pointer-events: none; z-index: 4; }
-        .revealed-content.active { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
-        
-        .rev-date { font-size: clamp(1.6rem, 3.5vw, 2.5rem); letter-spacing: 6px; color: var(--white); font-weight: 400; margin-bottom: 20px; }
-        .rev-loc { font-size: clamp(0.85rem, 2vw, 1.2rem); letter-spacing: 4px; color: rgba(255,255,255,0.85); line-height: 2; text-transform: uppercase; }
+        .reveal-btn { cursor: pointer; color: var(--gold); border: 1px solid var(--gold); padding: 15px 35px; background: rgba(26,54,38,0.5); backdrop-filter: blur(3px); letter-spacing: 4px; transition: 0.4s; }
+        .reveal-btn.hidden { opacity: 0; transform: translateY(-20px); pointer-events: none; }
+        .revealed-content { opacity: 0; transform: translateY(20px); transition: 1s ease; position: absolute; width: 100%; top: 0;}
+        .revealed-content.active { opacity: 1; transform: translateY(0); }
 
-        /* =========================================
-           3. SECTIONS & BLENDED CARDS
-           ========================================= */
         section { padding: 100px 20px; background: var(--grad-royal); text-align: center; border-bottom: 1px solid rgba(212,175,55,0.1); }
-
-        .cd-title { font-size: 1.2rem; letter-spacing: 5px; margin-bottom: 40px; color: var(--gold); text-transform: uppercase; }
-        .timer-grid { display: flex; justify-content: center; gap: clamp(15px, 4vw, 40px); }
-        .t-num { font-size: clamp(2.5rem, 6vw, 4.5rem); color: var(--white); line-height: 1; }
-        .t-label { font-size: 0.7rem; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; margin-top: 10px; }
-
-        .sec-title { font-size: clamp(2.5rem, 5vw, 4rem); color: var(--gold); margin-bottom: 20px; }
-        .sec-sub { font-size: 1rem; color: var(--text-light); margin-bottom: 60px; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.8; font-style: italic; }
         
-        .fam-grid, .ev-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; max-width: 1100px; margin: 0 auto; }
+        /* --- CARDS --- */
+        .fam-grid, .ev-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+        .fam-card, .ev-card { background: linear-gradient(145deg, #1d3d2a, #152b1e); border-radius: 12px; border: 1px solid rgba(212,175,55,0.15); box-shadow: 0 10px 30px rgba(0,0,0,0.4); overflow: hidden; transition: 0.4s; }
+        .fam-card:hover { transform: translateY(-10px); border-color: var(--gold); }
         
-        .fam-card, .ev-card { 
-            background: linear-gradient(145deg, #1d3d2a, #152b1e);
-            padding: 50px 30px; 
-            border-radius: 15px; 
-            border: 1px solid rgba(212, 175, 55, 0.15); 
-            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-        }
-        .fam-card:hover { transform: translateY(-10px); border-color: var(--gold); box-shadow: 0 20px 50px rgba(212,175,55,0.1); }
+        .ev-img { width: 100%; height: 250px; background-size: cover; background-position: center; position: relative; }
+        .ev-img::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 60%; background: linear-gradient(to top, #152b1e 0%, transparent 100%); }
+        .ev-content { padding: 0 30px 40px; text-align: left; margin-top: -20px; position: relative; z-index: 2; }
+        .e-date { font-size: 0.8rem; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+        .e-name { font-size: 2rem; color: var(--white); margin-bottom: 15px; }
+        .e-desc { font-size: 0.9rem; color: var(--text-light); line-height: 1.8; margin-bottom: 25px; }
+        .e-btn { display: inline-block; padding: 12px 25px; border: 1px solid var(--gold); color: var(--gold); text-decoration: none; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; transition: 0.3s; }
+        .e-btn:hover { background: var(--gold); color: #0a1a10; }
 
-        .fc-title { font-size: 1rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; opacity: 0.8; }
-        .fc-name { font-size: 2rem; color: var(--gold); margin-bottom: 20px; }
-        .fc-rel { font-size: 0.85rem; color: var(--text-light); line-height: 2; letter-spacing: 0px; }
-        .fc-rel strong { color: var(--white); font-weight: 500; }
-
-        /* =========================================
-           4. GLOWING RSVP BUTTONS
-           ========================================= */
-        .rsvp { padding: 120px 20px; }
-        .rsvp-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; max-width: 800px; margin: 0 auto; }
+        /* --- RSVP GLOW --- */
+        .r-box { flex: 1; min-width: 280px; padding: 35px 20px; border: 1px solid var(--gold); border-radius: 8px; background: rgba(212,175,55,0.05); text-decoration: none; animation: glowPulse 3s infinite alternate; transition: 0.4s; }
+        @keyframes glowPulse { 0% { box-shadow: 0 0 5px rgba(212,175,55,0.2); } 100% { box-shadow: 0 0 15px rgba(212,175,55,0.4); } }
+        .r-box:hover { background: var(--gold); animation: none; transform: translateY(-5px); }
+        .r-box:hover .r-num, .r-box:hover .r-icon { color: #0a1a10; }
         
-        .r-box { 
-            flex: 1; min-width: 280px; padding: 35px 20px; 
-            border: 1px solid var(--gold); border-radius: 8px; 
-            background: rgba(212,175,55,0.05); 
-            text-decoration: none; display: flex; flex-direction: column; align-items: center; 
-            transition: all 0.4s ease;
-            position: relative; overflow: hidden;
-            animation: glowPulse 3s infinite alternate;
-        }
-
-        @keyframes glowPulse {
-            0% { box-shadow: 0 0 5px rgba(212,175,55,0.2); border-color: rgba(212,175,55,0.4); }
-            100% { box-shadow: 0 0 20px rgba(212,175,55,0.4); border-color: rgba(212,175,55,1); }
-        }
-
-        .r-box:hover { 
-            background: var(--gold); transform: translateY(-5px); 
-            animation: none; box-shadow: 0 10px 30px rgba(212,175,55,0.5);
-        }
-        .r-box:hover .r-num, .r-box:hover .r-icon { color: var(--bg-dark); }
-        
-        .r-icon { font-size: 1.1rem; color: var(--gold); margin-bottom: 12px; transition: 0.3s; text-transform: uppercase; letter-spacing: 2px;}
-        .r-num { font-size: 1.4rem; letter-spacing: 2px; color: var(--white); font-weight: 400; transition: 0.3s; }
-
-        .footer { padding: 80px 20px; background: #07130b; border-top: 1px solid rgba(212,175,55,0.1); }
-        #music-toggle { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: rgba(26,54,38, 0.8); border: 1px solid var(--gold); border-radius: 50%; color: var(--gold); display: none; justify-content: center; align-items: center; cursor: pointer; z-index: 99999; backdrop-filter: blur(5px); transition: 0.3s; opacity: 0; }
+        #music-toggle { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: rgba(26,54,38,0.8); border: 1px solid var(--gold); border-radius: 50%; color: var(--gold); cursor: pointer; display: none; z-index: 99999; }
     </style>
 </head>
 <body>
@@ -163,17 +105,14 @@
     <button id="music-toggle" onclick="toggleMusic()">🔊</button>
 
     <div id="envelope-screen">
-        <div class="env-firefly" style="top: 15%; left: 10%; animation-duration: 6s;"></div>
-        <div class="env-firefly" style="top: 40%; left: 80%; animation-duration: 10s;"></div>
-        <div class="env-firefly" style="top: 75%; left: 85%; animation-duration: 11s;"></div>
-        <div class="env-firefly" style="top: 30%; left: 65%; animation-duration: 9s;"></div>
-        
-        <div class="env-lantern" style="left: 8%; animation-duration: 14s; filter: blur(4px);"></div>
-        <div class="env-lantern" style="left: 88%; animation-duration: 16s; filter: blur(5px);"></div>
-        <div class="env-lantern" style="left: 45%; animation-duration: 12s;"></div>
+        <div class="env-firefly" style="top: 10%; left: 15%;"></div>
+        <div class="env-firefly" style="top: 60%; left: 80%;"></div>
+        <div class="env-firefly" style="top: 30%; left: 50%;"></div>
+        <div class="env-lantern" style="left: 10%; animation-duration: 12s;"></div>
+        <div class="env-lantern" style="left: 85%; animation-duration: 15s; animation-delay: 2s;"></div>
+        <div class="env-lantern" style="left: 40%; animation-duration: 18s; animation-delay: 4s;"></div>
 
         <div class="serif env-title">Aastha & Anupam</div>
-        
         <div class="env-wrapper" id="env-wrapper" onclick="openEnvelope()">
             <div class="env-back-panel"></div>
             <div class="env-letter">
@@ -185,92 +124,122 @@
             <div class="env-edge-right"></div>
             <div class="env-flap-front-bottom"></div>
             <div class="env-flap-top"></div>
-            <div class="env-seal">
-                 <img src="logo.png" alt="Logo">
-            </div>
+            <div class="env-seal"><img src="logo.png" alt="Logo"></div>
         </div>
         <div class="sans tap-msg" id="tap-msg">Tap to reveal</div>
     </div>
 
     <audio id="weddingAudio" loop preload="auto"><source src="music.mp3.mp3" type="audio/mpeg"></audio>
 
-    <div id="main-site" style="display: none; opacity: 0; transition: opacity 1.5s ease;">
-        
+    <div id="main-site" style="display: none; opacity: 0; transition: 1.5s;">
         <section class="hero">
             <div class="hero-content">
-                <div class="sans h-subtitle" data-aos="fade-down">We invite you to celebrate</div>
-                <div data-aos="zoom-in" data-aos-delay="300">
+                <div class="sans h-subtitle">We invite you to celebrate</div>
+                <div data-aos="zoom-in">
                     <div class="serif h-names">AASTHA</div>
                     <div class="cursive h-and">&</div>
                     <div class="serif h-names">ANUPAM</div>
                 </div>
-                
-                <div class="reveal-wrapper" data-aos="fade-up" data-aos-delay="1000">
+                <div class="reveal-wrapper" style="margin-top: 40px;">
                     <div class="sans reveal-btn" id="reveal-btn" onclick="revealDateDetails()">Tap to Reveal Details</div>
                     <div class="revealed-content" id="revealed-content">
-                        <div class="sans rev-date">3 MAY 2026</div>
-                        <div class="sans rev-loc">HOTEL TAJ THEOG</div>
-                        <div class="sans rev-loc">SHIMLA HILLS, HIMACHAL PRADESH</div>
+                        <div class="sans e-date" style="font-size: 2rem; color: white;">3 MAY 2026</div>
+                        <div class="sans e-date">HOTEL TAJ THEOG, SHIMLA</div>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section class="countdown">
-            <div class="sans cd-title" data-aos="fade-up">Awaiting the magic</div>
-            <div class="timer-grid" data-aos="fade-up">
-                <div class="t-box"><span class="serif t-num" id="days">00</span><span class="sans t-label">Days</span></div>
-                <div class="t-box"><span class="serif t-num" id="hours">00</span><span class="sans t-label">Hours</span></div>
-                <div class="t-box"><span class="serif t-num" id="mins">00</span><span class="sans t-label">Mins</span></div>
-                <div class="t-box"><span class="serif t-num" id="secs">00</span><span class="sans t-label">Secs</span></div>
             </div>
         </section>
 
         <section class="family">
             <div class="cursive sec-title" data-aos="fade-up">Our Families</div>
-            <div class="serif sec-sub" data-aos="fade-up">With the blessings of our beloved families, we invite you to gather for a celebration of love.</div>
-            
             <div class="fam-grid">
                 <div class="fam-card" data-aos="fade-up">
                     <div class="sans fc-title">Bride's Family</div>
-                    <div class="serif fc-name">Ms. Aastha Kapil</div>
+                    <div class="serif fc-name" style="font-size: 1.8rem;">Ms. Aastha Kapil</div>
                     <div class="sans fc-rel">Daughter of<br><strong>Mr. Digvijay Kapil & Mrs. Radhika Kapil</strong></div>
                     <div class="sans fc-rel" style="margin-top: 15px;">Granddaughter of<br><strong>Late Shiv Kumar Kapil & Late. Nirmala Kapil</strong></div>
                 </div>
-                
                 <div class="fam-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="sans fc-title">Groom's Family</div>
-                    <div class="serif fc-name">Mr. Anupam Rakshit</div>
-                    <div class="sans fc-rel">
-                        Son of<br>
-                        <strong style="white-space: nowrap;">Mr. Abhay Kumar Srivastava & Mrs. Chanda Srivastava</strong>
+                    <div class="serif fc-name" style="font-size: 1.8rem;">Mr. Anupam Rakshit</div>
+                    <div class="sans fc-rel">Son of<br><strong style="white-space: nowrap;">Mr. Abhay Kumar Srivastava & Mrs. Chanda Srivastava</strong></div>
+                    <div class="sans fc-rel" style="margin-top: 15px;">Grandson of<br><strong>Late Keshav Chandra Srivastava & Late. Shanti Devi</strong></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="events">
+            <div class="cursive sec-title" data-aos="fade-up" style="margin-bottom: 60px;">The Details</div>
+            <div class="ev-grid">
+                <div class="ev-card" data-aos="fade-up">
+                    <div class="ev-img" style="background-image: url('mehendi1.jpeg');"></div>
+                    <div class="ev-content">
+                        <div class="sans e-date">30 April 2026 • 4:00 PM</div>
+                        <div class="serif e-name">Mehendi & Hi-Tea</div>
+                        <div class="sans e-desc">Join us amidst the pines at Hotel Taj Theog.</div>
+                        <a href="#" class="e-btn">Get Directions</a>
                     </div>
-                    <div class="sans fc-rel" style="margin-top: 15px;">
-                        Grandson of<br>
-                        <strong>Late Keshav Chandra Srivastava & Late. Shanti Devi</strong>
+                </div>
+                <div class="ev-card" data-aos="fade-up">
+                    <div class="ev-img" style="background-image: url('engagement1.jpeg');"></div>
+                    <div class="ev-content">
+                        <div class="sans e-date">1 May 2026 • 7:00 PM</div>
+                        <div class="serif e-name">Engagement</div>
+                        <div class="sans e-desc">An evening of rings and revelry at Hotel Taj Theog.</div>
+                        <a href="#" class="e-btn">Get Directions</a>
+                    </div>
+                </div>
+                <div class="ev-card" data-aos="fade-up">
+                    <div class="ev-img" style="background-image: url('haldi11.jpeg');"></div>
+                    <div class="ev-content">
+                        <div class="sans e-date">2 May 2026 • 11:00 AM</div>
+                        <div class="serif e-name">Haldi Ceremony</div>
+                        <div class="sans e-desc">Join us at the Amphitheater, Dusit.</div>
+                        <a href="#" class="e-btn">Get Directions</a>
+                    </div>
+                </div>
+                <div class="ev-card" data-aos="fade-up">
+                    <div class="ev-img" style="background-image: url('sangeet1.jpeg');"></div>
+                    <div class="ev-content">
+                        <div class="sans e-date">2 May 2026 • 7:00 PM</div>
+                        <div class="serif e-name">Sangeet Night</div>
+                        <div class="sans e-desc">Dance under the stars at Terrace Lawn, Dusit.</div>
+                        <a href="#" class="e-btn">Get Directions</a>
+                    </div>
+                </div>
+                <div class="ev-card" data-aos="fade-up">
+                    <div class="ev-img" style="background-image: url('wedding1.jpeg');"></div>
+                    <div class="ev-content">
+                        <div class="sans e-date">3 May 2026 • 3:30 PM</div>
+                        <div class="serif e-name">The Wedding</div>
+                        <div class="sans e-desc">Varmala at 5:00 PM at Hotel Taj Theog.</div>
+                        <a href="#" class="e-btn">Get Directions</a>
+                    </div>
+                </div>
+                <div class="ev-card" data-aos="fade-up">
+                    <div class="ev-img" style="background-image: url('gala1.jpeg');"></div>
+                    <div class="ev-content">
+                        <div class="sans e-date">4 May 2026 • 7:30 PM</div>
+                        <div class="serif e-name">Gala Dinner</div>
+                        <div class="sans e-desc">Grand closing at Hyatt Centric, Chandigarh.</div>
+                        <a href="#" class="e-btn">Get Directions</a>
                     </div>
                 </div>
             </div>
         </section>
 
         <section class="rsvp">
-            <div class="serif sec-title" data-aos="fade-up">RSVP</div>
-            <div class="sans r-subtitle" style="margin-bottom: 40px; letter-spacing: 2px;">Kindly confirm your presence by April 15</div>
-            <div class="rsvp-container" data-aos="zoom-in">
-                <a href="https://wa.me/919872904973" class="r-box" target="_blank">
+            <div class="serif sec-title">RSVP</div>
+            <div class="rsvp-container">
+                <a href="https://wa.me/919872904973" class="r-box">
                     <div class="r-icon">WhatsApp</div>
                     <div class="r-num">+91 98729 04973</div>
                 </a>
-                <a href="https://wa.me/917837210001" class="r-box" target="_blank">
+                <a href="https://wa.me/917837210001" class="r-box">
                     <div class="r-icon">WhatsApp</div>
                     <div class="r-num">+91 78372 10001</div>
                 </a>
             </div>
-        </section>
-
-        <section class="footer">
-            <div class="cursive f-names">Aastha & Anupam</div>
-            <div class="sans f-text">See you in the hills</div>
         </section>
     </div>
 
@@ -278,46 +247,30 @@
     <script>
         function openEnvelope() {
             document.getElementById('env-wrapper').classList.add('open');
-            document.getElementById('tap-msg').style.opacity = '0';
             setTimeout(() => {
-                const envScreen = document.getElementById('envelope-screen');
-                envScreen.style.opacity = '0';
+                document.getElementById('envelope-screen').style.opacity = '0';
                 setTimeout(() => {
-                    envScreen.style.display = 'none';
-                    const mainSite = document.getElementById('main-site');
-                    mainSite.style.display = 'block';
-                    void mainSite.offsetWidth; 
-                    mainSite.style.opacity = '1';
-                    const musicBtn = document.getElementById('music-toggle');
-                    musicBtn.style.display = 'flex';
-                    setTimeout(() => { musicBtn.style.opacity = '1'; }, 100);
+                    document.getElementById('envelope-screen').style.display = 'none';
+                    const main = document.getElementById('main-site');
+                    main.style.display = 'block';
+                    void main.offsetWidth;
+                    main.style.opacity = '1';
+                    document.getElementById('music-toggle').style.display = 'flex';
                     document.getElementById('weddingAudio').play().catch(e => {});
                     AOS.init({ duration: 1200, once: true });
-                }, 1000); 
-            }, 3000); 
+                }, 1000);
+            }, 3000);
         }
 
         function toggleMusic() {
-            const audio = document.getElementById('weddingAudio');
-            const btn = document.getElementById('music-toggle');
-            if (audio.paused) { audio.play(); btn.innerHTML = '🔊'; } 
-            else { audio.pause(); btn.innerHTML = '🔇'; }
+            const a = document.getElementById('weddingAudio');
+            a.paused ? a.play() : a.pause();
         }
 
         function revealDateDetails() {
             document.getElementById('reveal-btn').classList.add('hidden');
-            setTimeout(() => { document.getElementById('revealed-content').classList.add('active'); }, 400); 
+            setTimeout(() => { document.getElementById('revealed-content').classList.add('active'); }, 400);
         }
-
-        const target = new Date("May 3, 2026 15:30:00").getTime();
-        setInterval(() => {
-            const now = new Date().getTime();
-            const d = target - now;
-            document.getElementById("days").innerText = Math.max(0, Math.floor(d / (1000 * 60 * 60 * 24))).toString().padStart(2, '0');
-            document.getElementById("hours").innerText = Math.max(0, Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).toString().padStart(2, '0');
-            document.getElementById("mins").innerText = Math.max(0, Math.floor((d % (1000 * 60 * 60)) / (1000 * 60))).toString().padStart(2, '0');
-            document.getElementById("secs").innerText = Math.max(0, Math.floor((d % (1000 * 60)) / 1000)).toString().padStart(2, '0');
-        }, 1000);
     </script>
 </body>
 </html>
