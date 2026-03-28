@@ -122,13 +122,36 @@
         .sec-title { font-size: clamp(2.5rem, 5vw, 4rem); color: var(--gold); margin-bottom: 20px; }
         .sec-sub { font-size: 1rem; color: var(--text-light); margin-bottom: 60px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.8; font-style: italic; }
         
-        .fam-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; max-width: 1000px; margin: 0 auto; }
+       .fam-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Dropped from 300px */
+    width: 95%; /* Ensures a little breathing room on the edges of the screen */
+}
         .fam-card { background: var(--bg-card); padding: 50px 30px; border-radius: 10px; border: 1px solid rgba(212, 175, 55, 0.1); transition: transform 0.4s ease; }
         .fam-card:hover { transform: translateY(-10px); border-color: rgba(212, 175, 55, 0.4); }
         .fc-title { font-size: 1.2rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; }
         .fc-name { font-size: 2rem; color: var(--gold); margin-bottom: 20px; }
         .fc-rel { font-size: 0.9rem; color: var(--text-light); line-height: 2; }
         .fc-rel strong { color: var(--white); font-weight: 400; letter-spacing: 1px; }
+        /* Update the main name size to be more flexible */
+.fc-name {
+    font-size: clamp(1.5rem, 4vw, 2rem); 
+    margin-bottom: 20px;
+}
+
+/* Specific fix for phone screens */
+@media (max-width: 480px) {
+    .fam-card {
+        padding: 30px 15px; /* Reducing horizontal padding gives names more room */
+    }
+    
+    .fc-rel {
+        font-size: 0.8rem; /* Slightly smaller text for relatives */
+    }
+    
+    .fc-name {
+        font-size: 1.4rem; /* Keeps the bride/groom names readable but contained */
+    }
+}
 
         /* =========================================
            5. EVENTS GRID
@@ -301,7 +324,8 @@
                     <div class="sans fc-title">Bride's Family</div>
                     <div class="serif fc-name">Ms. Aastha Kapil</div>
                     <div class="sans fc-rel">Daughter of<br><strong>Mr. Digvijay Kapil & Mrs. Radhika Kapil</strong></div>
-                    <div class="sans fc-rel" style="margin-top: 15px;">Granddaughter of<br><strong>Late Sh. Shiv Kumar Kapil & Late Smt. Nirmala Kapil</strong></div>
+                    <div class="sans fc-rel" style="margin-top: 15px;">Granddaughter of<br><strong>
+        <strong style="white-space: nowrap;">Late Sh. Shiv Kumar Kapil & Late Smt. Nirmala Kapil</strong></div>
                 </div>
                 
                 <div class="fam-card" data-aos="fade-up" data-aos-delay="200">
@@ -313,7 +337,8 @@
     </div>
     <div class="sans fc-rel" style="margin-top: 15px; font-size: 0.85rem; letter-spacing: 0px;">
         Grandson of<br>
-        <strong>Late Sh. Keshav Chandra Srivastava & Late Smt. Shanti Devi</strong>
+        <strong>
+        <strong style="white-space: nowrap;">Late Sh. Keshav Chandra Srivastava & Late Smt. Shanti Devi</strong>
     </div>
 </div>
         </section>
