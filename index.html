@@ -118,64 +118,30 @@
         /* =========================================
            4. FAMILIES
            ========================================= */
-  /* Core Styling for both Family Cards */
+ /* Tumhara original side-by-side layout */
 .fam-section {
     display: flex;
-    justify-content: center; /* Center horizontally in flex */
-    align-items: flex-start; /* Optional: Align to top of flex container */
-    flex-wrap: wrap; /* Important for centering on all screens */
-    gap: 30px; /* Space between cards */
-    padding: 80px 20px;
+    justify-content: center; /* Dono boxes ko center mein rakhega */
+    gap: 40px; /* Boxes ke beech ka gap */
     max-width: 1200px;
-    margin: 0 auto; /* Center the whole section block */
-    background-color: #051A11;
+    margin: 0 auto; /* Poore section ko center karega */
+    padding: 60px 20px;
 }
 
+/* Tumhara original box style */
 .fam-card {
-    background-color: #122c20; /* Slightly lighter green box */
-    border-radius: 6px;
-    padding: 40px 20px;
+    background-color: #122c20; /* Box ka background color */
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 40px 30px;
+    flex: 1; /* Dono boxes ko barabar size dega */
     text-align: center;
-    flex: 1;
-    max-width: 580px; /* Make cards wider to prevent text breaks */
-    box-sizing: border-box;
+    max-width: 550px;
 }
 
-/* Style for text elements inside cards */
-.fam-card .fc-title {
-    font-size: 0.9rem;
-    letter-spacing: 4px;
-}
-
-.fam-card .fc-name {
-    color: #c4a777; /* Gold accent */
-    font-size: 2.2rem;
-    font-weight: 400;
-}
-
+/* BSS YE EK LINE CHAHIYE THI - Text ko ek line mein rakhne ke liye */
 .fam-card strong {
-    white-space: nowrap; /* Forces name to stay on one line */
-}
-
-/* Crucial Mobile Adjustment (Phone and Tablets) */
-@media (max-width: 768px) {
-    .fam-section {
-        flex-direction: column; /* Stack cards vertically */
-        align-items: center;
-        padding: 40px 10px;
-    }
-    
-    .fam-card {
-        width: 100%; /* Take full width minus padding */
-        max-width: none; /* Let it breathe full width */
-        margin-bottom: 20px;
-        padding: 30px 15px;
-    }
-
-    /* Reduce font size just enough on mobile to keep names on one line */
-    .fam-card .fc-rel strong {
-        font-size: 0.75rem; 
-    }
+    white-space: nowrap;
 }
 
         /* =========================================
