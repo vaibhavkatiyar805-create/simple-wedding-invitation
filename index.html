@@ -9,15 +9,15 @@
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     
     <style>
+        /* THE ROYAL PALETTE - Deep Blended Greens */
         :root { 
-            --bg-dark: #0a1a10;
-            --bg-medium: #152b1e;
-            --bg-card: #1d3d2a;
+            --bg-dark: #0d1c13; 
+            --bg-card: #1a3626; 
             --gold: #D4AF37;
             --gold-light: #F3E5AB;
             --text-light: #E0E0E0;
             --white: #FFFFFF;
-            --grad-royal: radial-gradient(circle at center, #1a3626 0%, #0a1a10 100%);
+            --grad-blend: radial-gradient(circle at center, #1a3626 0%, #0d1c13 100%);
         }
         
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -27,35 +27,33 @@
         .cursive { font-family: 'Great Vibes', cursive; }
         .sans { font-family: 'Montserrat', sans-serif; }
 
-        /* --- ENVELOPE REVEAL --- */
+        /* 1. ENVELOPE & RESTORED LANTERNS */
         #envelope-screen { 
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 99999; 
             background: radial-gradient(circle at center, #152b1e 0%, #050a07 100%);
             display: flex; flex-direction: column; justify-content: center; align-items: center; 
-            transition: opacity 1.2s ease; overflow: hidden;
+            transition: opacity 1s ease; overflow: hidden;
         }
 
         .env-firefly { position: absolute; width: 3px; height: 3px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 10px 2px var(--gold); z-index: 0; animation: drift 8s infinite alternate ease-in-out; opacity: 0.6; }
-        @keyframes drift { 0% { transform: translate(0, 0); opacity: 0.2; } 50% { opacity: 0.8; } 100% { transform: translate(30px, -50px); opacity: 0.2; } }
+        @keyframes drift { 0% { transform: translate(0, 0); opacity: 0.2; } 100% { transform: translate(30px, -50px); opacity: 0.2; } }
 
-        .env-lantern { position: absolute; bottom: -100px; width: 35px; height: 50px; background: radial-gradient(circle at 50% 50%, #ffdaa3, #ff8c00); border-radius: 5px 5px 10px 10px; box-shadow: 0 0 30px rgba(255, 140, 0, 0.6); z-index: 0; opacity: 0; animation: floatUp linear infinite; }
+        .env-lantern { position: absolute; bottom: -100px; width: 35px; height: 50px; background: radial-gradient(circle at 50% 50%, #ffdaa3, #ff8c00); border-radius: 5px 5px 10px 10px; box-shadow: 0 0 30px rgba(255, 140, 0, 0.6); z-index: 0; opacity: 0; animation: floatUp linear infinite; filter: blur(1px); }
         @keyframes floatUp { 0% { transform: translateY(0) scale(0.8); opacity: 0; } 20% { opacity: 0.6; } 100% { transform: translateY(-120vh) scale(1.2); opacity: 0; } }
         
         .env-title { font-size: clamp(2rem, 5vw, 2.5rem); color: var(--gold); margin-bottom: 40px; letter-spacing: 4px; text-shadow: 0 4px 15px rgba(0,0,0,0.5); z-index: 10; text-align: center;}
         
         .env-wrapper { position: relative; width: 350px; height: 230px; cursor: pointer; z-index: 10; transform-style: preserve-3d; }
-        .env-back-panel { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #0d1c13; border-radius: 5px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); z-index: 1; border: 1px solid rgba(212, 175, 55, 0.2); }
-        .env-letter { position: absolute; top: 15px; left: 15px; width: 320px; height: 190px; background: #FDFBF7; border-radius: 5px; z-index: 3; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 1px solid var(--gold); transform: translateY(0); transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1) 0.8s; } 
-        .letter-top { font-size: 2.2rem; color: var(--gold); margin-bottom: 5px; line-height: 1;}
-        .letter-date { font-size: 3rem; color: #1a3626; letter-spacing: 3px; font-weight: 500;}
-        .letter-year { font-size: 1rem; color: var(--gold); letter-spacing: 5px; margin-top: 5px; }
+        .env-back-panel { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #0d1c13; border-radius: 5px; z-index: 1; border: 1px solid rgba(212, 175, 55, 0.2); }
+        .env-letter { position: absolute; top: 15px; left: 15px; width: 320px; height: 190px; background: #FDFBF7; border-radius: 5px; z-index: 3; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 1px solid var(--gold); transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1) 0.8s; } 
         
         .env-edge-left { position: absolute; top: 0; left: 0; width: 0; height: 0; border-top: 115px solid transparent; border-bottom: 115px solid transparent; border-left: 175px solid #183324; z-index: 4; }
         .env-edge-right { position: absolute; top: 0; right: 0; width: 0; height: 0; border-top: 115px solid transparent; border-bottom: 115px solid transparent; border-right: 175px solid #162e20; z-index: 4; }
-        .env-flap-front-bottom { position: absolute; bottom: 0; left: 0; width: 0; height: 0; border-left: 175px solid transparent; border-right: 175px solid transparent; border-bottom: 130px solid #12261a; z-index: 5; box-shadow: 0 -5px 15px rgba(0,0,0,0.4); }
+        .env-flap-front-bottom { position: absolute; bottom: 0; left: 0; width: 0; height: 0; border-left: 175px solid transparent; border-right: 175px solid transparent; border-bottom: 130px solid #12261a; z-index: 5; }
         .env-flap-top { position: absolute; top: 0; left: 0; width: 0; height: 0; border-left: 175px solid transparent; border-right: 175px solid transparent; border-top: 135px solid #1f422e; z-index: 6; transform-origin: top; transition: transform 0.8s ease; }
-        .env-seal { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 85px; height: 85px; background: #FFFFFF; border-radius: 50%; z-index: 7; display: flex; justify-content: center; align-items: center; border: 2px solid var(--gold); overflow: hidden; }
-        .env-seal img { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply; transform: scale(1.15); }
+        
+        .env-seal { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 85px; height: 85px; background: #FFFFFF; border-radius: 50%; z-index: 7; display: flex; justify-content: center; align-items: center; border: 2px solid var(--gold); }
+        .env-seal img { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply; }
 
         .env-wrapper.open .env-seal { opacity: 0; }
         .env-wrapper.open .env-flap-top { transform: rotateX(180deg); z-index: 1; }
@@ -63,41 +61,39 @@
         .tap-msg { margin-top: 60px; font-size: 0.8rem; letter-spacing: 6px; color: var(--gold); text-transform: uppercase; animation: fadePulse 2s infinite; z-index: 10;}
         @keyframes fadePulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
 
-        /* --- MAIN SITE --- */
+        /* 2. HERO & BLENDING */
         .hero { position: relative; width: 100%; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1920&auto=format&fit=crop') no-repeat center center; background-size: cover; }
-        .hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(10,26,16,0.4) 0%, rgba(10,26,16,0.8) 70%, var(--bg-dark) 100%); z-index: 1; }
+        .hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(13,28,19,0.4) 0%, rgba(13,28,19,0.8) 70%, var(--bg-dark) 100%); z-index: 1; }
         .hero-content { position: relative; z-index: 2; text-align: center; }
-        .h-names { font-size: clamp(3.5rem, 8vw, 7rem); color: var(--white); }
-        .h-and { font-size: clamp(2.5rem, 5vw, 4rem); color: var(--gold); }
 
-        .reveal-btn { cursor: pointer; color: var(--gold); border: 1px solid var(--gold); padding: 15px 35px; background: rgba(26,54,38,0.5); backdrop-filter: blur(3px); letter-spacing: 4px; transition: 0.4s; }
+        .reveal-btn { cursor: pointer; color: var(--gold); border: 1px solid var(--gold); padding: 15px 35px; background: rgba(26,54,38,0.5); backdrop-filter: blur(3px); letter-spacing: 4px; transition: 0.6s; margin-top: 40px;}
         .reveal-btn.hidden { opacity: 0; transform: translateY(-20px); pointer-events: none; }
-        .revealed-content { opacity: 0; transform: translateY(20px); transition: 1s ease; position: absolute; width: 100%; top: 0;}
-        .revealed-content.active { opacity: 1; transform: translateY(0); }
+        .revealed-content { opacity: 0; transform: translateY(20px); transition: 1.2s; position: absolute; width: 100%; top: 40px; pointer-events: none;}
+        .revealed-content.active { opacity: 1; transform: translateY(0); pointer-events: auto; }
 
-        section { padding: 100px 20px; background: var(--grad-royal); text-align: center; border-bottom: 1px solid rgba(212,175,55,0.1); }
-        
-        /* --- CARDS --- */
+        section { padding: 100px 20px; background: var(--grad-blend); border-bottom: 1px solid rgba(212,175,55,0.1); text-align: center; }
+
+        /* 3. RESTORED CARDS & EVENTS */
         .fam-grid, .ev-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
-        .fam-card, .ev-card { background: linear-gradient(145deg, #1d3d2a, #152b1e); border-radius: 12px; border: 1px solid rgba(212,175,55,0.15); box-shadow: 0 10px 30px rgba(0,0,0,0.4); overflow: hidden; transition: 0.4s; }
+        .fam-card, .ev-card { background: linear-gradient(145deg, #1d3d2a, #152b1e); border-radius: 12px; border: 1px solid rgba(212,175,55,0.15); box-shadow: 0 10px 30px rgba(0,0,0,0.5); overflow: hidden; transition: 0.4s; }
+        .fam-card { padding: 50px 30px; }
         .fam-card:hover { transform: translateY(-10px); border-color: var(--gold); }
-        
+
         .ev-img { width: 100%; height: 250px; background-size: cover; background-position: center; position: relative; }
-        .ev-img::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 60%; background: linear-gradient(to top, #152b1e 0%, transparent 100%); }
+        .ev-img::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 60%; background: linear-gradient(to top, #1a3626 0%, transparent 100%); }
         .ev-content { padding: 0 30px 40px; text-align: left; margin-top: -20px; position: relative; z-index: 2; }
         .e-date { font-size: 0.8rem; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
         .e-name { font-size: 2rem; color: var(--white); margin-bottom: 15px; }
-        .e-desc { font-size: 0.9rem; color: var(--text-light); line-height: 1.8; margin-bottom: 25px; }
-        .e-btn { display: inline-block; padding: 12px 25px; border: 1px solid var(--gold); color: var(--gold); text-decoration: none; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; transition: 0.3s; }
-        .e-btn:hover { background: var(--gold); color: #0a1a10; }
+        .e-btn { display: inline-block; padding: 12px 25px; border: 1px solid var(--gold); color: var(--gold); text-decoration: none; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; border-radius: 3px; transition: 0.3s; }
+        .e-btn:hover { background: var(--gold); color: var(--bg-dark); }
 
-        /* --- RSVP GLOW --- */
-        .r-box { flex: 1; min-width: 280px; padding: 35px 20px; border: 1px solid var(--gold); border-radius: 8px; background: rgba(212,175,55,0.05); text-decoration: none; animation: glowPulse 3s infinite alternate; transition: 0.4s; }
-        @keyframes glowPulse { 0% { box-shadow: 0 0 5px rgba(212,175,55,0.2); } 100% { box-shadow: 0 0 15px rgba(212,175,55,0.4); } }
-        .r-box:hover { background: var(--gold); animation: none; transform: translateY(-5px); }
-        .r-box:hover .r-num, .r-box:hover .r-icon { color: #0a1a10; }
-        
-        #music-toggle { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: rgba(26,54,38,0.8); border: 1px solid var(--gold); border-radius: 50%; color: var(--gold); cursor: pointer; display: none; z-index: 99999; }
+        /* 4. RSVP GLOWING */
+        .r-box { flex: 1; min-width: 280px; padding: 35px 20px; border: 1px solid var(--gold); border-radius: 8px; background: rgba(212,175,55,0.05); text-decoration: none; animation: glowPulse 3s infinite alternate; transition: 0.4s; display: flex; flex-direction: column; align-items: center;}
+        @keyframes glowPulse { 0% { box-shadow: 0 0 5px rgba(212,175,55,0.2); } 100% { box-shadow: 0 0 20px rgba(212,175,55,0.4); } }
+        .r-box:hover { background: var(--gold); transform: translateY(-5px); animation: none;}
+        .r-box:hover .r-num, .r-box:hover .r-icon { color: var(--bg-dark); }
+
+        #music-toggle { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: rgba(26,54,38,0.8); border: 1px solid var(--gold); border-radius: 50%; color: var(--gold); cursor: pointer; z-index: 99999; display: none; justify-content: center; align-items: center; }
     </style>
 </head>
 <body>
@@ -105,20 +101,22 @@
     <button id="music-toggle" onclick="toggleMusic()">🔊</button>
 
     <div id="envelope-screen">
-        <div class="env-firefly" style="top: 10%; left: 15%;"></div>
-        <div class="env-firefly" style="top: 60%; left: 80%;"></div>
-        <div class="env-firefly" style="top: 30%; left: 50%;"></div>
-        <div class="env-lantern" style="left: 10%; animation-duration: 12s;"></div>
-        <div class="env-lantern" style="left: 85%; animation-duration: 15s; animation-delay: 2s;"></div>
-        <div class="env-lantern" style="left: 40%; animation-duration: 18s; animation-delay: 4s;"></div>
+        <div class="env-firefly" style="top: 15%; left: 10%;"></div>
+        <div class="env-firefly" style="top: 40%; left: 80%;"></div>
+        <div class="env-firefly" style="top: 75%; left: 85%;"></div>
+        <div class="env-firefly" style="top: 55%; left: 45%;"></div>
+        <div class="env-lantern" style="left: 8%; animation-duration: 14s;"></div>
+        <div class="env-lantern" style="left: 88%; animation-duration: 16s; animation-delay: 4s;"></div>
+        <div class="env-lantern" style="left: 25%; animation-duration: 12s;"></div>
+        <div class="env-lantern" style="left: 60%; animation-duration: 13s; animation-delay: 7s;"></div>
 
         <div class="serif env-title">Aastha & Anupam</div>
         <div class="env-wrapper" id="env-wrapper" onclick="openEnvelope()">
             <div class="env-back-panel"></div>
             <div class="env-letter">
-                <div class="cursive letter-top">Save the Date</div>
-                <div class="serif letter-date">MAY 3</div>
-                <div class="sans letter-year">2026</div>
+                <div class="cursive letter-top" style="font-size: 2.2rem; color: #D4AF37;">Save the Date</div>
+                <div class="serif letter-date" style="font-size: 3rem; color: #1a3626;">MAY 3</div>
+                <div class="sans letter-year" style="font-size: 1rem; color: #D4AF37;">2026</div>
             </div>
             <div class="env-edge-left"></div>
             <div class="env-edge-right"></div>
@@ -134,34 +132,34 @@
     <div id="main-site" style="display: none; opacity: 0; transition: 1.5s;">
         <section class="hero">
             <div class="hero-content">
-                <div class="sans h-subtitle">We invite you to celebrate</div>
+                <div class="sans h-subtitle" style="letter-spacing: 5px; color: var(--gold); text-transform: uppercase;">We invite you to celebrate</div>
                 <div data-aos="zoom-in">
                     <div class="serif h-names">AASTHA</div>
                     <div class="cursive h-and">&</div>
                     <div class="serif h-names">ANUPAM</div>
                 </div>
-                <div class="reveal-wrapper" style="margin-top: 40px;">
+                <div class="reveal-wrapper">
                     <div class="sans reveal-btn" id="reveal-btn" onclick="revealDateDetails()">Tap to Reveal Details</div>
                     <div class="revealed-content" id="revealed-content">
-                        <div class="sans e-date" style="font-size: 2rem; color: white;">3 MAY 2026</div>
-                        <div class="sans e-date">HOTEL TAJ THEOG, SHIMLA</div>
+                        <div class="sans rev-date" style="font-size: 2.5rem; letter-spacing: 6px; color: white;">3 MAY 2026</div>
+                        <div class="sans rev-loc" style="letter-spacing: 4px; color: rgba(255,255,255,0.85); text-transform: uppercase;">HOTEL TAJ THEOG, SHIMLA</div>
                     </div>
                 </div>
             </div>
         </section>
 
         <section class="family">
-            <div class="cursive sec-title" data-aos="fade-up">Our Families</div>
+            <div class="cursive sec-title">Our Families</div>
             <div class="fam-grid">
                 <div class="fam-card" data-aos="fade-up">
                     <div class="sans fc-title">Bride's Family</div>
-                    <div class="serif fc-name" style="font-size: 1.8rem;">Ms. Aastha Kapil</div>
+                    <div class="serif fc-name">Ms. Aastha Kapil</div>
                     <div class="sans fc-rel">Daughter of<br><strong>Mr. Digvijay Kapil & Mrs. Radhika Kapil</strong></div>
                     <div class="sans fc-rel" style="margin-top: 15px;">Granddaughter of<br><strong>Late Shiv Kumar Kapil & Late. Nirmala Kapil</strong></div>
                 </div>
                 <div class="fam-card" data-aos="fade-up" data-aos-delay="200">
                     <div class="sans fc-title">Groom's Family</div>
-                    <div class="serif fc-name" style="font-size: 1.8rem;">Mr. Anupam Rakshit</div>
+                    <div class="serif fc-name">Mr. Anupam Rakshit</div>
                     <div class="sans fc-rel">Son of<br><strong style="white-space: nowrap;">Mr. Abhay Kumar Srivastava & Mrs. Chanda Srivastava</strong></div>
                     <div class="sans fc-rel" style="margin-top: 15px;">Grandson of<br><strong>Late Keshav Chandra Srivastava & Late. Shanti Devi</strong></div>
                 </div>
@@ -169,7 +167,7 @@
         </section>
 
         <section class="events">
-            <div class="cursive sec-title" data-aos="fade-up" style="margin-bottom: 60px;">The Details</div>
+            <div class="cursive sec-title" style="margin-bottom: 60px;">The Details</div>
             <div class="ev-grid">
                 <div class="ev-card" data-aos="fade-up">
                     <div class="ev-img" style="background-image: url('mehendi1.jpeg');"></div>
@@ -231,13 +229,13 @@
         <section class="rsvp">
             <div class="serif sec-title">RSVP</div>
             <div class="rsvp-container">
-                <a href="https://wa.me/919872904973" class="r-box">
-                    <div class="r-icon">WhatsApp</div>
-                    <div class="r-num">+91 98729 04973</div>
+                <a href="https://wa.me/919872904973" class="r-box" target="_blank">
+                    <div class="r-icon" style="color: var(--gold); letter-spacing: 2px;">WhatsApp</div>
+                    <div class="r-num" style="color: white; font-size: 1.4rem;">+91 98729 04973</div>
                 </a>
-                <a href="https://wa.me/917837210001" class="r-box">
-                    <div class="r-icon">WhatsApp</div>
-                    <div class="r-num">+91 78372 10001</div>
+                <a href="https://wa.me/917837210001" class="r-box" target="_blank">
+                    <div class="r-icon" style="color: var(--gold); letter-spacing: 2px;">WhatsApp</div>
+                    <div class="r-num" style="color: white; font-size: 1.4rem;">+91 78372 10001</div>
                 </a>
             </div>
         </section>
@@ -261,12 +259,10 @@
                 }, 1000);
             }, 3000);
         }
-
         function toggleMusic() {
             const a = document.getElementById('weddingAudio');
             a.paused ? a.play() : a.pause();
         }
-
         function revealDateDetails() {
             document.getElementById('reveal-btn').classList.add('hidden');
             setTimeout(() => { document.getElementById('revealed-content').classList.add('active'); }, 400);
