@@ -124,22 +124,41 @@
    .sec-title { font-size: clamp(2.5rem, 5vw, 4rem); color: var(--gold); margin-bottom: 20px; }
    .sec-sub { font-size: 1rem; color: var(--text-light); margin-bottom: 60px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.8; font-style: italic; }
    
-   .fam-grid { 
-    display: grid; 
-    grid-template-columns: 1fr 1fr; /* Ye line force karegi dono boxes ko side-by-side rakhne ke liye */
+/* Container ko strictly left-right (row) mein lock kar diya */
+.fam-grid { 
+    display: flex !important; 
+    flex-direction: row !important; 
+    justify-content: center; 
+    align-items: stretch; /* Dono boxes ki height ek barabar rakhega */
     gap: 40px; 
-    max-width: 1200px; /* Thodi jagah badha di taaki boxes aaram se fit aa jayein */
+    max-width: 1100px; 
     margin: 0 auto; 
+    width: 100%; 
 }
 
-/* Phone pe wapas upar-neeche karne ke liye taaki mobile par na kate */
-@media (max-width: 768px) {
+/* Dono boxes ko exact 50% jagah lene ke liye force kiya */
+.fam-card { 
+    flex: 1; /* Dono boxes aadhi-aadhi screen lenge */
+    min-width: 0; /* Text lamba hone par box ko bahar nikalne se rokega */
+    background: var(--bg-card); 
+    padding: 50px 30px; 
+    border-radius: 10px; 
+    border: 1px solid rgba(212, 175, 55, 0.1); 
+    transition: transform 0.4s ease; 
+    box-sizing: border-box; 
+}
+
+.fam-card:hover { 
+    transform: translateY(-10px); 
+    border-color: rgba(212, 175, 55, 0.4); 
+}
+
+/* Sirf Phone ke liye wapas upar-neeche karega taaki mobile pe na kate */
+@media (max-width: 850px) {
     .fam-grid {
-        grid-template-columns: 1fr;
+        flex-direction: column !important;
     }
 }
-   .fam-card { background: var(--bg-card); padding: 50px 30px; border-radius: 10px; border: 1px solid rgba(212, 175, 55, 0.1); transition: transform 0.4s ease; }
-   .fam-card:hover { transform: translateY(-10px); border-color: rgba(212, 175, 55, 0.4); }
    .fc-title { font-size: 1.2rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; }
    .fc-name { font-size: 2rem; color: var(--gold); margin-bottom: 20px; }
    
