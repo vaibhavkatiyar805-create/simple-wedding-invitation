@@ -234,7 +234,23 @@
     </style>
 </head>
 <body>
-
+<body>
+    <script>
+        // Tum apna password yahan set kar sakte ho ('aastha2026' ki jagah kuch bhi likh do)
+        var correctPassword = "weddingdarzi"; 
+        
+        var userPassword = prompt("This is a private project. Please enter the password:");
+        
+        if (userPassword !== correctPassword) {
+            // Agar password galat dala, toh poori site hide ho jayegi aur ye message dikhega
+            document.body.innerHTML = "<h1 style='color: white; text-align: center; font-family: sans-serif; margin-top: 20vh;'>Access Denied. You do not have permission to view this project.</h1>";
+            document.body.style.backgroundColor = "#1a3626"; // Tumhara dark green background
+            document.body.style.overflow = "hidden"; // Scroll band kar dega
+        }
+    </script>
+    <button id="music-toggle" onclick="toggleMusic()">🔊</button>
+    <div id="envelope-screen">
+    ...
     <button id="music-toggle" onclick="toggleMusic()">🔊</button>
 
     <div id="envelope-screen">
