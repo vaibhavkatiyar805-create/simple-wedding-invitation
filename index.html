@@ -235,37 +235,7 @@
 </head>
 <body>
    
-    <script>
-        // Use a self-invoking function to avoid global variable conflicts
-        (function() {
-            var correctPassword = "weddingdarzi"; // Apne hisaab se password change kar lena
-            var userPassword = prompt("Private project. Please enter the password:");
-
-            // Agar authentication passes, browser continues loading the rest of the file normalmente.
-            if (userPassword === correctPassword) {
-                // SUCCESS: Nothing happens here yet, page loads normally.
-            } else {
-                // FAILED! WRONG PASSWORD!
-                // Hum browser ko FORCE karenge ki wo further HTML parse karna STOP kar de.
-                // It makes it perfectly secure without expensive plans.
-                document.write("<h1 style='color:white; text-align:center; font-family:sans-serif; margin-top:30vh;'>Access Denied. Incorrect Password.</h1>");
-                document.body.style.backgroundColor = "#1a3626"; // Tumhara dark green background
-                // This command stops the browser from loading anything below this point
-                if(window.stop) { window.stop(); } else { document.execCommand('Stop'); }
-            }
-        })();
-    </script>
-    
-    ```
-
-### Step 2: Ensure proper HTML structure mismatch chhota sa fix hai
-Bhai, tumhare code mein ek chhota sa structure gap tha. Naya script paste karne ke baad, **ensure karo ki tumhara site code `div id="envelope-screen"` se start ho**.
-
-Aapne Bride side box properly close kar diya upar section mein but Groom wale mein extra check kr lena tag missing the close krna. Bss HTML main `</div>` section mein proper count use karna missing tags correct kr do bss layout shi ho jayega side side wala already Maine bulletproof code de diya tha merge kaise krte hain wo change krna is not possible because Vercel automatically deploys based on current code.
-
-Bss naya script top pe daalo, envelope aur AOS animations dono perfectly chalenge password daalne ke baad! Test karke dekho aur batao, kya ab everything is working smooth?
    
-        
         <div class="env-firefly" style="top: 15%; left: 10%; animation-duration: 6s; width: 4px; height: 4px;"></div>
         <div class="env-firefly" style="top: 25%; left: 25%; animation-duration: 9s; animation-delay: 1s;"></div>
         <div class="env-firefly" style="top: 10%; left: 50%; animation-duration: 7s; animation-delay: 2s; width: 2px; height: 2px;"></div>
